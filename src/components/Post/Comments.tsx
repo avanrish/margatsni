@@ -5,8 +5,8 @@ import Link from '../Link';
 export default function Comments({ comments, homePage, mobile }) {
   return (
     <div
-      className={`ml-5 max-h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin ${
-        mobile ? 'max-h-52' : !homePage && 'max-h-full'
+      className={`ml-5 max-h-16 overflow-y-scroll scrollbar-thumb-black scrollbar-thin ${
+        mobile ? 'max-h-52' : !homePage && '!max-h-full'
       }`}
     >
       {comments.map((comment, i) => (

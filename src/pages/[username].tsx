@@ -58,7 +58,6 @@ export default function Username() {
     let newFollowers = [];
     if (following) newFollowers = profile.followers.filter((id) => id !== user?.uid);
     else newFollowers = [...profile.followers, user?.uid];
-    console.log(newFollowers);
     setProfile((prev) => ({ ...prev, followers: newFollowers }));
     setFollowing((prev) => !prev);
   }
