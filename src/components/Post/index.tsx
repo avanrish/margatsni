@@ -34,14 +34,14 @@ export default function Post({
   const [comments, setComments] = useState(homePage ? initComments.slice(0, 5) : initComments); // Displays only 5 latest messages
   const [likes, setLikes] = useState(initLikes);
   const [openOptions, setOpenOptions] = useState(false);
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
   const mobile = useRecoilValue(mobileDeviceState);
   const inputRef = useRef(null);
 
   return (
     <div
       className={`flex bg-white my-7 border rounded-sm ${
-        homePage || mobile ? 'flex-col' : 'flex-row'
+        homePage || mobile ? 'flex-col' : 'flex-row max-h-[815px]'
       }`}
     >
       {(mobile || homePage) && (
@@ -66,11 +66,7 @@ export default function Post({
           likes={likes}
           inputRef={homePage ? null : inputRef}
         />
-        {likes.length > 0 && (
-          <p className="font-semibold pt-3 pl-5 order-3">
-            {t('common:likes', { count: likes.length })}
-          </p>
-        )}
+
         <Caption
           homePage={homePage}
           username={username}
@@ -83,7 +79,7 @@ export default function Post({
           <Comments homePage={homePage} comments={comments} mobile={mobile} />
         )}
         <div className="order-3">
-          <p className="ml-4 text-xs uppercase text-gray-primary mt-2">
+          <p className="ml-5 text-xs uppercase text-gray-primary mt-2">
             {formatDistanceStrict(new Date(timestamp * 1000), new Date(), {
               addSuffix: true,
               locale: locales[lang],
