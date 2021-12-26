@@ -1,0 +1,13 @@
+{
+  "locales": ["en", "pl"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common"],
+    "/": ["home"],
+    "/accounts/login": ["auth"],
+    "/accounts/signup": ["auth"],
+    "/accounts/password/reset": ["auth"],
+    "/404": ["not-found"],
+    "/p/[postId]": ["home"]
+  }
+}

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navBtn {
+    @apply h-6 w-6 cursor-pointer hover:scale-125 transition-all duration-150 ease-out;
+  }
+  .btn {
+    @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out;
+  }
+  .input {
+    @apply border border-gray-300 bg-gray-bg rounded h-9 text-sm;
+  }
+  .login_btn {
+    @apply flex items-center justify-center h-8 !mt-3 text-white font-semibold bg-blue-primary rounded text-sm hover:bg-[#33adff] transition-colors disabled:opacity-50 disabled:cursor-default disabled:hover:bg-blue-primary;
+  }
+  .nav_bottom {
+    @apply fixed left-0 bottom-0 w-screen !justify-evenly bg-white py-2 border-t;
+  }
+  .profile-button {
+    @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold;
+  }
+}
+
+body {
+  @apply overflow-y-scroll;
+}
