@@ -1,4 +1,5 @@
-import { HeartIcon, PlusCircleIcon } from '@heroicons/react/outline';
+import { HeartIcon, PlusCircleIcon as PlusCircleOutline } from '@heroicons/react/outline';
+import { PlusCircleIcon as PlusCircleSolid } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -13,7 +14,7 @@ import Search from '../Search';
 import CompassIcon from '../Icons/ExploreIcon';
 import Dropdown from '../Dropdown';
 
-export default function Navigation({ setOpen }) {
+export default function Navigation({ open, setOpen }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const mobile = useRecoilValue(mobileDeviceState);
   const { user } = useAuth();
@@ -38,13 +39,17 @@ export default function Navigation({ setOpen }) {
               className={`flex justify-between items-center space-x-4 ${mobile && 'nav_bottom'}`}
             >
               <Link href="/">
-                <HomeIcon />
+                <HomeIcon open={open} />
               </Link>
               {!mobile && <MailIcon />}
-              <PlusCircleIcon
-                onClick={() => setOpen(true)}
-                className={`navBtn order-2 ${mobile && '!order-3'}`}
-              />
+              {!open ? (
+                <PlusCircleOutline
+                  onClick={() => setOpen(true)}
+                  className={`navBtn order-2 ${mobile && '!order-3'}`}
+                />
+              ) : (
+                <PlusCircleSolid className={`navBtn order-2 ${mobile && '!order-3'}`} />
+              )}
               <CompassIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
               <HeartIcon className="navBtn order-4" />
 

@@ -51,7 +51,7 @@ export default function Header({ resetPassword = false }) {
             </Link>
           </div>
 
-          {!resetPassword && <Navigation setOpen={setOpen} />}
+          {!resetPassword && <Navigation open={open} setOpen={setOpen} />}
         </div>
       </header>
       {user && <CreatePost open={open} setOpen={setOpen} />}
