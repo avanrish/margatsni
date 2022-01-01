@@ -13,12 +13,13 @@ import { ref, getDownloadURL, uploadString } from '@firebase/storage';
 import 'react-responsive-modal/styles.css';
 import { Modal as RModal } from 'react-responsive-modal';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 
 import { db, storage } from '../../lib/firebase';
-import { useAuth } from '../../hooks/useAuth';
+import { userState } from '../../atoms/UserAtom';
 
 export default function Modal({ open, setOpen }: ModalProps) {
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const filePickerRef = useRef(null);
   const captionRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -39,9 +40,9 @@ export default function Modal({ open, setOpen }: ModalProps) {
     if (loading) return;
     setLoading(true);
     const docRef = await addDoc(collection(db, 'posts'), {
-      username: user?.displayName?.split('+.')[0],
+      username: user?.username,
       caption: captionRef.current.value,
-      profileImg: user?.photoURL,
+      profileImg: user?.profileImg,
       likes: [],
       comments: [],
       timestamp: serverTimestamp(),

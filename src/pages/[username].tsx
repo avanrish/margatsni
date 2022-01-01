@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { BookmarkIcon, CameraIcon, ViewGridIcon } from '@heroicons/react/outline';
 import { ChatIcon, HeartIcon, UserIcon } from '@heroicons/react/solid';
+import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import { userState } from '../atoms/UserAtom';
 import { getPostsByUserId, getUserDataByUsername, toggleFollow } from '../services/firebase';
 import Header from '../components/Header';
-import { useAuth } from '../hooks/useAuth';
 import Link from '../components/Link';
 import LanguageSelect from '../components/LanguageSelect';
 import Unfollow from '../components/Modals/Unfollow';
@@ -22,10 +23,8 @@ export default function Username() {
   const [open, setOpen] = useState(false);
   const [following, setFollowing] = useState(false);
   const { t } = useTranslation('common');
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const router = useRouter();
-
-  const username = user?.displayName.split('+.')[0];
 
   useEffect(() => {
     getUserDataByUsername(router.query.username as string).then((data) => {
@@ -85,7 +84,7 @@ export default function Username() {
               <div className="ml-4 sm:ml-8 flex flex-col space-y-4">
                 <div className="flex flex-col space-y-3 xs:space-y-0 xs:flex-row xs:space-x-6 xs:items-center">
                   <p className="font-thin text-2xl">{profile.username}</p>
-                  {username === profile.username ? (
+                  {user?.username === profile.username ? (
                     <Link href="#" className="profile-button">{t`editProfile`}</Link>
                   ) : following ? (
                     <div className="flex">
@@ -125,7 +124,7 @@ export default function Username() {
                   <ViewGridIcon className="w-5 mr-2" />
                   {t`Posts`}
                 </div>
-                {username === profile.username && (
+                {user?.username === profile.username && (
                   <div className="py-3 uppercase text-xs text-gray-primary -mt-[1px] flex items-center cursor-pointer">
                     <BookmarkIcon className="w-5 mr-2" />
                     {t`saved`}
@@ -160,7 +159,7 @@ export default function Username() {
                     </Link>
                   ))}
                 </div>
-              ) : username === profile.username ? (
+              ) : user?.username === profile.username ? (
                 <div className="flex items-center">
                   <div className="relative w-[380px] h-[380px]">
                     <Image src="/images/sampleImage.jpg" alt="" layout="fill" />

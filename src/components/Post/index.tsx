@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useRecoilValue } from 'recoil';
 
+import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import PostOptionsModal from '../Modals/PostOptions';
 import Buttons from './Buttons';
 import Caption from './Caption';
@@ -12,7 +13,6 @@ import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import RImage from './Image';
-import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 
 const locales = { en: enUS, pl };
 
@@ -66,7 +66,6 @@ export default function Post({
           likes={likes}
           inputRef={homePage ? null : inputRef}
         />
-
         <Caption
           homePage={homePage}
           username={username}
@@ -91,6 +90,7 @@ export default function Post({
             homePage={homePage}
             inputRef={inputRef}
           />
+
           <PostOptionsModal
             open={openOptions}
             setOpenOptions={setOpenOptions}

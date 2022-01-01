@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-import { useAuth } from '../../hooks/useAuth';
-import { getMyFollowings, getSuggestions } from '../../services/firebase';
+import { getSuggestions } from '../../services/firebase';
 import Suggestion from './Suggestion';
+import { userState } from '../../atoms/UserAtom';
 
 export default function Suggestions() {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   useEffect(() => {
     const getNewSuggestions = async () => {
-      const following = await getMyFollowings(user.uid);
-      const suggestions = await getSuggestions(user.uid, following);
+      const suggestions = await getSuggestions([...user.following, user.uid]);
       setSuggestions(suggestions);
       setLoading(false);
     };
     getNewSuggestions();
-  }, [user.uid]);
+  }, [user]);
 
   return (
     <div className="mt-4 ml-10 w-full">

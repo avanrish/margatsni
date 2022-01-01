@@ -4,7 +4,6 @@ import {
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
-  updateProfile,
 } from '@firebase/auth';
 import {
   arrayRemove,
@@ -31,10 +30,6 @@ import validateUsername from '../util/validateUsername';
 
 export const createUser = async ({ username, fullName, email, password }: ICredentials) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
-  await updateProfile(user, {
-    displayName: `${username}+.${fullName}`, // I save it this way so there is no need to call firestore to obtain full name
-    photoURL: '/images/default.png',
-  });
   await setDoc(doc(db, 'users', user.uid), {
     uid: user.uid,
     username,
@@ -65,9 +60,7 @@ export const resetPassword = async (email: string) => {
   await sendPasswordResetEmail(auth, email);
 };
 
-export const getPosts = async (id: string) => {
-  const following = await getMyFollowings(id);
-  following.push(id);
+export const getPosts = async (following) => {
   return await getDocs(
     query(
       collection(db, 'posts'),
@@ -84,13 +77,7 @@ export const getPostsByUserId = async (id: string) => {
   );
 };
 
-export const getMyFollowings = async (id: string) => {
-  const response = await getDoc(doc(db, 'users', id));
-  return response.data().following;
-};
-
-export const getSuggestions = async (id: string, following: string[]) => {
-  following.push(id);
+export const getSuggestions = async (following: string[]) => {
   const { docs } = await getDocs(
     query(collection(db, 'users'), where('uid', 'not-in', following), limit(5))
   );
@@ -142,8 +129,8 @@ export const addComment = async (id, commentToSend, user, setComments, homePage)
   const docRef = doc(db, 'posts', id);
   const commentObj = {
     comment: commentToSend,
-    username: user.displayName.split('+.')[0],
-    profileImg: user.photoURL,
+    username: user.username,
+    profileImg: user.profileImg,
   };
 
   await updateDoc(docRef, {

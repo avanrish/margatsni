@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 
+import { userState } from '../../atoms/UserAtom';
 import Link from '../../components/Link';
 import { createUser, checkIfUsernameExists } from '../../services/firebase';
 import Spinner from '../../components/Spinner';
-import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';
 
@@ -21,7 +22,7 @@ export default function SignUp() {
     fullName: '',
     password: '',
   });
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   if (authLoading) return <Loading />;

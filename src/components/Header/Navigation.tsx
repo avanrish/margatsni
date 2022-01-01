@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
-import { useAuth } from '../../hooks/useAuth';
+import { userState } from '../../atoms/UserAtom';
 import { MailIcon, HomeIcon } from '../Icons';
 import Link from '../Link';
 import Search from '../Search';
@@ -17,7 +17,7 @@ import Dropdown from '../Dropdown';
 export default function Navigation({ open, setOpen }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const mobile = useRecoilValue(mobileDeviceState);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -65,11 +65,11 @@ export default function Navigation({ open, setOpen }) {
                   layout="fill"
                   onClick={() =>
                     mobile
-                      ? router.push(`/${user.displayName.split('+.')[0]}`)
+                      ? router.push(`/${user.username}`)
                       : setDropdownOpen((prev: boolean) => !prev)
                   }
                 />
-                {!mobile && dropdownOpen && <Dropdown username={user.displayName.split('+.')[0]} />}
+                {!mobile && dropdownOpen && <Dropdown username={user.username} />}
               </div>
               {!mobile && dropdownOpen && (
                 <div

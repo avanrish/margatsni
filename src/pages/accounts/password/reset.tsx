@@ -2,12 +2,13 @@ import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import { userState } from '../../../atoms/UserAtom';
 import Header from '../../../components/Header';
 import LanguageSelect from '../../../components/LanguageSelect';
 import Link from '../../../components/Link';
 import Loading from '../../../components/Loading';
-import { useAuth } from '../../../hooks/useAuth';
 import { resetPassword } from '../../../services/firebase';
 
 export default function ResetPassword() {
@@ -15,7 +16,7 @@ export default function ResetPassword() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, loading } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   if (loading) return <Loading />;

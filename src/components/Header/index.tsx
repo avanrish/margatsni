@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { CameraIcon } from '@heroicons/react/outline';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import Link from '../Link';
-import { useAuth } from '../../hooks/useAuth';
 import CreatePost from '../Modals/CreatePost';
 import Navigation from './Navigation';
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
+import { userState } from '../../atoms/UserAtom';
 
 export default function Header({ resetPassword = false }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useRecoilState(mobileDeviceState);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

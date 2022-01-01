@@ -50,7 +50,7 @@ export default function Search({ setDropdownOpen }) {
                 <Link
                   href={`/${user.data().username}`}
                   onClick={() => setSearchTerm('')}
-                  key={user.data().id}
+                  key={user.data().uid}
                   className="flex items-center pl-3 py-2 hover:bg-gray-100"
                 >
                   <div className="h-12 w-12 border-2 rounded-full border-red-500 p-[2px] cursor-pointer">

@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useRecoilValue } from 'recoil';
 
 import { toggleFollow } from '../../services/firebase';
 import Unfollow from '../Modals/Unfollow';
 import Link from '../Link';
+import { userState } from '../../atoms/UserAtom';
 
 export default function Suggestion({ profileImg, fullName, username, id: targetUserId }) {
   const [followed, setFollowed] = useState(false);
   const [open, setOpen] = useState(false);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   function followCallback() {

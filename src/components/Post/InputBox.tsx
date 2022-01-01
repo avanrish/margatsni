@@ -1,13 +1,14 @@
 import { EmojiHappyIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { useAuth } from '../../hooks/useAuth';
+import { userState } from '../../atoms/UserAtom';
 import { addComment } from '../../services/firebase';
 
 export default function InputBox({ setComments, postId, homePage, inputRef }) {
   const [comment, setComment] = useState('');
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   const sendComment = async (e: { preventDefault: () => void }) => {

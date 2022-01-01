@@ -3,18 +3,18 @@ import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
 import { BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from '@firebase/firestore';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import useTranslation from 'next-translate/useTranslation';
 
 import { db } from '../../lib/firebase';
-import { useAuth } from '../../hooks/useAuth';
 import { clipboardState } from '../../atoms/ClipboardAtom';
-import useTranslation from 'next-translate/useTranslation';
+import { userState } from '../../atoms/UserAtom';
 
 export default function Buttons({ postId, setLikes, likes, inputRef }) {
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   useEffect(() => {

@@ -3,10 +3,10 @@ import { deleteObject, ref } from '@firebase/storage';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import Modal from 'react-responsive-modal';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { clipboardState } from '../../atoms/ClipboardAtom';
-import { useAuth } from '../../hooks/useAuth';
+import { userState } from '../../atoms/UserAtom';
 import { db, storage } from '../../lib/firebase';
 import Link from '../Link';
 
@@ -14,9 +14,9 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
   const [consentDialog, setConsentDialog] = useState(false);
   const { t } = useTranslation('common');
   const setClipboard = useSetRecoilState(clipboardState);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
 
-  const currentUser = user?.displayName?.split('+.')[0];
+  const currentUser = user?.username;
 
   useEffect(() => {
     if (!open && consentDialog) window.setTimeout(() => setConsentDialog(false), 220);

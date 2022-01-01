@@ -2,9 +2,10 @@ import { DotsHorizontalIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 
-import { getMyFollowings, toggleFollow } from '../../services/firebase';
-import { useAuth } from '../../hooks/useAuth';
+import { userState } from '../../atoms/UserAtom';
+import { toggleFollow } from '../../services/firebase';
 import Link from '../Link';
 import Unfollow from '../Modals/Unfollow';
 
@@ -17,17 +18,16 @@ export default function PostHeader({
 }) {
   const [following, setFollowing] = useState(false);
   const [open, setOpen] = useState(false);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const { t } = useTranslation('common');
 
   useEffect(() => {
     const checkIfFollowing = async () => {
-      const followings = await getMyFollowings(user.uid);
-      const isFollowing = followings.filter((follow) => follow === userId).length > 0;
+      const isFollowing = user?.following.filter((follow) => follow === userId).length > 0;
       setFollowing(isFollowing);
     };
     if (postId) checkIfFollowing();
-  }, [postId, user.uid, userId]);
+  }, [postId, userId, user?.following]);
 
   function followCallback() {
     setFollowing((prev) => !prev);
@@ -49,7 +49,7 @@ export default function PostHeader({
       <Link className="block flex-1 font-semibold hover:underline max-w-max" href={`/${username}`}>
         {username}
       </Link>
-      {postId && (
+      {postId && user?.username !== username && (
         <>
           <p className="mx-2">•</p>
           <p
