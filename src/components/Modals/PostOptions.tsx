@@ -1,6 +1,7 @@
 import { deleteDoc, doc, arrayRemove, updateDoc } from '@firebase/firestore';
 import { deleteObject, ref } from '@firebase/storage';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Modal from 'react-responsive-modal';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -15,6 +16,7 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
   const { t } = useTranslation('common');
   const setClipboard = useSetRecoilState(clipboardState);
   const { user } = useRecoilValue(userState);
+  const router = useRouter();
 
   const currentUser = user?.username;
 
@@ -29,7 +31,8 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
     updateDoc(userRef, {
       posts: arrayRemove(docId),
     });
-    getPosts();
+    if (router.pathname !== '/') router.push('/');
+    else getPosts();
   };
 
   return (
