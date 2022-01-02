@@ -16,7 +16,7 @@ import Link from '../components/Link';
 import LanguageSelect from '../components/LanguageSelect';
 import Unfollow from '../components/Modals/Unfollow';
 
-export default function Username() {
+export default function Username({ username }) {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState(null);
@@ -27,14 +27,14 @@ export default function Username() {
   const router = useRouter();
 
   useEffect(() => {
-    getUserDataByUsername(router.query.username as string).then((data) => {
+    getUserDataByUsername(username).then((data) => {
       if (!data) router.push('/404', router.asPath);
       else {
         setProfile(data);
         setLoading(false);
       }
     });
-  }, [router]);
+  }, [router, username]);
 
   useEffect(() => {
     if (user && profile) setFollowing(profile.followers.filter((id) => id === user.uid).length > 0);
@@ -201,3 +201,9 @@ export default function Username() {
     </div>
   );
 }
+
+export const getServerSideProps = async ({ params: { username } }) => {
+  return {
+    props: { username },
+  };
+};
