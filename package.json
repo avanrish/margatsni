@@ -14,6 +14,7 @@
     "firebase": "9.6.1",
     "next": "12.0.7",
     "next-translate": "^1.2.0",
+    "nextjs-progressbar": "^0.0.13",
     "react": "17.0.2",
     "react-cookienotice": "^4.0.0",
     "react-dom": "17.0.2",

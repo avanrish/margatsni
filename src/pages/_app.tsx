@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import NextNProgress from 'nextjs-progressbar';
 
 import '../../styles/globals.css';
 import Wrapper from '../components/Wrapper';
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { t } = useTranslation();
   return (
     <>
+      <NextNProgress height={5} color="#0095F6" options={{ showSpinner: false }} />
       <RecoilRoot>
         <Wrapper>
           <Component {...pageProps} />
