@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 import { getSuggestions } from '../../services/firebase';
 import Suggestion from './Suggestion';
-import { userState } from '../../atoms/UserAtom';
 
-export default function Suggestions() {
-  const [suggestions, setSuggestions] = useState([]);
+export default function Suggestions({ user }) {
+  const [suggestions, setSuggestions] = useState<any>();
   const [loading, setLoading] = useState(true);
-  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -33,11 +29,11 @@ export default function Suggestions() {
       {!loading
         ? suggestions.map((profile) => (
             <Suggestion
-              key={profile.id}
-              id={profile.id}
-              username={profile.username}
-              fullName={profile.name}
-              profileImg={profile.avatar}
+              key={profile.data().uid}
+              uid={profile.data().uid}
+              username={profile.data().username}
+              fullName={profile.data().name}
+              profileImg={profile.data().profileImg}
             />
           ))
         : [...Array(5)].map((_, i) => (

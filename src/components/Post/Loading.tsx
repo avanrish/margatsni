@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 import { useRecoilValue } from 'recoil';
 import { EmojiHappyIcon } from '@heroicons/react/outline';
-import 'react-loading-skeleton/dist/skeleton.css';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';

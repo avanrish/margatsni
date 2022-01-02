@@ -3,9 +3,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import useDebounce from '../hooks/useDebounce';
-import { getUsersByKeyword } from '../services/firebase';
-import Link from './Link';
+import useDebounce from '../../hooks/useDebounce';
+import { getUsersByKeyword } from '../../services/firebase';
+import Link from '../Link';
 
 export default function Search({ setDropdownOpen }) {
   const [searchTerm, setSearchTerm] = useState('');

@@ -81,12 +81,7 @@ export const getSuggestions = async (following: string[]) => {
   const { docs } = await getDocs(
     query(collection(db, 'users'), where('uid', 'not-in', following), limit(5))
   );
-  return docs.map((sugg) => ({
-    id: sugg.data().uid,
-    name: sugg.data().fullName,
-    username: sugg.data().username,
-    avatar: sugg.data().profileImg,
-  }));
+  return docs;
 };
 
 export const toggleFollow = async (

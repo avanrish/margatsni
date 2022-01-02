@@ -50,7 +50,7 @@ export default function Post({
 
       <RImage postId={postId} img={img} homePage={homePage} />
 
-      <div className="flex flex-col min-w-[360px]">
+      <div className="flex flex-col sm:min-w-[360px]">
         {!homePage && !mobile && (
           <PostHeader
             userImg={userImg}

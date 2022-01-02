@@ -7,7 +7,6 @@ import { BookmarkIcon, CameraIcon, ViewGridIcon } from '@heroicons/react/outline
 import { ChatIcon, HeartIcon, UserIcon } from '@heroicons/react/solid';
 import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 import { userState } from '../atoms/UserAtom';
 import { getPostsByUserId, getUserDataByUsername, toggleFollow } from '../services/firebase';

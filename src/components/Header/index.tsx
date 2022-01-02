@@ -8,9 +8,11 @@ import CreatePost from '../Modals/CreatePost';
 import Navigation from './Navigation';
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import { userState } from '../../atoms/UserAtom';
+import Search from './Search';
 
 export default function Header({ resetPassword = false }) {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobile, setMobile] = useRecoilState(mobileDeviceState);
   const { user } = useRecoilValue(userState);
 
@@ -51,7 +53,20 @@ export default function Header({ resetPassword = false }) {
             </Link>
           </div>
 
-          {!resetPassword && <Navigation open={open} setOpen={setOpen} />}
+          {!resetPassword && (
+            <>
+              {/* Middle - Search Input */}
+              {!mobile && <Search setDropdownOpen={setDropdownOpen} />}
+
+              {/* Right */}
+              <Navigation
+                open={open}
+                setOpen={setOpen}
+                dropdownOpen={dropdownOpen}
+                setDropdownOpen={setDropdownOpen}
+              />
+            </>
+          )}
         </div>
       </header>
       {user && <CreatePost open={open} setOpen={setOpen} />}

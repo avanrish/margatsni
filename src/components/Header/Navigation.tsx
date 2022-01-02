@@ -1,21 +1,16 @@
-import { HeartIcon, PlusCircleIcon as PlusCircleOutline } from '@heroicons/react/outline';
-import { PlusCircleIcon as PlusCircleSolid } from '@heroicons/react/solid';
+import { HeartIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import { userState } from '../../atoms/UserAtom';
-import { MailIcon, HomeIcon } from '../Icons';
+import { CreateIcon, ExploreIcon, HomeIcon, MailIcon } from '../Icons';
 import Link from '../Link';
-import Search from '../Search';
-import CompassIcon from '../Icons/ExploreIcon';
 import Dropdown from '../Dropdown';
 
-export default function Navigation({ open, setOpen }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpen }) {
   const mobile = useRecoilValue(mobileDeviceState);
   const { user } = useRecoilValue(userState);
   const router = useRouter();
@@ -23,10 +18,6 @@ export default function Navigation({ open, setOpen }) {
 
   return (
     <>
-      {/* Middle - Search input field */}
-      {!mobile && <Search setDropdownOpen={setDropdownOpen} />}
-
-      {/* Right */}
       <div className="flex items-center justify-end lg:mr-5 xl:mr-0">
         {user ? (
           <>
@@ -42,15 +33,8 @@ export default function Navigation({ open, setOpen }) {
                 <HomeIcon open={open} />
               </Link>
               {!mobile && <MailIcon />}
-              {!open ? (
-                <PlusCircleOutline
-                  onClick={() => setOpen(true)}
-                  className={`navBtn order-2 ${mobile && '!order-3'}`}
-                />
-              ) : (
-                <PlusCircleSolid className={`navBtn order-2 ${mobile && '!order-3'}`} />
-              )}
-              <CompassIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
+              <CreateIcon open={open} setOpen={setOpen} mobile={mobile} />
+              <ExploreIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
               <HeartIcon className="navBtn order-4" />
 
               <div
@@ -59,7 +43,7 @@ export default function Navigation({ open, setOpen }) {
                 }`}
               >
                 <Image
-                  src={user?.photoURL || '/images/default.png'}
+                  src={user?.profileImg || '/images/default.png'}
                   alt="profile picture"
                   className="rounded-full cursor-pointer"
                   layout="fill"

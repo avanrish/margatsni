@@ -3,11 +3,12 @@ import { RecoilRoot } from 'recoil';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import NextNProgress from 'nextjs-progressbar';
+import 'react-loading-skeleton/dist/skeleton.css';
+import 'react-cookienotice/dist/index.css';
 
 import '../../styles/globals.css';
 import Wrapper from '../components/Wrapper';
 
-import 'react-cookienotice/dist/index.css';
 const CookieNotice = dynamic(() => import('react-cookienotice'), { ssr: false });
 
 function MyApp({ Component, pageProps }: AppProps) {

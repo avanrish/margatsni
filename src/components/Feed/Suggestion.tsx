@@ -8,7 +8,7 @@ import Unfollow from '../Modals/Unfollow';
 import Link from '../Link';
 import { userState } from '../../atoms/UserAtom';
 
-export default function Suggestion({ profileImg, fullName, username, id: targetUserId }) {
+export default function Suggestion({ profileImg, fullName, username, uid: targetUserId }) {
   const [followed, setFollowed] = useState(false);
   const [open, setOpen] = useState(false);
   const { user } = useRecoilValue(userState);
