@@ -27,12 +27,14 @@ export default function PostId() {
     getPosts();
   }, [router, getPosts]);
 
+  const title = post?.caption
+    ? `${post?.username} on Margatsni: "${post?.caption}"`
+    : `${post?.username} on Margatsni.`;
+
   return (
     <div>
       <Head>
-        <title>
-          {loading ? 'Margatsni' : `${post?.username} on Margatsni: "${post?.caption}"`}
-        </title>
+        <title>{loading ? 'Margatsni' : title}</title>
       </Head>
       <Header />
       {loading ? (

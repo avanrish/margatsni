@@ -142,6 +142,11 @@ export const getUserDataByUserId = async (userId: string) => {
   return docs[0].data();
 };
 
+export const getUserDataByUsername = async (username: string) => {
+  const { docs } = await getDocs(query(collection(db, 'users'), where('username', '==', username)));
+  return docs[0].data();
+};
+
 export const createPost = async (user, caption: string | null) => {
   return await addDoc(collection(db, 'posts'), {
     username: user?.username,

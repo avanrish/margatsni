@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { BookmarkIcon, CameraIcon, ViewGridIcon } from '@heroicons/react/outline';
 import { ChatIcon, HeartIcon, UserIcon } from '@heroicons/react/solid';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../atoms/UserAtom';
+import { logInDialogState } from '../atoms/LogInDialogAtom';
 import { getPostsByUserId, getUserDataByUsername, toggleFollow } from '../services/firebase';
 import Header from '../components/Header';
 import Link from '../components/Link';
@@ -21,6 +22,7 @@ export default function Username() {
   const [posts, setPosts] = useState(null);
   const [open, setOpen] = useState(false);
   const [following, setFollowing] = useState(false);
+  const setLoginDialog = useSetRecoilState(logInDialogState);
   const { t } = useTranslation('common');
   const { user } = useRecoilValue(userState);
   const router = useRouter();
@@ -95,7 +97,7 @@ export default function Username() {
                     </div>
                   ) : (
                     <button
-                      onClick={handleFollow}
+                      onClick={user ? handleFollow : () => setLoginDialog(true)}
                       className="profile-button !text-white !bg-blue-primary"
                     >{t`follow`}</button>
                   )}
