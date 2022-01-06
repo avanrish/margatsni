@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import NextNProgress from 'nextjs-progressbar';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-cookienotice/dist/index.css';
+import 'react-responsive-modal/styles.css';
 
 import '../../styles/globals.css';
 import Wrapper from '../components/Wrapper';

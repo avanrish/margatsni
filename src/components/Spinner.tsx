@@ -1,10 +1,12 @@
-export default function Spinner() {
+export default function Spinner({ blue, width = 20, height = 20 }) {
   return (
     <svg
-      className={`animate-spin h-5 w-5 text-white`}
+      className={`animate-spin ${blue ? 'text-blue-primary' : 'text-white'}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
+      width={width}
+      height={height}
     >
       <circle
         className="opacity-25"

@@ -21,12 +21,15 @@ import {
   startAt,
   updateDoc,
   where,
+  addDoc,
+  deleteDoc,
 } from '@firebase/firestore';
 
-import { auth, db } from '../lib/firebase';
+import { auth, db, storage } from '../lib/firebase';
 import { ICredentials } from '../pages/accounts/signup';
 import { ILogin } from '../pages/accounts/login';
 import validateUsername from '../util/validateUsername';
+import { getDownloadURL, uploadString, ref, deleteObject } from 'firebase/storage';
 
 export const createUser = async ({ username, fullName, email, password }: ICredentials) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -138,3 +141,36 @@ export const getUserDataByUsername = async (username: string) => {
   const { docs } = await getDocs(query(collection(db, 'users'), where('username', '==', username)));
   return docs[0].data();
 };
+
+export const createPost = async (user, caption: string | null) => {
+  return await addDoc(collection(db, 'posts'), {
+    username: user?.username,
+    caption,
+    profileImg: user?.profileImg,
+    likes: [],
+    comments: [],
+    timestamp: serverTimestamp(),
+    uid: user.uid,
+  });
+};
+
+export const uploadImage = async (imageRef, selectedFile, docId) => {
+  await uploadString(imageRef, selectedFile, 'data_url');
+  const downloadUrl = await getDownloadURL(imageRef);
+  await updateDoc(doc(db, 'posts', docId), {
+    image: downloadUrl,
+  });
+};
+
+export const getImageRef = (docId: string) => ref(storage, `posts/${docId}/image`);
+
+export const updateUserPostsArray = async (action, userId, docId) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    posts: action === 'add' ? arrayUnion(docId) : arrayRemove(docId),
+  });
+};
+
+export const deleteImage = async (docId) => deleteObject(ref(storage, `posts/${docId}/image`));
+
+export const deletePost = async (docId) => deleteDoc(doc(db, 'posts', docId));
