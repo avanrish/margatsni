@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { userState } from '../atoms/UserAtom';
 import { auth } from '../lib/firebase';
-import { getUserDataByUsername } from '../services/firebase';
+import { getUserDataByUserId } from '../services/firebase';
 
 export default function Wrapper({ children }) {
   const setUser = useSetRecoilState(userState);
@@ -13,7 +13,7 @@ export default function Wrapper({ children }) {
     () =>
       onAuthStateChanged(auth, async (user) => {
         if (user) {
-          const data = await getUserDataByUsername(user.displayName.split('+.')[0]);
+          const data = await getUserDataByUserId(user.uid);
           setUser({ user: data, loading: false });
         } else setUser({ user: null, loading: false });
       }),

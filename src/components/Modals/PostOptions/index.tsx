@@ -26,7 +26,7 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
         open={open}
         close={() => setOpenOptions(false)}
         postCreator={postCreator}
-        currentUser={user.username}
+        currentUser={user?.username}
         setConsentDialog={setConsentDialog}
         docId={docId}
       />

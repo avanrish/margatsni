@@ -10,29 +10,28 @@ import { db } from '../../lib/firebase';
 import { clipboardState } from '../../atoms/ClipboardAtom';
 import { userState } from '../../atoms/UserAtom';
 
-export default function Buttons({ postId, setLikes, likes, inputRef }) {
+export default function Buttons({ postId, setLikes, likes, inputRef, currUserId }) {
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
-  const { user } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   useEffect(() => {
-    setHasLiked(!!likes.find((like) => like === user?.uid));
-  }, [likes, user?.uid]);
+    setHasLiked(!!likes.find((like) => like === currUserId));
+  }, [likes, currUserId]);
 
   const likePost = async () => {
     const docRef = doc(db, 'posts', postId);
 
     if (hasLiked) {
-      setLikes(likes.filter((like) => like !== user.uid));
+      setLikes(likes.filter((like) => like !== currUserId));
       updateDoc(docRef, {
-        likes: arrayRemove(user.uid),
+        likes: arrayRemove(currUserId),
       });
     } else {
-      setLikes((prevLikes) => [...prevLikes, user.uid]);
+      setLikes((prevLikes) => [...prevLikes, currUserId]);
       updateDoc(docRef, {
-        likes: arrayUnion(user.uid),
+        likes: arrayUnion(currUserId),
       });
     }
   };

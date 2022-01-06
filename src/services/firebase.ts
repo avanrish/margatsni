@@ -137,8 +137,8 @@ export const addComment = async (id, commentToSend, user, setComments, homePage)
   setComments((prev) => (homePage ? [commentObj, ...prev] : [...prev, commentObj]));
 };
 
-export const getUserDataByUsername = async (username: string) => {
-  const { docs } = await getDocs(query(collection(db, 'users'), where('username', '==', username)));
+export const getUserDataByUserId = async (userId: string) => {
+  const { docs } = await getDocs(query(collection(db, 'users'), where('uid', '==', userId)));
   return docs[0].data();
 };
 

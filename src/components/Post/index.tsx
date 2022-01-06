@@ -2,10 +2,10 @@ import { useState, useRef } from 'react';
 import { formatDistanceStrict } from 'date-fns';
 import { enUS, pl } from 'date-fns/locale';
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 import { useRecoilValue } from 'recoil';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
+import { userState } from '../../atoms/UserAtom';
 import PostOptionsModal from '../Modals/PostOptions';
 import Buttons from './Buttons';
 import Caption from './Caption';
@@ -27,15 +27,15 @@ export default function Post({
   comments: initComments,
   timestamp,
   getPosts,
-}: IPost) {
-  const { pathname } = useRouter();
+}) {
+  const { locale, pathname } = useRouter();
   const homePage = pathname === '/';
 
   const [comments, setComments] = useState(homePage ? initComments.slice(0, 5) : initComments); // Displays only 5 latest messages
   const [likes, setLikes] = useState(initLikes);
   const [openOptions, setOpenOptions] = useState(false);
-  const { lang } = useTranslation();
   const mobile = useRecoilValue(mobileDeviceState);
+  const { user } = useRecoilValue(userState);
   const inputRef = useRef(null);
 
   return (
@@ -65,6 +65,7 @@ export default function Post({
           setLikes={setLikes}
           likes={likes}
           inputRef={homePage ? null : inputRef}
+          currUserId={user?.uid}
         />
         <Caption
           homePage={homePage}
@@ -81,7 +82,7 @@ export default function Post({
           <p className="ml-5 text-xs uppercase text-gray-primary mt-2">
             {formatDistanceStrict(new Date(timestamp * 1000), new Date(), {
               addSuffix: true,
-              locale: locales[lang],
+              locale: locales[locale],
             })}
           </p>
           <InputBox
@@ -102,21 +103,4 @@ export default function Post({
       </div>
     </div>
   );
-}
-
-export interface IPost {
-  postId: string;
-  userId: string;
-  username: string;
-  userImg: string;
-  img: string;
-  caption: string;
-  likes: string[];
-  comments: {
-    username: string;
-    comment: string;
-    profileImg: string;
-  }[];
-  timestamp: number;
-  getPosts?: any;
 }
