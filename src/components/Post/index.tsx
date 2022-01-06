@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { formatDistanceStrict } from 'date-fns';
 import { enUS, pl } from 'date-fns/locale';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import { userState } from '../../atoms/UserAtom';
@@ -13,6 +13,7 @@ import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import RImage from './Image';
+import { logInDialogState } from '../../atoms/LogInDialogAtom';
 
 const locales = { en: enUS, pl };
 
@@ -36,6 +37,7 @@ export default function Post({
   const [openOptions, setOpenOptions] = useState(false);
   const mobile = useRecoilValue(mobileDeviceState);
   const { user } = useRecoilValue(userState);
+  const setLoginDialog = useSetRecoilState(logInDialogState);
   const inputRef = useRef(null);
 
   return (
@@ -45,7 +47,13 @@ export default function Post({
       }`}
     >
       {(mobile || homePage) && (
-        <PostHeader userImg={userImg} username={username} setOpenOptions={setOpenOptions} />
+        <PostHeader
+          userImg={userImg}
+          username={username}
+          setOpenOptions={setOpenOptions}
+          setLoginDialog={setLoginDialog}
+          currUser={user}
+        />
       )}
 
       <RImage postId={postId} img={img} homePage={homePage} />
@@ -58,6 +66,8 @@ export default function Post({
             setOpenOptions={setOpenOptions}
             postId={postId}
             userId={userId}
+            currUser={user}
+            setLoginDialog={setLoginDialog}
           />
         )}
         <Buttons
@@ -66,6 +76,7 @@ export default function Post({
           likes={likes}
           inputRef={homePage ? null : inputRef}
           currUserId={user?.uid}
+          setLoginDialog={setLoginDialog}
         />
         <Caption
           homePage={homePage}

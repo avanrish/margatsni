@@ -1,4 +1,4 @@
-export default function Spinner({ blue, width = 20, height = 20 }) {
+export default function Spinner({ blue = false, width = 20, height = 20 }) {
   return (
     <svg
       className={`animate-spin ${blue ? 'text-blue-primary' : 'text-white'}`}

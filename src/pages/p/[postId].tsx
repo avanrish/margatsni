@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
 import { getPostById } from '../../services/firebase';
@@ -13,7 +13,7 @@ export default function PostId() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
+  const getPosts = useCallback(() => {
     getPostById(router.query.postId as string).then((data) => {
       if (!data) router.push('/404', router.asPath);
       else {
@@ -22,6 +22,10 @@ export default function PostId() {
       }
     });
   }, [router]);
+
+  useEffect(() => {
+    getPosts();
+  }, [router, getPosts]);
 
   return (
     <div>
@@ -46,6 +50,7 @@ export default function PostId() {
               img={post.image}
               likes={post.likes}
               timestamp={post.timestamp.seconds}
+              getPosts={getPosts}
             />
           </div>
         )

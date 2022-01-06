@@ -3,14 +3,13 @@ import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
 import { BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from '@firebase/firestore';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
 import { db } from '../../lib/firebase';
 import { clipboardState } from '../../atoms/ClipboardAtom';
-import { userState } from '../../atoms/UserAtom';
 
-export default function Buttons({ postId, setLikes, likes, inputRef, currUserId }) {
+export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
@@ -43,11 +42,18 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId 
           {hasLiked ? (
             <HeartIconFilled onClick={likePost} className="btn text-red-500" />
           ) : (
-            <HeartIcon onClick={likePost} className="btn" />
+            <HeartIcon
+              onClick={currUserId ? likePost : () => setLoginDialog(true)}
+              className="btn"
+            />
           )}
           <ChatIcon
             className="btn"
-            onClick={inputRef ? () => inputRef.current.focus() : () => router.push(`/p/${postId}`)}
+            onClick={() => {
+              if (!currUserId) setLoginDialog(true);
+              else if (inputRef) inputRef.current.focus();
+              else router.push(`/p/${postId}`);
+            }}
           />
           <PaperAirplaneIcon
             className="btn"

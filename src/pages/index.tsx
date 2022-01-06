@@ -1,13 +1,15 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../atoms/UserAtom';
-import ClipboardMonit from '../components/ClipboardMonit';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+
+const ClipboardMonit = dynamic(() => import('../components/ClipboardMonit'));
 
 const Home: NextPage = () => {
   const { user, loading } = useRecoilValue(userState);
