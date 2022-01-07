@@ -7,12 +7,18 @@ import {
   ServiceAccount,
 } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-import { firebaseAdminConfig } from './firebase-admin.config';
 
-const serviceAccount = firebaseAdminConfig as ServiceAccount;
+// How to obtain required credentials
+// https://firebase.google.com/docs/admin/setup#initialize-sdk
+
+const credentials: ServiceAccount = {
+  projectId: process.env.PROJECT_ID,
+  privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+  clientEmail: process.env.CLIENT_EMAIL,
+};
 
 const options: AppOptions = {
-  credential: cert(serviceAccount),
+  credential: cert(credentials),
   databaseURL: process.env.databaseURL,
 };
 
