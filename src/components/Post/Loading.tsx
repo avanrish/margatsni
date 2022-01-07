@@ -34,7 +34,7 @@ export default function Loading() {
             <Skeleton width={80} />
           </div>
         )}
-        <div className={!mobile && 'mt-auto'}>
+        <div className={!mobile ? 'mt-auto' : undefined}>
           <div className="flex items-center p-4">
             <EmojiHappyIcon className="h-7" />
             <input

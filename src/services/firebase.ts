@@ -179,3 +179,19 @@ export const updateUserPostsArray = async (action, userId, docId) => {
 export const deleteImage = async (docId) => deleteObject(ref(storage, `posts/${docId}/image`));
 
 export const deletePost = async (docId) => deleteDoc(doc(db, 'posts', docId));
+
+export const toggleLike = async (hasLiked, currUserId, postId, setLikes) => {
+  const docRef = doc(db, 'posts', postId);
+
+  if (hasLiked) {
+    setLikes((prevLikes) => prevLikes.filter((like) => like !== currUserId));
+    updateDoc(docRef, {
+      likes: arrayRemove(currUserId),
+    });
+  } else {
+    setLikes((prevLikes) => [...prevLikes, currUserId]);
+    updateDoc(docRef, {
+      likes: arrayUnion(currUserId),
+    });
+  }
+};

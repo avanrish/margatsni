@@ -2,12 +2,11 @@ import { useRouter } from 'next/router';
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
 import { BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
-import { arrayRemove, arrayUnion, doc, updateDoc } from '@firebase/firestore';
 import { useSetRecoilState } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
-import { db } from '../../lib/firebase';
 import { clipboardState } from '../../atoms/ClipboardAtom';
+import { toggleLike } from '../../services/firebase';
 
 export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
   const [hasLiked, setHasLiked] = useState(false);
@@ -20,19 +19,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId,
   }, [likes, currUserId]);
 
   const likePost = async () => {
-    const docRef = doc(db, 'posts', postId);
-
-    if (hasLiked) {
-      setLikes(likes.filter((like) => like !== currUserId));
-      updateDoc(docRef, {
-        likes: arrayRemove(currUserId),
-      });
-    } else {
-      setLikes((prevLikes) => [...prevLikes, currUserId]);
-      updateDoc(docRef, {
-        likes: arrayUnion(currUserId),
-      });
-    }
+    toggleLike(hasLiked, currUserId, postId, setLikes);
   };
 
   return (

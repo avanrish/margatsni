@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import { userState } from '../../atoms/UserAtom';
+import { logInDialogState } from '../../atoms/LogInDialogAtom';
 import PostOptionsModal from '../Modals/PostOptions';
 import Buttons from './Buttons';
 import Caption from './Caption';
@@ -13,7 +14,6 @@ import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import RImage from './Image';
-import { logInDialogState } from '../../atoms/LogInDialogAtom';
 
 const locales = { en: enUS, pl };
 
@@ -101,6 +101,8 @@ export default function Post({
             setComments={setComments}
             homePage={homePage}
             inputRef={inputRef}
+            user={user}
+            setLoginDialog={setLoginDialog}
           />
 
           <PostOptionsModal
