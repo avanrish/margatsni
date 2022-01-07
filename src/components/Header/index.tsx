@@ -14,7 +14,7 @@ export default function Header({ resetPassword = false }) {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobile, setMobile] = useRecoilState(mobileDeviceState);
-  const { user } = useRecoilValue(userState);
+  const { user, loading } = useRecoilValue(userState);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -34,40 +34,42 @@ export default function Header({ resetPassword = false }) {
   return (
     <>
       <header className="bg-white h-[67px] shadow-sm border-b sticky top-0 z-50">
-        <div className="flex justify-between h-full max-w-6xl mx-5 lg:mx-auto">
-          {mobile && user && (
-            <div className="flex items-center">
-              <CameraIcon className="h-6 w-6" onClick={() => setOpen(true)} />
+        {mobile === null || loading ? null : (
+          <div className="flex justify-between h-full max-w-6xl mx-5 lg:mx-auto">
+            {mobile && user && (
+              <div className="flex items-center">
+                <CameraIcon className="h-6 w-6" onClick={() => setOpen(true)} />
+              </div>
+            )}
+            {/* Left  */}
+            <div className="flex items-center lg:ml-5 xl:ml-0">
+              <Link href="/" className="h-[29px]">
+                <Image
+                  src="/images/margatsni.png"
+                  width={121}
+                  height={35.46}
+                  alt="Margatsni"
+                  objectFit="contain"
+                />
+              </Link>
             </div>
-          )}
-          {/* Left  */}
-          <div className="flex items-center lg:ml-5 xl:ml-0">
-            <Link href="/" className="h-[29px]">
-              <Image
-                src="/images/margatsni.png"
-                width={121}
-                height={35.46}
-                alt="Margatsni"
-                objectFit="contain"
-              />
-            </Link>
+
+            {!resetPassword && (
+              <>
+                {/* Middle - Search Input */}
+                {!mobile && <Search setDropdownOpen={setDropdownOpen} />}
+
+                {/* Right */}
+                <Navigation
+                  open={open}
+                  setOpen={setOpen}
+                  dropdownOpen={dropdownOpen}
+                  setDropdownOpen={setDropdownOpen}
+                />
+              </>
+            )}
           </div>
-
-          {!resetPassword && (
-            <>
-              {/* Middle - Search Input */}
-              {!mobile && <Search setDropdownOpen={setDropdownOpen} />}
-
-              {/* Right */}
-              <Navigation
-                open={open}
-                setOpen={setOpen}
-                dropdownOpen={dropdownOpen}
-                setDropdownOpen={setDropdownOpen}
-              />
-            </>
-          )}
-        </div>
+        )}
       </header>
       {user && <CreatePost open={open} setOpen={setOpen} />}
     </>
