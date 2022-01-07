@@ -133,10 +133,11 @@ export const getServerSideProps = async ({ query: { username } }) => {
     return {
       notFound: true,
     };
-  delete profile.timestamp; // Timestamp could not be serialized as JSON
+  delete profile.timestamp; // Timestamp cannot be serialized as JSON
   return {
     props: {
       profile,
+      key: username,
     },
   };
 };

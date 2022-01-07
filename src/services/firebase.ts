@@ -63,7 +63,7 @@ export const resetPassword = async (email: string) => {
   await sendPasswordResetEmail(auth, email);
 };
 
-export const getPosts = async (following) => {
+export const getFollowingUsersPosts = async (following) => {
   return await getDocs(
     query(
       collection(db, 'posts'),

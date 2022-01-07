@@ -27,7 +27,7 @@ export default function Post({
   likes: initLikes,
   comments: initComments,
   timestamp,
-  getPosts,
+  getPosts = null,
 }) {
   const { locale, pathname } = useRouter();
   const homePage = pathname === '/';

@@ -1,64 +1,54 @@
-import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { useCallback, useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
-import { getPostById } from '../../services/firebase';
 import Post from '../../components/Post';
 import ClipboardMonit from '../../components/ClipboardMonit';
-import Loading from '../../components/Post/Loading';
+import { getPostById as adminGetPostById } from '../../services/firebase-admin';
 
-export default function PostId() {
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  const getPosts = useCallback(() => {
-    getPostById(router.query.postId as string).then((data) => {
-      if (!data) router.push('/404', router.asPath);
-      else {
-        setPost(data);
-        setLoading(false);
-      }
-    });
-  }, [router]);
-
-  useEffect(() => {
-    getPosts();
-  }, [router, getPosts]);
-
-  const title = post?.caption
-    ? `${post?.username} on Margatsni: "${post?.caption}"`
-    : `${post?.username} on Margatsni.`;
+export default function PostId({ post, postId, timestamp }) {
+  const title = post.caption
+    ? `${post.username} on Margatsni: "${post.caption}"`
+    : `${post.username} on Margatsni.`;
 
   return (
     <div>
       <Head>
-        <title>{loading ? 'Margatsni' : title}</title>
+        <title>{title}</title>
       </Head>
       <Header />
-      {loading ? (
-        <Loading />
-      ) : (
-        post && (
-          <div className="max-w-6xl pb-14 mx-auto">
-            <Post
-              postId={router?.query?.postId as string}
-              userId={post.uid}
-              username={post.username}
-              userImg={post.profileImg}
-              comments={post.comments}
-              caption={post.caption}
-              img={post.image}
-              likes={post.likes}
-              timestamp={post.timestamp.seconds}
-              getPosts={getPosts}
-            />
-          </div>
-        )
-      )}
+      <div className="max-w-6xl pb-14 mx-auto">
+        <Post
+          postId={postId}
+          userId={post.uid}
+          username={post.username}
+          userImg={post.profileImg}
+          comments={post.comments}
+          caption={post.caption}
+          img={post.image}
+          likes={post.likes}
+          timestamp={timestamp}
+        />
+      </div>
 
       <ClipboardMonit />
     </div>
   );
 }
+
+export const getServerSideProps = async ({ query: { postId } }) => {
+  const post = await adminGetPostById(postId);
+  if (!post)
+    return {
+      notFound: true,
+    };
+  const timestamp = post.timestamp.seconds;
+  delete post.timestamp; // Timestamp cannot be serialized as JSON
+  return {
+    props: {
+      post,
+      postId,
+      timestamp,
+      key: postId,
+    },
+  };
+};

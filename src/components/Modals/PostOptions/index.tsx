@@ -16,8 +16,8 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
     await deleteImage(docId);
     await deletePost(docId);
     await updateUserPostsArray('remove', user.uid, docId);
-    if (router.pathname !== '/') router.push('/');
-    else getPosts();
+    if (getPosts) getPosts();
+    else router.push('/');
   };
 
   return (
