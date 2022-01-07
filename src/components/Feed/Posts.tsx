@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../../atoms/UserAtom';
-import { getFollowingUsersPosts } from '../../services/firebase';
+import { getPostsOfFollowedUsers } from '../../services/posts.firebase';
 import Post from '../Post';
 
 export default function Posts() {
@@ -15,7 +15,7 @@ export default function Posts() {
   const { t } = useTranslation('home');
 
   const getPosts = useCallback(async () => {
-    const { docs } = await getFollowingUsersPosts([...user.following, user.uid]);
+    const { docs } = await getPostsOfFollowedUsers([...user.following, user.uid]);
     setPosts(docs);
     setLoading(false);
   }, [user]);

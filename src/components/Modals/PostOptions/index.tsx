@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../../atoms/UserAtom';
-import { deleteImage, deletePost, updateUserPostsArray } from '../../../services/firebase';
+import { deletePost } from '../../../services/posts.firebase';
+import { deleteImage } from '../../../services/storage.firebase';
+import { updateUserPostsArray } from '../../../services/users.firebase';
 import ConfirmDelete from './ConfirmDelete';
 import Options from './Options';
 

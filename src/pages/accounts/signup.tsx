@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
 import Link from '../../components/Link';
-import { createUser, checkIfUsernameExists } from '../../services/firebase';
+import { createUser, doesUsernameExist } from '../../services/users.firebase';
 import Spinner from '../../components/Spinner';
 import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';
@@ -42,7 +42,7 @@ export default function SignUp() {
     setLoading(true);
     try {
       if (credentials.fullName.trim() === '') throw { code: 'auth/invalid-fullname' };
-      await checkIfUsernameExists(credentials.username);
+      await doesUsernameExist(credentials.username);
       await createUser(credentials);
       router.push('/');
     } catch (err) {

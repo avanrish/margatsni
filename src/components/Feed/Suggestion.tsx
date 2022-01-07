@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { toggleFollow } from '../../services/firebase';
+import { toggleFollow } from '../../services/users.firebase';
 import Unfollow from '../Modals/Unfollow';
 import Link from '../Link';
 import { userState } from '../../atoms/UserAtom';

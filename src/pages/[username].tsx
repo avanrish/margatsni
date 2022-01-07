@@ -7,11 +7,12 @@ import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../atoms/UserAtom';
-import { getPostsByUserId, toggleFollow } from '../services/firebase';
+import { toggleFollow } from '../services/users.firebase';
+import { getPostsByUserId } from '../services/posts.firebase';
 import Header from '../components/Header';
 import LanguageSelect from '../components/LanguageSelect';
 import Unfollow from '../components/Modals/Unfollow';
-import { getUserDataByUsername } from '../services/firebase-admin';
+import { getUserDataByUsername } from '../services/users.firebase-admin';
 import Buttons from '../components/Profile/Buttons';
 import Stats from '../components/Profile/Stats';
 import Post from '../components/Profile/Post';

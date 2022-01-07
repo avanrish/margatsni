@@ -9,7 +9,7 @@ import Header from '../../../components/Header';
 import LanguageSelect from '../../../components/LanguageSelect';
 import Link from '../../../components/Link';
 import Loading from '../../../components/Loading';
-import { resetPassword } from '../../../services/firebase';
+import { resetPassword } from '../../../services/users.firebase';
 
 export default function ResetPassword() {
   const [email, setEmail] = useState<string>('');

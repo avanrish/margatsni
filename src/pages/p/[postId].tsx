@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import Post from '../../components/Post';
 import ClipboardMonit from '../../components/ClipboardMonit';
-import { getPostById as adminGetPostById } from '../../services/firebase-admin';
+import { getPostDataById } from '../../services/posts.firebase-admin';
 
 export default function PostId({ post, postId, timestamp }) {
   const title = post.caption
@@ -36,7 +36,7 @@ export default function PostId({ post, postId, timestamp }) {
 }
 
 export const getServerSideProps = async ({ query: { postId } }) => {
-  const post = await adminGetPostById(postId);
+  const post = await getPostDataById(postId);
   if (!post)
     return {
       notFound: true,

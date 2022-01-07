@@ -6,7 +6,7 @@ import { logInDialogState } from '../atoms/LogInDialogAtom';
 
 import { userState } from '../atoms/UserAtom';
 import { auth } from '../lib/firebase';
-import { getUserDataByUserId } from '../services/firebase';
+import { getUserDataByUserId } from '../services/users.firebase';
 
 const LogInDialog = dynamic(() => import('../components/Modals/LogInDialog'), { ssr: false });
 

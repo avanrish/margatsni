@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Skeleton from 'react-loading-skeleton';
 
-import { getSuggestions } from '../../services/firebase';
+import { getSuggestions } from '../../services/users.firebase';
 import Suggestion from './Suggestion';
 
 export default function Suggestions({ user }) {

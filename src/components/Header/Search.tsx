@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import useDebounce from '../../hooks/useDebounce';
-import { getUsersByKeyword } from '../../services/firebase';
+import { getUsersByKeyword } from '../../services/users.firebase';
 import Link from '../Link';
 
 export default function Search({ setDropdownOpen }) {
