@@ -21,6 +21,10 @@
   .profile-button {
     @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold;
   }
+  .progress-bar {
+    background-color: purple;
+    background-image: linear-gradient(to right, purple, red);
+  }
 }
 
 body {

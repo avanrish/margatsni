@@ -1,8 +1,9 @@
 import type { AppProps } from 'next/app';
+import Router from 'next/router';
 import { RecoilRoot } from 'recoil';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import NextNProgress from 'nextjs-progressbar';
+import ProgressBar from '@badrap/bar-of-progress';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-cookienotice/dist/index.css';
 import 'react-responsive-modal/styles.css';
@@ -12,11 +13,16 @@ import Wrapper from '../components/Wrapper';
 
 const CookieNotice = dynamic(() => import('react-cookienotice'), { ssr: false });
 
+const progress = new ProgressBar({ size: 4, className: 'progress-bar' });
+
+Router.events.on('routeChangeStart', progress.start);
+Router.events.on('routeChangeComplete', progress.finish);
+Router.events.on('routeChangeError', progress.finish);
+
 function MyApp({ Component, pageProps }: AppProps) {
   const { t } = useTranslation();
   return (
     <>
-      <NextNProgress height={5} color="#0095F6" options={{ showSpinner: false }} />
       <RecoilRoot>
         <Wrapper>
           <Component {...pageProps} />
