@@ -17,7 +17,7 @@ export default function Search({ setDropdownOpen }) {
   useEffect(() => {
     if (debouncedSearchTerm.trim() !== '') {
       getUsersByKeyword(debouncedSearchTerm)
-        .then(({ docs }) => setResult(docs))
+        .then((docs) => setResult(docs))
         .catch(() => setResult(null));
     } else setResult(null);
   }, [debouncedSearchTerm]);

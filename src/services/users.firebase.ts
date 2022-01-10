@@ -92,7 +92,7 @@ export const getUsersByKeyword = async (keyword: string) => {
       limit(8)
     )
   );
-  return { docs };
+  return docs;
 };
 
 export const getUserDataByUserId = async (userId: string) => {
