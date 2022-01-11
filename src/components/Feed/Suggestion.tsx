@@ -12,7 +12,7 @@ export default function Suggestion({ profileImg, fullName, username, uid: target
   const [followed, setFollowed] = useState(false);
   const [open, setOpen] = useState(false);
   const { user } = useRecoilValue(userState);
-  const { t } = useTranslation();
+  const { t } = useTranslation('suggestions');
 
   function followCallback() {
     setFollowed((prev) => !prev);
@@ -29,7 +29,7 @@ export default function Suggestion({ profileImg, fullName, username, uid: target
           <Link className="block font-semibold text-sm hover:underline" href={`/${username}`}>
             {username}
           </Link>
-          <h3 className="text-xs text-gray-primary">{t('home:recommended')}</h3>
+          <h3 className="text-xs text-gray-primary">{t('recommended')}</h3>
         </div>
 
         <button

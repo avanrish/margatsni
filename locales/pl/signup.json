@@ -1,0 +1,12 @@
+{
+  "auth/username-already-in-use": "Ta nazwa użytkownika jest zajęta. Spróbuj inną.",
+  "auth/weak-password": "Hasło powinno mieć conajmniej 6 znaków.",
+  "auth/invalid-username": "Wprowadzona nazwa użytkownika jest niepoprawna.",
+  "auth/invalid-fullname": "Wprowadzone imię i nazwisko jest niepoprawne.",
+  "auth/email-already-in-use": "Wprowadzony email jest używany przez innego użytkownika.",
+  "signUpMsg": "Zarejestruj się, aby przeglądać zdjęcia i filmy znajomych.",
+  "fullName": "Imię i nazwisko",
+  "username": "Nazwa użytkownika",
+  "cloneMsg": "To tylko projekt do sprawdzenia moich umiejętności i nauki firebase'a. Użyj fałszywych danych do sprawdzenia tego klona.",
+  "haveAccount": "Masz konto?"
+}

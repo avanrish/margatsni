@@ -14,7 +14,7 @@ export default function Options({
   docId,
 }) {
   const setClipboard = useSetRecoilState(clipboardState);
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
 
   return (
     <Modal
@@ -32,17 +32,17 @@ export default function Options({
           className="py-3 font-bold text-red-primary cursor-pointer hover:bg-gray-100 transition-all"
           onClick={() => (setConsentDialog(true), close())}
         >
-          {t('common:delete')}
+          {t('delete')}
         </div>
       )}
       <Link href={`/p/${docId}`} className="block py-3 hover:bg-gray-100 outline-none">
-        {t('common:goPost')}
+        {t('goToPost')}
       </Link>
       <div
         className="py-3 hover:bg-gray-100 cursor-pointer"
         onClick={() => setClipboard({ monit: true, post: docId })}
       >
-        {t('common:copyLink')}
+        {t('copyLink')}
       </div>
       <div className="py-3 cursor-pointer hover:bg-gray-100 transition-all" onClick={close}>
         {t('common:cancel')}

@@ -1,0 +1,23 @@
+{
+  "editProfile": "Edytuj Profil",
+  "posts": {
+    "0": "<0>{{count}}</0> postów",
+    "one": "<0>{{count}}</0> post",
+    "few": "Posty: <0>{{count}}</0>",
+    "many": "Posty: <0>{{count}}</0>",
+    "other": "Posty: <0>{{count}}</0>",
+    "999999": "Posty"
+  },
+  "followers": {
+    "0": "<0>{{count}}</0> obserwujących",
+    "one": "<0>{{count}}</0> obserwujący",
+    "few": "<0>{{count}}</0> obserwujących",
+    "many": "<0>{{count}}</0> obserwujących",
+    "other": "<0>{{count}}</0> obserwujących"
+  },
+  "following": "Obserwowani: <0>{{count}}</0>",
+  "noPostsCurrUser1": "Uwieczniaj i udostępniaj ciekawe chwile.",
+  "noPostsCurrUser2": "Udostępnij swoje pierwsze zdjęcie.",
+  "noPostsAnotherUser": "Nie ma jeszcze żadnych postów",
+  "message": "Wyślij wiadomość"
+}

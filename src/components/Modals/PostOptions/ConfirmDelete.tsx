@@ -5,7 +5,7 @@ import Spinner from '../../Spinner';
 
 export default function ConfirmDelete({ open, close, handleDelete }) {
   const [deleting, setDeleting] = useState(false);
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
   return (
     <Modal
       open={open}
@@ -20,14 +20,14 @@ export default function ConfirmDelete({ open, close, handleDelete }) {
       {!deleting ? (
         <>
           <div className="flex flex-col py-4">
-            <span className="font-semibold text-lg">{t('common:deletePost')}</span>
-            <span className="text-gray-primary">{t('common:deleteYouSure')}</span>
+            <span className="font-semibold text-lg">{t('deletePost')}</span>
+            <span className="text-gray-primary">{t('deletePostConsent')}</span>
           </div>
           <div
             className="py-3 font-bold text-red-primary cursor-pointer hover:bg-gray-100 transition-all"
             onClick={() => (setDeleting(true), handleDelete())}
           >
-            {t('common:delete')}
+            {t('delete')}
           </div>
           <div className="py-3 cursor-pointer hover:bg-gray-100 transition-all" onClick={close}>
             {t('common:cancel')}

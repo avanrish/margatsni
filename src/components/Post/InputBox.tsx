@@ -13,7 +13,7 @@ export default function InputBox({
   setLoginDialog,
 }) {
   const [comment, setComment] = useState('');
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
 
   const sendComment = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default function InputBox({
         className="border-none flex-1 focus:ring-0"
         value={comment}
         onChange={({ target }) => setComment(target.value)}
-        placeholder={t('common:addComment')}
+        placeholder={t('commentPlaceholder')}
         ref={inputRef}
       />
       <button
@@ -42,7 +42,7 @@ export default function InputBox({
         disabled={!comment.trim()}
         className={`font-semibold text-blue-400 ${!comment.trim() && 'opacity-50 cursor-default'}`}
       >
-        {t('common:post')}
+        {t('sendComment')}
       </button>
     </form>
   );

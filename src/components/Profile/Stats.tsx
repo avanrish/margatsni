@@ -1,20 +1,28 @@
-import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 
 export default function Stats({ profile }) {
-  const { t } = useTranslation('common');
   return (
     <div className="xs:flex space-x-10 hidden">
       <div>
-        <span className="font-semibold mr-1">{profile.posts.length}</span>
-        {profile.posts.length === 1 ? t`postSingular` : t`posts`}
+        <Trans
+          i18nKey="profile:posts"
+          values={{ count: profile.posts.length }}
+          components={[<span key={0} className="font-semibold" />]}
+        />
       </div>
       <div>
-        <span className="font-semibold mr-1">{profile.followers.length}</span>
-        {profile.followers.length === 1 ? t`follower` : t`followers`}
+        <Trans
+          i18nKey="profile:followers"
+          values={{ count: profile.followers.length }}
+          components={[<span key={1} className="font-semibold" />]}
+        />
       </div>
       <div>
-        <span className="font-semibold mr-1">{profile.following.length}</span>
-        {t`profileFollowing`}
+        <Trans
+          i18nKey="profile:following"
+          values={{ count: profile.following.length }}
+          components={[<span key={2} className="font-semibold" />]}
+        />
       </div>
     </div>
   );

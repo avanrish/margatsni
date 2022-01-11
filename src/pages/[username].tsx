@@ -22,7 +22,7 @@ export default function Username({ profile: initProfile }) {
   const [posts, setPosts] = useState(null);
   const [open, setOpen] = useState(false);
   const [following, setFollowing] = useState(false);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('profile');
   const { user, loading } = useRecoilValue(userState);
 
   useEffect(() => {
@@ -77,12 +77,12 @@ export default function Username({ profile: initProfile }) {
           <div className="flex justify-center space-x-20">
             <div className="py-3 uppercase text-xs border-t border-black -mt-[1px] flex items-center cursor-pointer">
               <ViewGridIcon className="w-5 mr-2" />
-              {t`Posts`}
+              {t('posts', { count: 999999 })}
             </div>
             {user?.username === profile.username && (
               <div className="py-3 uppercase text-xs text-gray-primary -mt-[1px] flex items-center cursor-pointer">
                 <BookmarkIcon className="w-5 mr-2" />
-                {t`saved`}
+                {t`common:saved`}
               </div>
             )}
           </div>
@@ -104,14 +104,14 @@ export default function Username({ profile: initProfile }) {
                 <Image src="/images/sampleImage.jpg" alt="" layout="fill" />
               </div>
               <div className="flex flex-col mx-auto text-center text-lg">
-                <span className="font-semibold">{t`noPhotos1`}</span>
-                <span>{t`noPhotos2`}</span>
+                <span className="font-semibold">{t`noPostsCurrUser1`}</span>
+                <span>{t`noPostsCurrUser2`}</span>
               </div>
             </div>
           ) : (
             <div className="flex flex-col items-center my-12">
               <CameraIcon className="w-7 mb-12" />
-              <span className="font-thin text-3xl">{t`noPosts`}</span>
+              <span className="font-thin text-3xl">{t`noPostsAnotherUser`}</span>
             </div>
           )}
         </div>

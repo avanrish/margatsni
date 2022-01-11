@@ -8,7 +8,7 @@ import Suggestion from './Suggestion';
 export default function Suggestions({ user }) {
   const [suggestions, setSuggestions] = useState<any>();
   const [loading, setLoading] = useState(true);
-  const { t } = useTranslation();
+  const { t } = useTranslation('suggestions');
 
   useEffect(() => {
     const getNewSuggestions = async () => {
@@ -22,8 +22,8 @@ export default function Suggestions({ user }) {
   return (
     <div className="mt-4 ml-10 w-full">
       <div className="flex justify-between text-sm mb-5">
-        <h3 className="font-semibold text-gray-primary">{t('home:suggestions')}</h3>
-        <button className="text-gray-600 font-semibold">{t('home:seeAll')}</button>
+        <h3 className="font-semibold text-gray-primary">{t('suggestions')}</h3>
+        <button className="text-gray-600 font-semibold">{t('seeAll')}</button>
       </div>
 
       {!loading

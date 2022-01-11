@@ -8,7 +8,7 @@ import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 
 export default function Loading() {
   const mobile = useRecoilValue(mobileDeviceState);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('post');
 
   return (
     <div
@@ -40,14 +40,14 @@ export default function Loading() {
             <input
               type="text"
               className="border-none flex-1 focus:ring-0"
-              placeholder={t('addComment')}
+              placeholder={t('commentPlaceholder')}
             />
             <button
               type="submit"
               disabled={true}
               className={`font-semibold text-blue-400 opacity-50 cursor-default`}
             >
-              {t('post')}
+              {t('sendComment')}
             </button>
           </div>
         </div>

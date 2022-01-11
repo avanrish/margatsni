@@ -17,7 +17,7 @@ export default function ResetPassword() {
   const [error, setError] = useState('');
   const router = useRouter();
   const { user, loading } = useRecoilValue(userState);
-  const { t } = useTranslation();
+  const { t } = useTranslation('reset-password');
 
   if (loading) return <Loading />;
   if (user) {
@@ -40,7 +40,7 @@ export default function ResetPassword() {
   return (
     <div className="flex flex-col">
       <Head>
-        <title>{t('auth:reset')} • Margatsni</title>
+        <title>{t('reset')} • Margatsni</title>
       </Head>
       <Header resetPassword />
       <div className="mx-auto mt-32 w-screen max-w-xs xs:max-w-sm flex flex-col">
@@ -59,8 +59,8 @@ export default function ResetPassword() {
               d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
             ></path>
           </svg>
-          <p className="text-center font-semibold my-2">{t('auth:trouble')}</p>
-          <p className="text-center text-gray-primary text-sm">{t('auth:resetMsg')}</p>
+          <p className="text-center font-semibold my-2">{t('trouble')}</p>
+          <p className="text-center text-gray-primary text-sm">{t('resetMsg')}</p>
           <form method="POST">
             <input
               className="input mt-3 mb-1 w-full"
@@ -70,29 +70,27 @@ export default function ResetPassword() {
               onChange={({ target }) => setEmail(target.value)}
             />
             <button disabled={isInvalid} className="login_btn w-full" onClick={handleSubmit}>
-              {t('auth:loginLink')}
+              {t('loginLink')}
             </button>
           </form>
           {error && (
             <div className="text-center text-red-500 text-sm mt-3">{t(`auth:${error}`)}</div>
           )}
-          {sent && (
-            <div className="text-sm mt-2 text-center text-blue-light">{t('auth:emailSent')}</div>
-          )}
+          {sent && <div className="text-sm mt-2 text-center text-blue-light">{t('emailSent')}</div>}
           <div className="mt-3 flex border-b border-gray-300 justify-center">
             <p className="translate-y-2 text-xs bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
-              {t('common:or')}
+              {t('auth:or')}
             </p>
           </div>
           <Link className="font-semibold text-sm text-center mt-4" href="/accounts/signup">
-            {t('auth:newAccount')}
+            {t('newAccount')}
           </Link>
         </div>
         <Link
           href="/accounts/login"
           className="bg-white mt-4 xs:mt-0 xs:bg-transparent border py-4 text-center font-semibold text-sm"
         >
-          {t('auth:backToLogin')}
+          {t('backToLogin')}
         </Link>
       </div>
       <LanguageSelect />

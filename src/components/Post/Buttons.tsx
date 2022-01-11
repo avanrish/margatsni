@@ -12,7 +12,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId,
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
 
   useEffect(() => {
     setHasLiked(!!likes.find((like) => like === currUserId));
@@ -50,9 +50,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId,
         <BookmarkIcon className="btn" />
       </div>
       {likes.length > 0 && (
-        <p className="font-semibold pt-3 pl-5 order-2">
-          {t('common:likes', { count: likes.length })}
-        </p>
+        <p className="font-semibold pt-3 pl-5 order-2">{t('likes', { count: likes.length })}</p>
       )}
     </div>
   );

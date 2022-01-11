@@ -7,7 +7,7 @@ import Link from '../Link';
 
 export default function Buttons({ username, profileUsername, following, handleFollow, loading }) {
   const setLoginDialog = useSetRecoilState(logInDialogState);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('profile');
 
   return (
     <div className="flex flex-col space-y-3 xs:space-y-0 xs:flex-row xs:space-x-6 xs:items-center">
@@ -27,7 +27,7 @@ export default function Buttons({ username, profileUsername, following, handleFo
           <button
             onClick={username ? handleFollow : () => setLoginDialog(true)}
             className="profile-button !text-white !bg-blue-primary"
-          >{t`follow`}</button>
+          >{t`common:follow`}</button>
         )
       )}
     </div>

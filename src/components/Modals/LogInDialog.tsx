@@ -31,7 +31,7 @@ export default function LogInDialog({ open, close }) {
           {t('common:login')}
         </Link>
         <p>
-          {t`auth:noAccount`}{' '}
+          {t`common:noAccount`}{' '}
           <Link
             href="/accounts/signup"
             className="text-blue-primary font-semibold"

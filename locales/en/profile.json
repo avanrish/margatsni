@@ -1,0 +1,14 @@
+{
+  "editProfile": "Edit Profile",
+  "posts": {
+    "one": "<0>{{count}}</0> post",
+    "other": "<0>{{count}}</0> posts",
+    "999999": "Posts"
+  },
+  "followers": { "one": "<0>{{count}}</0> follower", "other": "<0>{{count}}</0> followers" },
+  "following": "<0>{{count}}</0> following",
+  "noPostsCurrUser1": "Start capturing and sharing your moments.",
+  "noPostsCurrUser2": "Go share your first photo.",
+  "noPostsAnotherUser": "No Posts Yet",
+  "message": "Message"
+}

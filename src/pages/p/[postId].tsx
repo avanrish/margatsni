@@ -1,14 +1,18 @@
 import Head from 'next/head';
+import useTranslation from 'next-translate/useTranslation';
 
 import Header from '../../components/Header';
 import Post from '../../components/Post';
 import ClipboardMonit from '../../components/ClipboardMonit';
 import { getPostDataById } from '../../services/posts.firebase-admin';
+import LanguageSelect from '../../components/LanguageSelect';
 
 export default function PostId({ post, postId, timestamp }) {
+  const { t } = useTranslation('post');
+
   const title = post.caption
-    ? `${post.username} on Margatsni: "${post.caption}"`
-    : `${post.username} on Margatsni.`;
+    ? `${post.username} ${t`on`} Margatsni: "${post.caption}"`
+    : `${post.username} ${t`on`} Margatsni.`;
 
   return (
     <div>
@@ -16,7 +20,7 @@ export default function PostId({ post, postId, timestamp }) {
         <title>{title}</title>
       </Head>
       <Header />
-      <div className="max-w-6xl pb-14 mx-auto">
+      <div className="max-w-6xl pb-14 md:pb-0 mx-auto">
         <Post
           postId={postId}
           userId={post.uid}
@@ -29,6 +33,7 @@ export default function PostId({ post, postId, timestamp }) {
           timestamp={timestamp}
         />
       </div>
+      <LanguageSelect />
 
       <ClipboardMonit />
     </div>

@@ -11,7 +11,7 @@ export default function Caption({
   homePage,
   profileImg = '/',
 }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
   return (
     <div className="px-5 py-3 truncate">
       {caption && (
@@ -29,7 +29,7 @@ export default function Caption({
       )}
       {homePage && initComments.length > 5 && (
         <Link className="block text-sm text-gray-primary" href={`/p/${postId}`}>
-          {t('home:seeAllComments', { count: initComments.length })}
+          {t('seeAllComments', { count: initComments.length })}
         </Link>
       )}
     </div>

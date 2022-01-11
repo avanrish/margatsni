@@ -12,7 +12,7 @@ export default function Posts() {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useRecoilValue(userState);
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('post');
 
   const getPosts = useCallback(async () => {
     const { docs } = await getPostsOfFollowedUsers([...user.following, user.uid]);
@@ -38,14 +38,14 @@ export default function Posts() {
             <input
               type="text"
               className="border-none flex-1 focus:ring-0"
-              placeholder={t('common:addComment')}
+              placeholder={t('commentPlaceholder')}
             />
             <button
               type="submit"
               disabled={true}
               className={`font-semibold text-blue-400 opacity-50 cursor-default`}
             >
-              {t('common:post')}
+              {t('sendComment')}
             </button>
           </div>
         </div>
