@@ -2,17 +2,18 @@ import { useState, useRef } from 'react';
 import { formatDistanceStrict } from 'date-fns';
 import { enUS, pl } from 'date-fns/locale';
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
+import { userState } from '../../atoms/UserAtom';
+import { logInDialogState } from '../../atoms/LogInDialogAtom';
 import PostOptionsModal from '../Modals/PostOptions';
 import Buttons from './Buttons';
 import Caption from './Caption';
 import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
-import RImage from './Image';
-import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
+import PostImage from './Image';
 
 const locales = { en: enUS, pl };
 
@@ -26,16 +27,17 @@ export default function Post({
   likes: initLikes,
   comments: initComments,
   timestamp,
-  getPosts,
-}: IPost) {
-  const { pathname } = useRouter();
+  getPosts = null,
+}) {
+  const { locale, pathname } = useRouter();
   const homePage = pathname === '/';
 
   const [comments, setComments] = useState(homePage ? initComments.slice(0, 5) : initComments); // Displays only 5 latest messages
   const [likes, setLikes] = useState(initLikes);
   const [openOptions, setOpenOptions] = useState(false);
-  const { lang } = useTranslation();
   const mobile = useRecoilValue(mobileDeviceState);
+  const { user } = useRecoilValue(userState);
+  const setLoginDialog = useSetRecoilState(logInDialogState);
   const inputRef = useRef(null);
 
   return (
@@ -45,12 +47,18 @@ export default function Post({
       }`}
     >
       {(mobile || homePage) && (
-        <PostHeader userImg={userImg} username={username} setOpenOptions={setOpenOptions} />
+        <PostHeader
+          userImg={userImg}
+          username={username}
+          setOpenOptions={setOpenOptions}
+          setLoginDialog={setLoginDialog}
+          currUser={user}
+        />
       )}
 
-      <RImage postId={postId} img={img} homePage={homePage} />
+      <PostImage postId={postId} img={img} homePage={homePage} />
 
-      <div className="flex flex-col min-w-[360px]">
+      <div className="flex flex-col sm:min-w-[360px]">
         {!homePage && !mobile && (
           <PostHeader
             userImg={userImg}
@@ -58,6 +66,8 @@ export default function Post({
             setOpenOptions={setOpenOptions}
             postId={postId}
             userId={userId}
+            currUser={user}
+            setLoginDialog={setLoginDialog}
           />
         )}
         <Buttons
@@ -65,8 +75,9 @@ export default function Post({
           setLikes={setLikes}
           likes={likes}
           inputRef={homePage ? null : inputRef}
+          currUserId={user?.uid}
+          setLoginDialog={setLoginDialog}
         />
-
         <Caption
           homePage={homePage}
           username={username}
@@ -82,7 +93,7 @@ export default function Post({
           <p className="ml-5 text-xs uppercase text-gray-primary mt-2">
             {formatDistanceStrict(new Date(timestamp * 1000), new Date(), {
               addSuffix: true,
-              locale: locales[lang],
+              locale: locales[locale],
             })}
           </p>
           <InputBox
@@ -90,7 +101,10 @@ export default function Post({
             setComments={setComments}
             homePage={homePage}
             inputRef={inputRef}
+            user={user}
+            setLoginDialog={setLoginDialog}
           />
+
           <PostOptionsModal
             open={openOptions}
             setOpenOptions={setOpenOptions}
@@ -102,21 +116,4 @@ export default function Post({
       </div>
     </div>
   );
-}
-
-export interface IPost {
-  postId: string;
-  userId: string;
-  username: string;
-  userImg: string;
-  img: string;
-  caption: string;
-  likes: string[];
-  comments: {
-    username: string;
-    comment: string;
-    profileImg: string;
-  }[];
-  timestamp: number;
-  getPosts?: any;
 }

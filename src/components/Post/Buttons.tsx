@@ -2,39 +2,24 @@ import { useRouter } from 'next/router';
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
 import { BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
-import { arrayRemove, arrayUnion, doc, updateDoc } from '@firebase/firestore';
 import { useSetRecoilState } from 'recoil';
-
-import { db } from '../../lib/firebase';
-import { useAuth } from '../../hooks/useAuth';
-import { clipboardState } from '../../atoms/ClipboardAtom';
 import useTranslation from 'next-translate/useTranslation';
 
-export default function Buttons({ postId, setLikes, likes, inputRef }) {
+import { clipboardState } from '../../atoms/ClipboardAtom';
+import { toggleLike } from '../../services/firebase';
+
+export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
-  const { user } = useAuth();
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
 
   useEffect(() => {
-    setHasLiked(!!likes.find((like) => like === user?.uid));
-  }, [likes, user?.uid]);
+    setHasLiked(!!likes.find((like) => like === currUserId));
+  }, [likes, currUserId]);
 
   const likePost = async () => {
-    const docRef = doc(db, 'posts', postId);
-
-    if (hasLiked) {
-      setLikes(likes.filter((like) => like !== user.uid));
-      updateDoc(docRef, {
-        likes: arrayRemove(user.uid),
-      });
-    } else {
-      setLikes((prevLikes) => [...prevLikes, user.uid]);
-      updateDoc(docRef, {
-        likes: arrayUnion(user.uid),
-      });
-    }
+    toggleLike(hasLiked, currUserId, postId, setLikes);
   };
 
   return (
@@ -44,11 +29,18 @@ export default function Buttons({ postId, setLikes, likes, inputRef }) {
           {hasLiked ? (
             <HeartIconFilled onClick={likePost} className="btn text-red-500" />
           ) : (
-            <HeartIcon onClick={likePost} className="btn" />
+            <HeartIcon
+              onClick={currUserId ? likePost : () => setLoginDialog(true)}
+              className="btn"
+            />
           )}
           <ChatIcon
             className="btn"
-            onClick={inputRef ? () => inputRef.current.focus() : () => router.push(`/p/${postId}`)}
+            onClick={() => {
+              if (!currUserId) setLoginDialog(true);
+              else if (inputRef) inputRef.current.focus();
+              else router.push(`/p/${postId}`);
+            }}
           />
           <PaperAirplaneIcon
             className="btn"
@@ -58,9 +50,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef }) {
         <BookmarkIcon className="btn" />
       </div>
       {likes.length > 0 && (
-        <p className="font-semibold pt-3 pl-5 order-2">
-          {t('common:likes', { count: likes.length })}
-        </p>
+        <p className="font-semibold pt-3 pl-5 order-2">{t('likes', { count: likes.length })}</p>
       )}
     </div>
   );

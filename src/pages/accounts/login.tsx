@@ -3,11 +3,12 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 
+import { userState } from '../../atoms/UserAtom';
 import Link from '../../components/Link';
 import { loginUser } from '../../services/firebase';
 import Spinner from '../../components/Spinner';
-import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';
 
@@ -16,7 +17,7 @@ export default function LogIn() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   if (authLoading) return <Loading />;
@@ -93,7 +94,7 @@ export default function LogIn() {
             )}
             <div className="mt-3 flex border-b border-gray-border justify-center">
               <p className="translate-y-2 text-xs bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
-                {t('common:or')}
+                {t('auth:or')}
               </p>
             </div>
             <Link
@@ -104,7 +105,7 @@ export default function LogIn() {
             </Link>
           </div>
           <div className="flex justify-center w-full pt-10 max-w-xs xs:max-w-sm xs:border xs:py-6 xs:px-10 xs:bg-white text-sm space-x-1">
-            <span>{t('auth:noAccount')}</span>
+            <span>{t('common:noAccount')}</span>
             <Link href="/accounts/signup" className="text-blue-primary font-semibold">
               {t('common:signup')}
             </Link>

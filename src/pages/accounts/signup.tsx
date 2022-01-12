@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
+import { useRecoilValue } from 'recoil';
 
+import { userState } from '../../atoms/UserAtom';
 import Link from '../../components/Link';
-import { createUser, checkIfUsernameExists } from '../../services/firebase';
+import { createUser, doesUsernameExist } from '../../services/firebase';
 import Spinner from '../../components/Spinner';
-import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';
 
@@ -21,7 +22,7 @@ export default function SignUp() {
     fullName: '',
     password: '',
   });
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useRecoilValue(userState);
   const { t } = useTranslation();
 
   if (authLoading) return <Loading />;
@@ -41,7 +42,7 @@ export default function SignUp() {
     setLoading(true);
     try {
       if (credentials.fullName.trim() === '') throw { code: 'auth/invalid-fullname' };
-      await checkIfUsernameExists(credentials.username);
+      await doesUsernameExist(credentials.username);
       await createUser(credentials);
       router.push('/');
     } catch (err) {
@@ -68,7 +69,9 @@ export default function SignUp() {
             objectFit="contain"
             draggable={false}
           />
-          <p className="mb-4 text-center font-semibold text-gray-primary">{t('auth:signUpMsg')}</p>
+          <p className="mb-4 text-center font-semibold text-gray-primary">
+            {t('signup:signUpMsg')}
+          </p>
           <form className="flex flex-col space-y-2" method="POST">
             <input
               type="text"
@@ -83,7 +86,7 @@ export default function SignUp() {
               name="fullName"
               value={credentials.fullName}
               onChange={handleChange}
-              placeholder={t('auth:fullName')}
+              placeholder={t('signup:fullName')}
               className="input"
             />
             <input
@@ -91,7 +94,7 @@ export default function SignUp() {
               name="username"
               value={credentials.username}
               onChange={handleChange}
-              placeholder={t('auth:username')}
+              placeholder={t('signup:username')}
               className="input"
             />
             <input
@@ -109,11 +112,11 @@ export default function SignUp() {
           {error && (
             <div className="text-center text-red-500 text-sm mt-3">{t(`auth:${error}`)}</div>
           )}
-          <p className="mt-3 text-xs text-center text-gray-primary">{t('auth:cloneMsg')}</p>
+          <p className="mt-3 text-xs text-center text-gray-primary">{t('signup:cloneMsg')}</p>
         </div>
 
         <div className="flex justify-center w-full pt-10 max-w-xs xs:max-w-sm xs:border xs:py-6 xs:px-10 xs:bg-white text-sm space-x-1">
-          <span>{t('auth:haveAccount')} </span>
+          <span>{t('signup:haveAccount')} </span>
           <Link href="/accounts/login" className="text-blue-primary font-semibold">
             {t('common:login')}
           </Link>

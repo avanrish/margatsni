@@ -1,0 +1,12 @@
+{
+  "likes": "{{count}} likes",
+  "sendComment": "Post",
+  "commentPlaceholder": "Add a comment...",
+  "delete": "Delete",
+  "goToPost": "Go to post",
+  "copyLink": "Copy Link",
+  "deletePost": "Delete Post?",
+  "deletePostConsent": "Are you sure you want to delete this post?",
+  "on": "on",
+  "seeAllComments": "See all {{count}} comments"
+}

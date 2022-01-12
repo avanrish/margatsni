@@ -3,9 +3,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import useDebounce from '../hooks/useDebounce';
-import { getUsersByKeyword } from '../services/firebase';
-import Link from './Link';
+import useDebounce from '../../hooks/useDebounce';
+import { getUsersByKeyword } from '../../services/firebase';
+import Link from '../Link';
 
 export default function Search({ setDropdownOpen }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +17,7 @@ export default function Search({ setDropdownOpen }) {
   useEffect(() => {
     if (debouncedSearchTerm.trim() !== '') {
       getUsersByKeyword(debouncedSearchTerm)
-        .then(({ docs }) => setResult(docs))
+        .then((docs) => setResult(docs))
         .catch(() => setResult(null));
     } else setResult(null);
   }, [debouncedSearchTerm]);
@@ -50,7 +50,7 @@ export default function Search({ setDropdownOpen }) {
                 <Link
                   href={`/${user.data().username}`}
                   onClick={() => setSearchTerm('')}
-                  key={user.data().id}
+                  key={user.data().uid}
                   className="flex items-center pl-3 py-2 hover:bg-gray-100"
                 >
                   <div className="h-12 w-12 border-2 rounded-full border-red-500 p-[2px] cursor-pointer">

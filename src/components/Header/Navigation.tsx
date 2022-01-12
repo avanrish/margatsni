@@ -1,31 +1,23 @@
-import { HeartIcon, PlusCircleIcon } from '@heroicons/react/outline';
+import { HeartIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
-import { useAuth } from '../../hooks/useAuth';
-import { MailIcon, HomeIcon } from '../Icons';
+import { userState } from '../../atoms/UserAtom';
+import { CreateIcon, ExploreIcon, HomeIcon, MailIcon } from '../Icons';
 import Link from '../Link';
-import Search from '../Search';
-import CompassIcon from '../Icons/ExploreIcon';
 import Dropdown from '../Dropdown';
 
-export default function Navigation({ setOpen }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpen }) {
   const mobile = useRecoilValue(mobileDeviceState);
-  const { user } = useAuth();
+  const { user } = useRecoilValue(userState);
   const router = useRouter();
   const { t } = useTranslation();
 
   return (
     <>
-      {/* Middle - Search input field */}
-      {!mobile && <Search setDropdownOpen={setDropdownOpen} />}
-
-      {/* Right */}
       <div className="flex items-center justify-end lg:mr-5 xl:mr-0">
         {user ? (
           <>
@@ -38,14 +30,11 @@ export default function Navigation({ setOpen }) {
               className={`flex justify-between items-center space-x-4 ${mobile && 'nav_bottom'}`}
             >
               <Link href="/">
-                <HomeIcon />
+                <HomeIcon open={open} />
               </Link>
               {!mobile && <MailIcon />}
-              <PlusCircleIcon
-                onClick={() => setOpen(true)}
-                className={`navBtn order-2 ${mobile && '!order-3'}`}
-              />
-              <CompassIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
+              <CreateIcon open={open} setOpen={setOpen} mobile={mobile} />
+              <ExploreIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
               <HeartIcon className="navBtn order-4" />
 
               <div
@@ -54,17 +43,17 @@ export default function Navigation({ setOpen }) {
                 }`}
               >
                 <Image
-                  src={user?.photoURL || '/images/default.png'}
+                  src={user?.profileImg || '/images/default.png'}
                   alt="profile picture"
                   className="rounded-full cursor-pointer"
                   layout="fill"
                   onClick={() =>
                     mobile
-                      ? router.push(`/${user.displayName.split('+.')[0]}`)
+                      ? router.push(`/${user.username}`)
                       : setDropdownOpen((prev: boolean) => !prev)
                   }
                 />
-                {!mobile && dropdownOpen && <Dropdown username={user.displayName.split('+.')[0]} />}
+                {!mobile && dropdownOpen && <Dropdown username={user.username} />}
               </div>
               {!mobile && dropdownOpen && (
                 <div

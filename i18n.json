@@ -3,11 +3,12 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common"],
-    "/": ["home"],
+    "/": ["suggestions", "post"],
     "/accounts/login": ["auth"],
-    "/accounts/signup": ["auth"],
-    "/accounts/password/reset": ["auth"],
+    "/accounts/signup": ["auth", "signup"],
+    "/accounts/password/reset": ["auth", "reset-password"],
     "/404": ["not-found"],
-    "/p/[postId]": ["home"]
+    "/p/[postId]": ["post"],
+    "/[username]": ["profile"]
   }
 }

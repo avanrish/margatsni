@@ -1,24 +1,28 @@
 import { EmojiHappyIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
-import { useAuth } from '../../hooks/useAuth';
-import { getPosts } from '../../services/firebase';
+import { userState } from '../../atoms/UserAtom';
+import { getPostsOfFollowedUsers } from '../../services/firebase';
 import Post from '../Post';
 
 export default function Posts() {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
-  const { t } = useTranslation('home');
+  const { user } = useRecoilValue(userState);
+  const { t } = useTranslation('post');
 
-  const aGetPosts = () =>
-    getPosts(user.uid).then(({ docs }) => (setPosts(docs), setLoading(false)));
+  const getPosts = useCallback(async () => {
+    const { docs } = await getPostsOfFollowedUsers([...user.following, user.uid]);
+    setPosts(docs);
+    setLoading(false);
+  }, [user]);
 
   useEffect(() => {
-    aGetPosts();
-  }, []);
+    getPosts();
+  }, [getPosts]);
 
   return (
     <div>
@@ -34,14 +38,14 @@ export default function Posts() {
             <input
               type="text"
               className="border-none flex-1 focus:ring-0"
-              placeholder={t('common:addComment')}
+              placeholder={t('commentPlaceholder')}
             />
             <button
               type="submit"
               disabled={true}
               className={`font-semibold text-blue-400 opacity-50 cursor-default`}
             >
-              {t('common:post')}
+              {t('sendComment')}
             </button>
           </div>
         </div>
@@ -58,7 +62,7 @@ export default function Posts() {
             likes={post.data().likes}
             comments={post.data().comments.reverse()}
             timestamp={post.data().timestamp.seconds}
-            getPosts={aGetPosts}
+            getPosts={getPosts}
           />
         ))
       ) : (

@@ -1,14 +1,14 @@
 import Skeleton from 'react-loading-skeleton';
 import { useRecoilValue } from 'recoil';
 import { EmojiHappyIcon } from '@heroicons/react/outline';
-import 'react-loading-skeleton/dist/skeleton.css';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 
 export default function Loading() {
   const mobile = useRecoilValue(mobileDeviceState);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('post');
 
   return (
     <div
@@ -34,20 +34,20 @@ export default function Loading() {
             <Skeleton width={80} />
           </div>
         )}
-        <div className={!mobile && 'mt-auto'}>
+        <div className={!mobile ? 'mt-auto' : undefined}>
           <div className="flex items-center p-4">
             <EmojiHappyIcon className="h-7" />
             <input
               type="text"
               className="border-none flex-1 focus:ring-0"
-              placeholder={t('addComment')}
+              placeholder={t('commentPlaceholder')}
             />
             <button
               type="submit"
               disabled={true}
               className={`font-semibold text-blue-400 opacity-50 cursor-default`}
             >
-              {t('post')}
+              {t('sendComment')}
             </button>
           </div>
         </div>

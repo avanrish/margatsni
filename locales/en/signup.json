@@ -1,0 +1,12 @@
+{
+  "auth/username-already-in-use": "This username isn't available. Please try another.",
+  "auth/weak-password": "Password should be at least 6 characters.",
+  "auth/invalid-username": "The provided value for the username user property is invalid.",
+  "auth/invalid-fullname": "The provided value for the full name user property is invalid.",
+  "auth/email-already-in-use": "The provided email is already in use by an existing user.",
+  "signUpMsg": "Sign up to see photos and videos from your friends.",
+  "fullName": "Full Name",
+  "username": "Username",
+  "cloneMsg": "This is only a project to test my skills and learn firebase. Use fake data to check out the clone.",
+  "haveAccount": "Have an account?"
+}

@@ -1,15 +1,18 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import ClipboardMonit from '../components/ClipboardMonit';
+import { useRecoilValue } from 'recoil';
 
+import { userState } from '../atoms/UserAtom';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
-import { useAuth } from '../hooks/useAuth';
+
+const ClipboardMonit = dynamic(() => import('../components/ClipboardMonit'));
 
 const Home: NextPage = () => {
-  const { user, loading } = useAuth();
+  const { user, loading } = useRecoilValue(userState);
   const router = useRouter();
 
   // First the app waits for firebase

@@ -2,41 +2,38 @@ import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Skeleton from 'react-loading-skeleton';
 
-import { useAuth } from '../../hooks/useAuth';
-import { getMyFollowings, getSuggestions } from '../../services/firebase';
+import { getSuggestions } from '../../services/firebase';
 import Suggestion from './Suggestion';
 
-export default function Suggestions() {
-  const [suggestions, setSuggestions] = useState([]);
+export default function Suggestions({ user }) {
+  const [suggestions, setSuggestions] = useState<any>();
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
-  const { t } = useTranslation();
+  const { t } = useTranslation('suggestions');
 
   useEffect(() => {
     const getNewSuggestions = async () => {
-      const following = await getMyFollowings(user.uid);
-      const suggestions = await getSuggestions(user.uid, following);
+      const suggestions = await getSuggestions([...user.following, user.uid]);
       setSuggestions(suggestions);
       setLoading(false);
     };
     getNewSuggestions();
-  }, [user.uid]);
+  }, [user]);
 
   return (
     <div className="mt-4 ml-10 w-full">
       <div className="flex justify-between text-sm mb-5">
-        <h3 className="font-semibold text-gray-primary">{t('home:suggestions')}</h3>
-        <button className="text-gray-600 font-semibold">{t('home:seeAll')}</button>
+        <h3 className="font-semibold text-gray-primary">{t('suggestions')}</h3>
+        <button className="text-gray-600 font-semibold">{t('seeAll')}</button>
       </div>
 
       {!loading
         ? suggestions.map((profile) => (
             <Suggestion
-              key={profile.id}
-              id={profile.id}
-              username={profile.username}
-              fullName={profile.name}
-              profileImg={profile.avatar}
+              key={profile.data().uid}
+              uid={profile.data().uid}
+              username={profile.data().username}
+              fullName={profile.data().name}
+              profileImg={profile.data().profileImg}
             />
           ))
         : [...Array(5)].map((_, i) => (

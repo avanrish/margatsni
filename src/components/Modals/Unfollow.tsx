@@ -31,7 +31,7 @@ export default function Unfollow({ open, setOpen, profileImg, username, toggleFo
       >
         {t`unfollow`}
       </div>
-      <div className="py-3 cursor-pointer">{t`cancel`}</div>
+      <div className="py-3 cursor-pointer" onClick={() => setOpen(false)}>{t`cancel`}</div>
     </Modal>
   );
 }
