@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
 import Link from '../../components/Link';
-import { createUser, doesUsernameExist } from '../../services/users.firebase';
+import { createUser, doesUsernameExist } from '../../services/firebase';
 import Spinner from '../../components/Spinner';
 import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';

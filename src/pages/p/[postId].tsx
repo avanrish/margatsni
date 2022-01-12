@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Header from '../../components/Header';
 import Post from '../../components/Post';
 import ClipboardMonit from '../../components/ClipboardMonit';
-import { getPostDataById } from '../../services/posts.firebase-admin';
+import { getPostDataById } from '../../services/firebase-admin';
 import LanguageSelect from '../../components/LanguageSelect';
 
 export default function PostId({ post, postId, timestamp }) {

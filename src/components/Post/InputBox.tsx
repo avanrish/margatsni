@@ -2,7 +2,7 @@ import { EmojiHappyIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
-import { addComment } from '../../services/posts.firebase';
+import { addComment } from '../../services/firebase';
 
 export default function InputBox({
   setComments,

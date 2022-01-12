@@ -1,7 +1,7 @@
 import { deleteObject, getDownloadURL, ref, uploadString } from 'firebase/storage';
 
 import { storage } from '../lib/firebase';
-import { addImageLinkToPost } from './posts.firebase';
+import { addImageLinkToPost } from './firebase';
 
 export const getImageRef = (docId: string) => ref(storage, `posts/${docId}/image`);
 

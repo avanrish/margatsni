@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { toggleFollow } from '../../services/users.firebase';
+import { toggleFollow } from '../../services/firebase';
 import Link from '../Link';
 import Unfollow from '../Modals/Unfollow';
 

@@ -6,9 +6,12 @@ import Modal from 'react-responsive-modal';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../../atoms/UserAtom';
-import { createPost } from '../../../services/posts.firebase';
-import { getImageRef, uploadImage } from '../../../services/storage.firebase';
-import { updateUserPostsArray } from '../../../services/users.firebase';
+import {
+  createPost,
+  getImageRef,
+  uploadImage,
+  updateUserPostsArray,
+} from '../../../services/firebase';
 
 export default function Create({ open, close, setSuccess }) {
   const { user } = useRecoilValue(userState);

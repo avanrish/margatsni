@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../../atoms/UserAtom';
-import { getPostsOfFollowedUsers } from '../../services/posts.firebase';
+import { getPostsOfFollowedUsers } from '../../services/firebase';
 import Post from '../Post';
 
 export default function Posts() {

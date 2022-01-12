@@ -13,7 +13,7 @@ import Caption from './Caption';
 import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
-import RImage from './Image';
+import PostImage from './Image';
 
 const locales = { en: enUS, pl };
 
@@ -56,7 +56,7 @@ export default function Post({
         />
       )}
 
-      <RImage postId={postId} img={img} homePage={homePage} />
+      <PostImage postId={postId} img={img} homePage={homePage} />
 
       <div className="flex flex-col sm:min-w-[360px]">
         {!homePage && !mobile && (
