@@ -82,6 +82,16 @@ export const toggleFollow = async (
   if (callback) callback();
 };
 
+export const toggleSave = async (userId, postId, saved, callback) => {
+  const currentUserRef = doc(db, 'users', userId);
+
+  updateDoc(currentUserRef, {
+    saved: saved ? arrayRemove(postId) : arrayUnion(postId),
+  });
+
+  if (callback) callback();
+};
+
 export const getUsersByKeyword = async (keyword: string) => {
   const { docs } = await getDocs(
     query(
