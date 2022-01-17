@@ -25,7 +25,7 @@ export default function Posts() {
   }, [getPosts]);
 
   return (
-    <div>
+    <div className="pb-[57px] md:pb-0 my-4 space-y-4">
       {loading ? (
         <div className="bg-white my-7 border rounded-sm">
           <div className="flex items-center p-5">

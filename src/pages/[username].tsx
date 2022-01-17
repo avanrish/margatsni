@@ -65,7 +65,7 @@ export default function Username({ profile: initProfile }) {
         <title>{`${profile.fullName} (@${profile.username}) • Margatsni`}</title>
       </Head>
       <Header />
-      <main className="flex flex-col max-w-4xl mx-auto mt-7">
+      <main className="flex flex-col max-w-4xl mx-auto mt-7 pb-[57px] md:pb-0">
         <div className="flex mb-8">
           <div className="relative w-[77px] h-[77px] sm:w-[150px] sm:h-[150px] mx-4 sm:mx-14">
             <Image className="rounded-full" src={profile.profileImg} alt="" layout="fill" />
@@ -115,8 +115,8 @@ export default function Username({ profile: initProfile }) {
             <Saved posts={savedPosts} />
           )}
         </div>
+        <LanguageSelect />
       </main>
-      <LanguageSelect />
       <Unfollow
         open={open}
         setOpen={setOpen}

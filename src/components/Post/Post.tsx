@@ -42,7 +42,7 @@ export default function Post({
 
   return (
     <div
-      className={`flex bg-white my-7 border rounded-sm ${
+      className={`flex bg-white border rounded-sm ${
         homePage || mobile ? 'flex-col' : 'flex-row max-h-[815px]'
       }`}
     >

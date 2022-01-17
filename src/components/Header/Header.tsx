@@ -33,7 +33,7 @@ export default function Header({ resetPassword = false }) {
 
   return (
     <>
-      <header className="bg-white h-[67px] shadow-sm border-b sticky top-0 z-50">
+      <header className="bg-white h-[67px] shadow-sm border-b sticky top-0 z-40">
         {mobile === null || loading ? null : (
           <div className="flex justify-between h-full max-w-6xl mx-5 lg:mx-auto">
             {mobile && user && (

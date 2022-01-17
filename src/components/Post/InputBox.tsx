@@ -27,7 +27,7 @@ export default function InputBox({
   };
 
   return (
-    <form onSubmit={sendComment} className="flex items-center px-4 pt-2 pb-8 sm:pb-4">
+    <form onSubmit={sendComment} className="flex items-center px-4 py-2">
       <EmojiHappyIcon className="h-7" />
       <input
         type="text"
