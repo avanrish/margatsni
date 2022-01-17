@@ -10,5 +10,7 @@
   "noPostsCurrUser1": "Start capturing and sharing your moments.",
   "noPostsCurrUser2": "Go share your first photo.",
   "noPostsAnotherUser": "No Posts Yet",
-  "message": "Message"
+  "message": "Message",
+  "save": "Save",
+  "saveDescription": "Save photos and videos that you want to see again. No one is notified, and only you can see what you've saved."
 }

@@ -25,6 +25,15 @@
     background-color: purple;
     background-image: linear-gradient(to right, purple, red);
   }
+  .posts-saved-inactive {
+    @apply text-gray-primary border-gray-border hover:text-black hover:border-black transition;
+  }
+  .posts-saved-active {
+    @apply border-black text-black;
+  }
+  .posts-saved-btn {
+    @apply py-3 uppercase text-xs border-t -mt-[1px] flex items-center cursor-pointer;
+  }
 }
 
 body {

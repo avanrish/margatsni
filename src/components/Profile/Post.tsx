@@ -16,7 +16,7 @@ export default function Post({ post }) {
           {post.data().comments.length}
         </span>
       </div>
-      <Image draggable={false} src={post.data().image} alt="" layout="fill" />
+      <Image draggable={false} src={post.data().image} alt="" layout="fill" objectFit="cover" />
     </Link>
   );
 }
