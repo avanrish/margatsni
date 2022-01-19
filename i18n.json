@@ -9,6 +9,7 @@
     "/accounts/password/reset": ["auth", "reset-password"],
     "/404": ["not-found"],
     "/p/[postId]": ["post"],
-    "/[username]": ["profile"]
+    "/[username]": ["profile"],
+    "/explore/people": ["suggestions"]
   }
 }

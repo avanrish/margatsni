@@ -86,3 +86,8 @@ export const getSavedPosts = async (savedPosts: string[]) => {
   }
   return [];
 };
+
+export const getPosts = async () => {
+  const { docs } = await getDocs(query(collection(db, 'posts'), orderBy('timestamp', 'desc')));
+  return docs;
+};

@@ -34,7 +34,7 @@ export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpe
               </Link>
               {!mobile && <MailIcon />}
               <CreateIcon open={open} setOpen={setOpen} mobile={mobile} />
-              <ExploreIcon className={`navBtn order-3 ${mobile && '!order-2'}`} />
+              <ExploreIcon active={router.pathname === '/explore'} mobile={mobile} />
               <HeartIcon className="navBtn order-4" />
 
               <div

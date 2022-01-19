@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="min-h-screen">
       <Head>
         <title>Margatsni</title>
       </Head>

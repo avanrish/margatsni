@@ -57,9 +57,9 @@ export const resetPassword = async (email: string) => {
   await sendPasswordResetEmail(auth, email);
 };
 
-export const getSuggestions = async (following: string[]) => {
+export const getSuggestions = async (following: string[], _limit: number) => {
   const { docs } = await getDocs(
-    query(collection(db, 'users'), where('uid', 'not-in', following), limit(5))
+    query(collection(db, 'users'), where('uid', 'not-in', following), limit(_limit))
   );
   return docs;
 };
