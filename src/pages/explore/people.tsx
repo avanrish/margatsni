@@ -43,7 +43,7 @@ export default function People() {
                 </div>
               </div>
             ))
-          ) : suggestions.length === 0 ? (
+          ) : suggestions.length !== 0 ? (
             suggestions.map((profile) => (
               <Suggestion
                 key={profile.data().uid}

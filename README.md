@@ -34,6 +34,7 @@ Live demo at [_margatsni-nine.vercel.app_](http://margatsni-nine.vercel.app/).
 - Post page (public for everyone with restrictions for not logged in users)
 - Suggestions
 - Search
+- Explore people / posts
 - Follow / Unfollow
 - Multiple languages
   - EN
