@@ -3,5 +3,7 @@
   "changePassword": "Change Password",
   "changeProfilePhoto": "Change Profile Photo",
   "uploadPhoto": "Upload Photo",
-  "removePhoto": "Remove Current Photo"
+  "removePhoto": "Remove Current Photo",
+  "photoAdded": "Profile photo added.",
+  "photoRemoved": "Profile photo removed."
 }

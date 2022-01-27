@@ -15,11 +15,5 @@ export default function ClipboardMonit() {
     }
   }, [monit, post, setClipboard]);
 
-  return (
-    <div
-      className={`fixed -bottom-12 flex w-screen items-center p-3 bg-gray-800 text-white transition-all z-50 ${
-        monit && '!bottom-0'
-      }`}
-    >{t`copiedToClipboard`}</div>
-  );
+  return <div className={`toast ${monit && '!bottom-0'}`}>{t`copiedToClipboard`}</div>;
 }

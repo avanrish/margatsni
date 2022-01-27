@@ -34,6 +34,9 @@
   .posts-saved-btn {
     @apply py-3 uppercase text-xs border-t -mt-[1px] flex items-center cursor-pointer;
   }
+  .toast {
+    @apply fixed left-0 -bottom-12 flex w-screen items-center p-3 bg-gray-800 text-white transition-all z-50;
+  }
 }
 
 body {
