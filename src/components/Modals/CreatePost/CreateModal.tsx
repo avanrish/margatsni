@@ -35,7 +35,7 @@ export default function Create({ open, close, setSuccess }) {
     if (loading) return;
     setLoading(true);
     const docRef = await createPost(user, captionRef.current.value);
-    const imageRef = getImageRef(docRef.id, 'posts');
+    const imageRef = getImageRef('posts', docRef.id);
     const imageLink = await uploadImage(imageRef, selectedFile);
     await addImageLinkToPost(docRef.id, imageLink);
     await updateUserPostsArray('add', user.uid, docRef.id);

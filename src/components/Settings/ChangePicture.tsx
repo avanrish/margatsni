@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../../atoms/UserAtom';
-import { getImageRef, uploadImage, updateUserImage } from '../../services/firebase';
+import { getImageRef, uploadImage, updateUserImage, deleteImage } from '../../services/firebase';
 import useTranslation from 'next-translate/useTranslation';
 import Toast from './Toast';
 import ChangeProfilePicture from '../Modals/ChangeProfilePicture';
@@ -29,13 +29,24 @@ export default function ChangePicture({ profileImg, username, userId }) {
     }
 
     reader.onload = async (readerEvent) => {
-      const imageRef = getImageRef(username, 'avatars');
+      const imageRef = getImageRef('avatars', username);
       const profilePicture = await uploadImage(imageRef, readerEvent.target.result);
       await updateUserImage(userId, profilePicture);
       setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: profilePicture } }));
       setLoading(false);
       setActiveToast('photoAdded');
     };
+  };
+
+  const deletePhoto = async () => {
+    if (loading) return;
+    setLoading(true);
+    if (openModal) setOpenModal(false);
+    await deleteImage('avatars', username);
+    await updateUserImage(userId, defaultImg);
+    setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: defaultImg } }));
+    setLoading(false);
+    setActiveToast('photoRemoved');
   };
 
   useEffect(() => {
@@ -86,6 +97,7 @@ export default function ChangePicture({ profileImg, username, userId }) {
         open={openModal}
         close={() => setOpenModal(false)}
         filePicker={() => filePickerRef.current.click()}
+        deletePhoto={deletePhoto}
       />
     </>
   );

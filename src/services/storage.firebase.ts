@@ -2,7 +2,7 @@ import { deleteObject, getDownloadURL, ref, uploadString } from 'firebase/storag
 
 import { storage } from '../lib/firebase';
 
-export const getImageRef = (name: string, dir: string) => ref(storage, `${dir}/${name}/image`);
+export const getImageRef = (dir: string, name: string) => ref(storage, `${dir}/${name}/image`);
 
 export const uploadImage = async (imageRef, selectedFile) => {
   await uploadString(imageRef, selectedFile, 'data_url');
@@ -10,4 +10,5 @@ export const uploadImage = async (imageRef, selectedFile) => {
   return downloadUrl;
 };
 
-export const deleteImage = async (docId) => deleteObject(ref(storage, `posts/${docId}/image`));
+export const deleteImage = async (dir: string, name: string) =>
+  deleteObject(ref(storage, `${dir}/${name}/image`));

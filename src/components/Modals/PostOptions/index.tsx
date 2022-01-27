@@ -13,7 +13,7 @@ export default function PostOptionsModal({ open, setOpenOptions, postCreator, do
   const router = useRouter();
 
   const handleDelete = async () => {
-    await deleteImage(docId);
+    await deleteImage('posts', docId);
     await deletePost(docId);
     await updateUserPostsArray('remove', user.uid, docId);
     if (getPosts) getPosts();
