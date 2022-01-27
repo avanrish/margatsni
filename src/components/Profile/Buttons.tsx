@@ -13,7 +13,7 @@ export default function Buttons({ username, profileUsername, following, handleFo
     <div className="flex flex-col space-y-3 xs:space-y-0 xs:flex-row xs:space-x-6 xs:items-center">
       <p className="font-thin text-2xl">{profileUsername}</p>
       {username === profileUsername ? (
-        <Link href="#" className="profile-button">{t`editProfile`}</Link>
+        <Link href="/accounts/edit" className="profile-button">{t`editProfile`}</Link>
       ) : following ? (
         <div className="flex">
           <button className="profile-button mr-2">{t`message`}</button>

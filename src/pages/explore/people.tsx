@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/UserAtom';
 import Suggestion from '../../components/Feed/Suggestion';
 import Header from '../../components/Header';
+import LanguageSelect from '../../components/LanguageSelect';
 import { getSuggestions } from '../../services/firebase';
 
 export default function People() {
@@ -20,7 +21,7 @@ export default function People() {
   useEffect(() => {
     if (!loading && user)
       getSuggestions([...user.following, user.uid], 15).then((docs) => setSuggestions(docs));
-    else if (!loading && !user) router.push('/accounts/login', router.asPath);
+    else if (!loading && !user) router.push('/accounts/login');
   }, [loading, user, router]);
 
   return (
@@ -61,6 +62,7 @@ export default function People() {
             </p>
           )}
         </div>
+        <LanguageSelect />
       </main>
     </div>
   );

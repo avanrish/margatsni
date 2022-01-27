@@ -116,3 +116,10 @@ export const updateUserPostsArray = async (action, userId, docId) => {
     posts: action === 'add' ? arrayUnion(docId) : arrayRemove(docId),
   });
 };
+
+export const updateUserImage = async (userId, profileImg) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    profileImg,
+  });
+};

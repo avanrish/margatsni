@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
 import Header from '../../components/Header';
+import LanguageSelect from '../../components/LanguageSelect';
 import Post from '../../components/Profile/Post';
 import { getPosts } from '../../services/firebase';
 
@@ -16,7 +17,7 @@ export default function Explore() {
 
   useEffect(() => {
     if (!loading && user) getPosts().then((docs) => setPosts(docs));
-    if (!loading && !user) router.push('/accounts/login', router.asPath);
+    if (!loading && !user) router.push('/accounts/login');
   }, [loading, user, router]);
 
   return (
@@ -32,6 +33,7 @@ export default function Explore() {
             ? [...Array(3)].map((_, i) => <Skeleton key={i} className="aspect-square" />)
             : posts.map((post) => <Post key={post.id} post={post} />)}
         </div>
+        <LanguageSelect />
       </main>
     </div>
   );
