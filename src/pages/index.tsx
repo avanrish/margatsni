@@ -9,7 +9,7 @@ import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 
-const ClipboardMonit = dynamic(() => import('../components/ClipboardMonit'));
+const ClipboardToast = dynamic(() => import('../components/ClipboardToast'));
 
 const Home: NextPage = () => {
   const { user, loading } = useRecoilValue(userState);
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 
       <Header />
       <Feed />
-      <ClipboardMonit />
+      <ClipboardToast />
     </div>
   );
 };

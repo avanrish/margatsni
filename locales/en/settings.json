@@ -1,4 +1,7 @@
 {
   "editProfile": "Edit Profile",
-  "changePassword": "Change Password"
+  "changePassword": "Change Password",
+  "changeProfilePhoto": "Change Profile Photo",
+  "uploadPhoto": "Upload Photo",
+  "removePhoto": "Remove Current Photo"
 }

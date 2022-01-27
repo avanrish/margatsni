@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Header from '../../components/Header';
 import Post from '../../components/Post';
-import ClipboardMonit from '../../components/ClipboardMonit';
+import ClipboardToast from '../../components/ClipboardToast';
 import { getPostDataById } from '../../services/firebase-admin';
 import LanguageSelect from '../../components/LanguageSelect';
 
@@ -37,7 +37,7 @@ export default function PostId({ post, postId, timestamp }) {
         <LanguageSelect />
       </main>
 
-      <ClipboardMonit />
+      <ClipboardToast />
     </div>
   );
 }

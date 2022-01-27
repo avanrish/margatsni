@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../../atoms/UserAtom';
 import { getImageRef, uploadImage, updateUserImage } from '../../services/firebase';
+import useTranslation from 'next-translate/useTranslation';
 
 const defaultImg = '/images/default.png';
 
@@ -12,6 +13,7 @@ export default function ChangePicture({ profileImg, username, userId }) {
   const [loading, setLoading] = useState(false);
   const setUser = useSetRecoilState(userState);
   const filePickerRef = useRef(null);
+  const { t } = useTranslation('settings');
 
   const handleUpload = (e) => {
     if (loading) return;
@@ -54,7 +56,7 @@ export default function ChangePicture({ profileImg, username, userId }) {
           className="text-sm font-semibold text-blue-primary cursor-pointer"
           onClick={profileImg === defaultImg ? () => filePickerRef.current.click() : null}
         >
-          Change Profile Photo
+          {t`changeProfilePhoto`}
         </span>
       </div>
       <input type="file" ref={filePickerRef} onChange={handleUpload} hidden />
