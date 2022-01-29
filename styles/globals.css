@@ -19,7 +19,7 @@
     @apply fixed left-0 bottom-0 w-screen !justify-evenly bg-white py-2 border-t;
   }
   .profile-button {
-    @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold;
+    @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold max-w-[150px] text-center;
   }
   .progress-bar {
     background-color: purple;

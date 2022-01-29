@@ -66,9 +66,9 @@ export default function Username({ profile: initProfile }) {
         <title>{`${profile.fullName} (@${profile.username}) • Margatsni`}</title>
       </Head>
       <Header />
-      <main className="flex flex-col max-w-4xl mx-auto mt-7 pb-[57px] md:pb-0">
+      <main className="flex flex-col max-w-4xl mx-auto mt-7 pb-[57px] md:pb-0 overflow-hidden">
         <div className="flex mb-8">
-          <div className="relative w-[77px] h-[77px] sm:w-[150px] sm:h-[150px] mx-4 sm:mx-14">
+          <div className="relative min-w-[77px] h-[77px] sm:min-w-[150px] sm:h-[150px] mx-4 sm:mx-14">
             <Image className="rounded-full" src={profile.profileImg} alt="" layout="fill" />
           </div>
           <div className="ml-4 sm:ml-8 flex flex-col space-y-4">
@@ -80,7 +80,24 @@ export default function Username({ profile: initProfile }) {
               handleFollow={handleFollow}
             />
             <Stats profile={profile} />
-            <div className="font-semibold">{profile.fullName}</div>
+            <div className="relative left-[calc(-125px+1rem)] sm:static">
+              <div className="font-semibold">{profile.fullName}</div>
+              {profile.bio && (
+                <div className="w-[calc(100vw-32px)] truncate sm:w-full sm:break-all sm:whitespace-normal">
+                  {profile.bio}
+                </div>
+              )}
+              {profile.website && (
+                <a
+                  className="text-blue-secondary font-semibold"
+                  href={profile.website}
+                  target="blank"
+                  rel="noreferrer"
+                >
+                  {new URL(profile.website).hostname}
+                </a>
+              )}
+            </div>
           </div>
         </div>
         <div className="flex flex-col border-t border-gray-border">
