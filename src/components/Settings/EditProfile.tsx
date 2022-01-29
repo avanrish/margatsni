@@ -6,7 +6,7 @@ import Toast from './Toast';
 import ChangePicture from './ChangePicture';
 import deepEqual from '../../util/deepEqual';
 import validData from '../../util/validData';
-import { updateUserData } from '../../services/users.firebase';
+import { updateUserData } from '../../services/firebase';
 import Spinner from '../Spinner';
 
 export default function EditProfile({ user, loading, setUser }) {
@@ -86,7 +86,7 @@ export default function EditProfile({ user, loading, setUser }) {
         <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`username`}</div>
         <div className="w-full max-w-xs flex flex-col space-y-3">
           <input
-            className={`rounded border-gray-border w-full ${true && 'disabled'}`}
+            className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
             type="text"
             placeholder={t`username`}
             disabled
@@ -122,6 +122,52 @@ export default function EditProfile({ user, loading, setUser }) {
             value={newUser?.bio || ''}
             onChange={handleChange}
             name="bio"
+          />
+        </div>
+      </div>
+
+      {/* Email */}
+      <div className="flex items-center">
+        <div className="w-32 mx-8 text-right font-semibold self-end mb-2">{t`email`}</div>
+        <div className="w-full max-w-xs">
+          <p className="text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
+          <p className="text-xs text-gray-primary mb-3">{t`infoDescription`}</p>
+          <input
+            className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
+            type="text"
+            placeholder={t`email`}
+            defaultValue={newUser?.email || ''}
+            disabled
+          />
+        </div>
+      </div>
+
+      {/* Phone Number */}
+      <div className="flex items-center">
+        <div className="w-32 mx-8 text-right font-semibold">{t`phoneNumber`}</div>
+        <div className="w-full max-w-xs">
+          <input
+            className="rounded border-gray-border w-full"
+            type="text"
+            placeholder={t`phoneNumber`}
+            value={newUser?.phoneNumber || ''}
+            name="phoneNumber"
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      {/* Gender */}
+      <div className="flex items-center">
+        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`gender`}</div>
+        <div className="w-full max-w-xs">
+          <input
+            className="rounded border-gray-border w-full"
+            type="text"
+            placeholder={t`gender`}
+            value={newUser?.gender || ''}
+            name="gender"
+            onChange={handleChange}
           />
           <button className="login_btn mt-4" disabled={inactiveSubmit} onClick={handleSubmit}>
             {updateInProgress ? <Spinner /> : t`submit`}

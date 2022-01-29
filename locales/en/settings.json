@@ -16,5 +16,20 @@
   "invalidWebsite": "Enter a valid website.",
   "bio": "Bio",
   "invalidBio": "Your bio must be 150 characters or fewer.",
-  "submit": "Submit"
+  "submit": "Submit",
+  "email": "Email",
+  "invalidEmail": "Provided email is invalid.",
+  "personalInfo": "Personal Information",
+  "infoDescription": "Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.",
+  "phoneNumber": "Phone Number",
+  "PHONE_NOT_A_NUMBER": "Phone number cannot have letters.",
+  "PHONE_INVALID_COUNTRY": "Phone number must have country code.",
+  "PHONE_TOO_SHORT": "Phone number is too short.",
+  "PHONE_TOO_LONG": "Phone number is too long.",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "custom": "Custom",
+  "unset": "Prefer Not To Say",
+  "done": "Done"
 }
