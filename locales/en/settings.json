@@ -5,5 +5,16 @@
   "uploadPhoto": "Upload Photo",
   "removePhoto": "Remove Current Photo",
   "photoAdded": "Profile photo added.",
-  "photoRemoved": "Profile photo removed."
+  "photoRemoved": "Profile photo removed.",
+  "profileSaved": "Profile saved.",
+  "name": "Name",
+  "invalidName": "Your name must be 3 characters or more.",
+  "nameDescription": "Help people discover your account by using the name you're known by: either your full name, nickname, or business name.",
+  "username": "Username",
+  "usernameDescription": "In most cases, you'll be able to change your username back to {{username}}.",
+  "website": "Website",
+  "invalidWebsite": "Enter a valid website.",
+  "bio": "Bio",
+  "invalidBio": "Your bio must be 150 characters or fewer.",
+  "submit": "Submit"
 }

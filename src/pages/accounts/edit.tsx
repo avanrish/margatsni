@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
 import tabs from '../../util/settingsTabs.json';
@@ -12,7 +12,7 @@ import LanguageSelect from '../../components/LanguageSelect';
 import EditProfile from '../../components/Settings/EditProfile';
 
 export default function Settings() {
-  const { user, loading } = useRecoilValue(userState);
+  const [{ user, loading }, setUser] = useRecoilState(userState);
   const [currentTab, setCurrentTab] = useState('editProfile');
   const router = useRouter();
   const { t } = useTranslation('settings');
@@ -40,7 +40,9 @@ export default function Settings() {
             ))}
           </div>
           <div className="w-full py-6 space-y-4">
-            {currentTab === 'editProfile' && <EditProfile user={user} loading={loading} />}
+            {currentTab === 'editProfile' && (
+              <EditProfile user={user} loading={loading} setUser={setUser} />
+            )}
           </div>
         </div>
         <LanguageSelect />

@@ -39,6 +39,7 @@ export const createUser = async ({ username, fullName, email, password }) => {
     uid: user.uid,
     username,
     fullName,
+    email,
     timestamp: serverTimestamp(),
     profileImg: '/images/default.png',
     following: [],
@@ -122,4 +123,9 @@ export const updateUserImage = async (userId, profileImg) => {
   await updateDoc(userRef, {
     profileImg,
   });
+};
+
+export const updateUserData = async (userId, newUser) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, newUser);
 };

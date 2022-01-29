@@ -37,8 +37,15 @@
   .toast {
     @apply fixed left-0 -bottom-12 flex w-screen items-center p-3 bg-gray-800 text-white transition-all z-50;
   }
+  .disabled {
+    @apply cursor-not-allowed text-gray-primary bg-gray-100;
+  }
 }
 
 body {
   @apply overflow-y-scroll;
+}
+
+input {
+  @apply placeholder:text-gray-primary;
 }

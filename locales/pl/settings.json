@@ -5,5 +5,16 @@
   "uploadPhoto": "Dodaj zdjęcie",
   "removePhoto": "Usuń bieżące zdjęcie",
   "photoAdded": "Dodano zdjęcie profilowe.",
-  "photoRemoved": "Usunięto zdjęcie profilowe."
+  "photoRemoved": "Usunięto zdjęcie profilowe.",
+  "profileSaved": "Profil został zapisany.",
+  "name": "Imię i nazwisko",
+  "invalidName": "Imię i nazwisko musi zawierać conajmniej 3 znaki.",
+  "nameDescription": "Pomóż ludziom odkryć Twoje konto, korzystając ze znanej im nazwy — może to być Twoje imię i nazwisko, nick lub nazwa firmy.",
+  "username": "Nazwa użytkownika",
+  "usernameDescription": "W większości przypadków będzie można zmienić nazwę użytkownika z powrotem na {{username}}.",
+  "website": "Witryna internetowa",
+  "invalidWebsite": "Wprowadź prawidłowy adres strony internetowej.",
+  "bio": "Biogram",
+  "invalidBio": "Biogram może zawierać maksymalnie 150 znaków.",
+  "submit": "Wyślij"
 }

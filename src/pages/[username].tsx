@@ -15,6 +15,7 @@ import Buttons from '../components/Profile/Buttons';
 import Stats from '../components/Profile/Stats';
 import Posts from '../components/Profile/Posts';
 import Saved from '../components/Profile/Saved';
+import removePrivateData from '../util/removePrivateData';
 
 export default function Username({ profile: initProfile }) {
   const [profile, setProfile] = useState(initProfile);
@@ -134,7 +135,7 @@ export const getServerSideProps = async ({ query: { username } }) => {
     return {
       notFound: true,
     };
-  delete profile.timestamp; // Timestamp cannot be serialized as JSON
+  removePrivateData(profile);
   return {
     props: {
       profile,
