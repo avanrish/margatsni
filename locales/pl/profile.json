@@ -19,5 +19,7 @@
   "noPostsCurrUser1": "Uwieczniaj i udostępniaj ciekawe chwile.",
   "noPostsCurrUser2": "Udostępnij swoje pierwsze zdjęcie.",
   "noPostsAnotherUser": "Nie ma jeszcze żadnych postów",
-  "message": "Wyślij wiadomość"
+  "message": "Wyślij wiadomość",
+  "save": "Zapisz",
+  "saveDescription": "Zapisuj zdjęcia i filmy, które chcesz zobaczyć ponownie. Nikt nie zostanie o tym powiadomiony i tylko Ty zobaczysz, co zostało zapisane."
 }

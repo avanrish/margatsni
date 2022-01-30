@@ -3,4 +3,4 @@ export default function validateUsername(username: string) {
     throw { code: 'auth/invalid-username' };
 }
 
-const paths = ['accounts', 'p', '404'];
+const paths = ['accounts', 'p', '404', 'settings', 'direct'];

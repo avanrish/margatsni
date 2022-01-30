@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Header from '../../components/Header';
 import Post from '../../components/Post';
-import ClipboardMonit from '../../components/ClipboardMonit';
+import ClipboardToast from '../../components/ClipboardToast';
 import { getPostDataById } from '../../services/firebase-admin';
 import LanguageSelect from '../../components/LanguageSelect';
 
@@ -20,22 +20,24 @@ export default function PostId({ post, postId, timestamp }) {
         <title>{title}</title>
       </Head>
       <Header />
-      <div className="max-w-6xl pb-14 md:pb-0 mx-auto">
-        <Post
-          postId={postId}
-          userId={post.uid}
-          username={post.username}
-          userImg={post.profileImg}
-          comments={post.comments}
-          caption={post.caption}
-          img={post.image}
-          likes={post.likes}
-          timestamp={timestamp}
-        />
-      </div>
-      <LanguageSelect />
+      <main className="pb-[57px] md:pb-0">
+        <div className="max-w-6xl mx-auto mt-4">
+          <Post
+            postId={postId}
+            userId={post.uid}
+            username={post.username}
+            userImg={post.profileImg}
+            comments={post.comments}
+            caption={post.caption}
+            img={post.image}
+            likes={post.likes}
+            timestamp={timestamp}
+          />
+        </div>
+        <LanguageSelect />
+      </main>
 
-      <ClipboardMonit />
+      <ClipboardToast />
     </div>
   );
 }

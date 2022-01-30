@@ -2,23 +2,26 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { BookmarkIcon, CameraIcon, ViewGridIcon } from '@heroicons/react/outline';
+import { BookmarkIcon, ViewGridIcon } from '@heroicons/react/outline';
 import { useRecoilValue } from 'recoil';
-import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../atoms/UserAtom';
-import { getPostsByUserId, toggleFollow } from '../services/firebase';
+import { getPostsByUserId, toggleFollow, getSavedPosts } from '../services/firebase';
 import { getUserDataByUsername } from '../services/firebase-admin';
 import Header from '../components/Header';
 import LanguageSelect from '../components/LanguageSelect';
 import Unfollow from '../components/Modals/Unfollow';
 import Buttons from '../components/Profile/Buttons';
 import Stats from '../components/Profile/Stats';
-import Post from '../components/Profile/Post';
+import Posts from '../components/Profile/Posts';
+import Saved from '../components/Profile/Saved';
+import removePrivateData from '../util/removePrivateData';
 
 export default function Username({ profile: initProfile }) {
   const [profile, setProfile] = useState(initProfile);
   const [posts, setPosts] = useState(null);
+  const [savedPosts, setSavedPosts] = useState(null);
+  const [showPosts, setShowPosts] = useState(true);
   const [open, setOpen] = useState(false);
   const [following, setFollowing] = useState(false);
   const { t } = useTranslation('profile');
@@ -35,6 +38,14 @@ export default function Username({ profile: initProfile }) {
     };
     if (profile) getPosts();
   }, [profile]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const posts = await getSavedPosts(user.saved);
+      setSavedPosts(posts);
+    };
+    if (!showPosts && user && savedPosts === null) getPosts();
+  }, [savedPosts, showPosts, user]);
 
   const handleFollow = () => {
     if (following) setOpen(true);
@@ -55,9 +66,9 @@ export default function Username({ profile: initProfile }) {
         <title>{`${profile.fullName} (@${profile.username}) • Margatsni`}</title>
       </Head>
       <Header />
-      <main className="flex flex-col max-w-4xl mx-auto mt-7">
+      <main className="flex flex-col max-w-4xl mx-auto mt-7 pb-[57px] md:pb-0 overflow-hidden">
         <div className="flex mb-8">
-          <div className="relative w-[77px] h-[77px] sm:w-[150px] sm:h-[150px] mx-4 sm:mx-14">
+          <div className="relative min-w-[77px] h-[77px] sm:min-w-[150px] sm:h-[150px] mx-4 sm:mx-14">
             <Image className="rounded-full" src={profile.profileImg} alt="" layout="fill" />
           </div>
           <div className="ml-4 sm:ml-8 flex flex-col space-y-4">
@@ -69,53 +80,61 @@ export default function Username({ profile: initProfile }) {
               handleFollow={handleFollow}
             />
             <Stats profile={profile} />
-            <div className="font-semibold">{profile.fullName}</div>
+            <div className="relative left-[calc(-125px+1rem)] sm:static">
+              <div className="font-semibold">{profile.fullName}</div>
+              {profile.bio && (
+                <div className="w-[calc(100vw-32px)] truncate sm:w-full sm:break-all sm:whitespace-normal">
+                  {profile.bio}
+                </div>
+              )}
+              {profile.website && (
+                <a
+                  className="text-blue-secondary font-semibold"
+                  href={profile.website}
+                  target="blank"
+                  rel="noreferrer"
+                >
+                  {new URL(profile.website).hostname}
+                </a>
+              )}
+            </div>
           </div>
         </div>
         <div className="flex flex-col border-t border-gray-border">
           <div className="flex justify-center space-x-20">
-            <div className="py-3 uppercase text-xs border-t border-black -mt-[1px] flex items-center cursor-pointer">
+            <div
+              className={`posts-saved-btn ${
+                showPosts ? 'posts-saved-active' : 'posts-saved-inactive'
+              }`}
+              onClick={showPosts ? null : () => setShowPosts(true)}
+            >
               <ViewGridIcon className="w-5 mr-2" />
               {t('posts', { count: 999999 })}
             </div>
             {user?.username === profile.username && (
-              <div className="py-3 uppercase text-xs text-gray-primary -mt-[1px] flex items-center cursor-pointer">
+              <div
+                className={`posts-saved-btn ${
+                  !showPosts ? 'posts-saved-active' : 'posts-saved-inactive'
+                }`}
+                onClick={!showPosts ? null : () => setShowPosts(false)}
+              >
                 <BookmarkIcon className="w-5 mr-2" />
                 {t`common:saved`}
               </div>
             )}
           </div>
-          {posts === null ? (
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {[...Array(3)].map((_, i) => (
-                <Skeleton key={i} className="aspect-square" />
-              ))}
-            </div>
-          ) : posts.length > 0 ? (
-            <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => (
-                <Post key={post.id} post={post} />
-              ))}
-            </div>
-          ) : user?.username === profile.username ? (
-            <div className="flex items-center">
-              <div className="relative w-[380px] h-[380px]">
-                <Image src="/images/sampleImage.jpg" alt="" layout="fill" />
-              </div>
-              <div className="flex flex-col mx-auto text-center text-lg">
-                <span className="font-semibold">{t`noPostsCurrUser1`}</span>
-                <span>{t`noPostsCurrUser2`}</span>
-              </div>
-            </div>
+          {showPosts ? (
+            <Posts
+              posts={posts}
+              currUserUsername={user?.username}
+              profileUsername={profile?.username}
+            />
           ) : (
-            <div className="flex flex-col items-center my-12">
-              <CameraIcon className="w-7 mb-12" />
-              <span className="font-thin text-3xl">{t`noPostsAnotherUser`}</span>
-            </div>
+            <Saved posts={savedPosts} />
           )}
         </div>
+        <LanguageSelect />
       </main>
-      <LanguageSelect />
       <Unfollow
         open={open}
         setOpen={setOpen}
@@ -133,7 +152,7 @@ export const getServerSideProps = async ({ query: { username } }) => {
     return {
       notFound: true,
     };
-  delete profile.timestamp; // Timestamp cannot be serialized as JSON
+  removePrivateData(profile);
   return {
     props: {
       profile,

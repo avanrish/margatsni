@@ -1,5 +1,5 @@
 import { signOut } from '@firebase/auth';
-import { BookmarkIcon, CogIcon, UserCircleIcon } from '@heroicons/react/outline';
+import { CogIcon, UserCircleIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 
 import { auth } from '../lib/firebase';
@@ -13,11 +13,7 @@ export default function Dropdown({ username }) {
         <UserCircleIcon className="w-5 h-5 mr-2" />
         {t`profile`}
       </Link>
-      <Link href={`#`} className="flex items-center pl-3 hover:bg-gray-100 py-1">
-        <BookmarkIcon className="w-5 h-5 mr-2" />
-        {t`saved`}
-      </Link>
-      <Link href="#" className="flex items-center pl-3 hover:bg-gray-100 py-1">
+      <Link href="/accounts/edit" className="flex items-center pl-3 hover:bg-gray-100 py-1">
         <CogIcon className="w-5 h-5 mr-2" />
         {t`settings`}
       </Link>

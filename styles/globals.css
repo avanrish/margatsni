@@ -13,13 +13,41 @@
     @apply border border-gray-300 bg-gray-bg rounded h-9 text-sm;
   }
   .login_btn {
-    @apply flex items-center justify-center h-8 !mt-3 text-white font-semibold bg-blue-primary rounded text-sm hover:bg-[#33adff] transition-colors disabled:opacity-50 disabled:cursor-default disabled:hover:bg-blue-primary;
+    @apply flex items-center justify-center px-3 h-8 text-white font-semibold bg-blue-primary rounded text-sm hover:bg-[#33adff] transition-colors disabled:opacity-50 disabled:cursor-default disabled:hover:bg-blue-primary;
   }
   .nav_bottom {
     @apply fixed left-0 bottom-0 w-screen !justify-evenly bg-white py-2 border-t;
   }
   .profile-button {
-    @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold;
+    @apply px-2 py-1 transition border border-gray-border rounded text-sm font-semibold max-w-[150px] text-center;
+  }
+  .progress-bar {
+    background-color: purple;
+    background-image: linear-gradient(to right, purple, red);
+  }
+  .posts-saved-inactive {
+    @apply text-gray-primary border-gray-border hover:text-black hover:border-black transition;
+  }
+  .posts-saved-active {
+    @apply border-black text-black;
+  }
+  .posts-saved-btn {
+    @apply py-3 uppercase text-xs border-t -mt-[1px] flex items-center cursor-pointer;
+  }
+  .toast {
+    @apply fixed left-0 -bottom-12 flex w-screen items-center p-3 bg-gray-800 text-white transition-all z-50;
+  }
+  .disabled-input {
+    @apply cursor-not-allowed text-gray-primary bg-gray-100;
+  }
+  .edit-container {
+    @apply flex flex-col md:flex-row mx-8 md:mx-0 md:items-center;
+  }
+  .edit-label {
+    @apply md:w-32 md:mx-8 md:text-right font-semibold self-start md:mt-2;
+  }
+  .edit-input {
+    @apply w-full md:max-w-xs;
   }
   .progress-bar {
     background-color: purple;
@@ -29,4 +57,8 @@
 
 body {
   @apply overflow-y-scroll;
+}
+
+input {
+  @apply placeholder:text-gray-primary;
 }

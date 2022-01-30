@@ -2,13 +2,20 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import cn from 'classnames';
 
 import { toggleFollow } from '../../services/firebase';
 import Unfollow from '../Modals/Unfollow';
 import Link from '../Link';
 import { userState } from '../../atoms/UserAtom';
 
-export default function Suggestion({ profileImg, fullName, username, uid: targetUserId }) {
+export default function Suggestion({
+  profileImg,
+  fullName = null,
+  username,
+  uid: targetUserId,
+  explore = false,
+}) {
   const [followed, setFollowed] = useState(false);
   const [open, setOpen] = useState(false);
   const { user } = useRecoilValue(userState);
@@ -18,24 +25,30 @@ export default function Suggestion({ profileImg, fullName, username, uid: target
     setFollowed((prev) => !prev);
   }
 
+  const followClass = cn('font-semibold', {
+    'text-xs': !explore,
+    'text-blue-secondary': !explore && followed,
+    'text-blue-primary': !explore && !followed,
+    login_btn: explore && !followed,
+    'profile-button': explore && followed,
+  });
+
   return (
     <>
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between">
         <Link className="block w-10 h-10 rounded-full border p-[2px]" href={`/${username}`}>
-          <img className="rounded-full" src={profileImg} alt={fullName} width={38} height={38} />
+          <img className="rounded-full" src={profileImg} alt={username} width={38} height={38} />
         </Link>
 
         <div className="flex-1 ml-4">
           <Link className="block font-semibold text-sm hover:underline" href={`/${username}`}>
             {username}
           </Link>
-          <h3 className="text-xs text-gray-primary">{t('recommended')}</h3>
+          <h3 className="text-xs text-gray-primary">{fullName || t('recommended')}</h3>
         </div>
 
         <button
-          className={`text-xs font-semibold ${
-            followed ? 'text-blue-secondary' : 'text-blue-primary'
-          }`}
+          className={followClass}
           onClick={() =>
             followed
               ? setOpen(true)

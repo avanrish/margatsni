@@ -1,9 +1,13 @@
 import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
+  updateEmail,
+  updatePassword,
 } from 'firebase/auth';
 import {
   arrayRemove,
@@ -39,6 +43,7 @@ export const createUser = async ({ username, fullName, email, password }) => {
     uid: user.uid,
     username,
     fullName,
+    email,
     timestamp: serverTimestamp(),
     profileImg: '/images/default.png',
     following: [],
@@ -57,9 +62,9 @@ export const resetPassword = async (email: string) => {
   await sendPasswordResetEmail(auth, email);
 };
 
-export const getSuggestions = async (following: string[]) => {
+export const getSuggestions = async (following: string[], _limit: number) => {
   const { docs } = await getDocs(
-    query(collection(db, 'users'), where('uid', 'not-in', following), limit(5))
+    query(collection(db, 'users'), where('uid', 'not-in', following), limit(_limit))
   );
   return docs;
 };
@@ -79,6 +84,16 @@ export const toggleFollow = async (
   updateDoc(targetUserRef, {
     followers: followed ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
   });
+  if (callback) callback();
+};
+
+export const toggleSave = async (userId, postId, saved, callback) => {
+  const currentUserRef = doc(db, 'users', userId);
+
+  updateDoc(currentUserRef, {
+    saved: saved ? arrayRemove(postId) : arrayUnion(postId),
+  });
+
   if (callback) callback();
 };
 
@@ -106,3 +121,24 @@ export const updateUserPostsArray = async (action, userId, docId) => {
     posts: action === 'add' ? arrayUnion(docId) : arrayRemove(docId),
   });
 };
+
+export const updateUserImage = async (userId, profileImg) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    profileImg,
+  });
+};
+
+export const updateUserData = async (userId, newUser) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, newUser);
+};
+
+export const changePassword = async (password) => await updatePassword(auth.currentUser, password);
+
+export const reAuthenticate = async (email, password) => {
+  const credential = EmailAuthProvider.credential(email, password);
+  await reauthenticateWithCredential(auth.currentUser, credential);
+};
+
+export const changeEmail = async (email) => await updateEmail(auth.currentUser, email);

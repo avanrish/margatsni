@@ -11,6 +11,7 @@ import {
   getImageRef,
   uploadImage,
   updateUserPostsArray,
+  addImageLinkToPost,
 } from '../../../services/firebase';
 
 export default function Create({ open, close, setSuccess }) {
@@ -34,8 +35,9 @@ export default function Create({ open, close, setSuccess }) {
     if (loading) return;
     setLoading(true);
     const docRef = await createPost(user, captionRef.current.value);
-    const imageRef = getImageRef(docRef.id);
-    await uploadImage(imageRef, selectedFile, docRef.id);
+    const imageRef = getImageRef('posts', docRef.id);
+    const imageLink = await uploadImage(imageRef, selectedFile);
+    await addImageLinkToPost(docRef.id, imageLink);
     await updateUserPostsArray('add', user.uid, docRef.id);
 
     close();

@@ -5,8 +5,8 @@ import {
   collection,
   deleteDoc,
   doc,
+  documentId,
   getDocs,
-  limit,
   orderBy,
   query,
   serverTimestamp,
@@ -18,18 +18,13 @@ import { db } from '../lib/firebase';
 
 export const getPostsByUserId = async (id: string) => {
   return await getDocs(
-    query(collection(db, 'posts'), where('uid', '==', id), orderBy('timestamp', 'desc'), limit(9))
+    query(collection(db, 'posts'), where('uid', '==', id), orderBy('timestamp', 'desc'))
   );
 };
 
 export const getPostsOfFollowedUsers = async (following) => {
   return await getDocs(
-    query(
-      collection(db, 'posts'),
-      where('uid', 'in', following),
-      orderBy('timestamp', 'desc'),
-      limit(10)
-    )
+    query(collection(db, 'posts'), where('uid', 'in', following), orderBy('timestamp', 'desc'))
   );
 };
 
@@ -80,4 +75,19 @@ export const toggleLike = async (hasLiked, currUserId, postId, setLikes) => {
       likes: arrayUnion(currUserId),
     });
   }
+};
+
+export const getSavedPosts = async (savedPosts: string[]) => {
+  if (savedPosts.length > 0) {
+    const { docs } = await getDocs(
+      query(collection(db, 'posts'), where(documentId(), 'in', savedPosts))
+    );
+    return docs;
+  }
+  return [];
+};
+
+export const getPosts = async () => {
+  const { docs } = await getDocs(query(collection(db, 'posts'), orderBy('timestamp', 'desc')));
+  return docs;
 };

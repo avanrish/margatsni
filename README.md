@@ -29,11 +29,15 @@ Live demo at [_margatsni-nine.vercel.app_](http://margatsni-nine.vercel.app/).
 - Timeline (not available to not logged in users)
 - Create / delete posts
 - Like / comment posts
+- Save posts
 - Profile page (public for everyone with restrictions for not logged in users)
 - Post page (public for everyone with restrictions for not logged in users)
 - Suggestions
 - Search
+- Explore people / posts
 - Follow / Unfollow
+- Edit Profile
+- Change Password / Email
 - Multiple languages
   - EN
   - PL

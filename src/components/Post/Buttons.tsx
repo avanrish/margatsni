@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
-import { BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
+import { ChatIcon, HeartIcon, PaperAirplaneIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
 import { clipboardState } from '../../atoms/ClipboardAtom';
 import { toggleLike } from '../../services/firebase';
+import SavePostIcon from '../Icons/SavePostIcon';
 
 export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
   const [hasLiked, setHasLiked] = useState(false);
@@ -47,7 +48,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId,
             onClick={() => setClipboard({ monit: true, post: postId })}
           />
         </div>
-        <BookmarkIcon className="btn" />
+        <SavePostIcon postId={postId} />
       </div>
       {likes.length > 0 && (
         <p className="font-semibold pt-3 pl-5 order-2">{t('likes', { count: likes.length })}</p>
