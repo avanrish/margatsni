@@ -33,7 +33,7 @@ export default function Settings() {
       <Header />
       <main className="flex flex-col max-w-4xl mx-auto mt-7 pb-[57px] md:pb-0">
         <div className="bg-white w-full border border-gray-border rounded-md flex divide-x divide-gray-border overflow-hidden">
-          <div className="w-[235px]">
+          <div className="w-[235px] hidden md:block">
             {tabs.map((tab) => (
               <SettingsTab
                 key={tab}

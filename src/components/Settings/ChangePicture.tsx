@@ -49,8 +49,8 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
 
   return (
     <>
-      <div className="flex items-center">
-        <div className="w-32 mx-8 font-semibold flex items-center justify-end">
+      <div className="flex mx-8 md:mx-0 md:items-center">
+        <div className="md:w-32 md:mx-8 font-semibold flex items-center justify-end">
           {loading ? (
             <div className="-mt-2">
               <Skeleton borderRadius={999} width={38} height={38} />
@@ -70,7 +70,7 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
             />
           )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ml-4 md:ml-0">
           <span className="text-lg">{username}</span>
           <span
             className="text-sm font-semibold text-blue-primary cursor-pointer"

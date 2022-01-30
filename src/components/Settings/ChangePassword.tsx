@@ -42,8 +42,8 @@ export default function ChangePassword({ user }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center">
-        <div className="w-32 mx-8 font-semibold flex items-center justify-end">
+      <div className="flex md:items-center">
+        <div className="md:w-32 mx-8 font-semibold flex items-center justify-end">
           <Image
             className="rounded-full cursor-pointer"
             src={user.profileImg}
@@ -55,9 +55,9 @@ export default function ChangePassword({ user }) {
         <span className="text-2xl">{user.username}</span>
       </div>
 
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold">{t`newPasswd`}</div>
-        <div className="w-full max-w-xs flex flex-col space-y-3">
+      <div className="edit-container">
+        <div className="edit-label">{t`newPasswd`}</div>
+        <div className="edit-input">
           <input
             className="rounded border-gray-border w-full"
             type="password"
@@ -68,9 +68,9 @@ export default function ChangePassword({ user }) {
         </div>
       </div>
 
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start">{t`confirmNewPasswd`}</div>
-        <div className="w-full max-w-xs flex flex-col space-y-3">
+      <div className="edit-container">
+        <div className="edit-label">{t`confirmNewPasswd`}</div>
+        <div className="edit-input flex flex-col space-y-3">
           <input
             className="rounded border-gray-border w-full"
             type="password"

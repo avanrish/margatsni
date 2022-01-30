@@ -58,9 +58,9 @@ export default function EditProfile({ user, setUser }) {
       />
 
       {/* Full Name */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`name`}</div>
-        <div className="w-full max-w-xs flex flex-col space-y-3">
+      <div className="edit-container">
+        <div className="edit-label ">{t`name`}</div>
+        <div className="edit-input flex flex-col space-y-3">
           <input
             className="rounded border-gray-border w-full"
             type="text"
@@ -74,9 +74,9 @@ export default function EditProfile({ user, setUser }) {
       </div>
 
       {/* Username */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`username`}</div>
-        <div className="w-full max-w-xs flex flex-col space-y-3">
+      <div className="edit-container">
+        <div className="edit-label ">{t`username`}</div>
+        <div className="edit-input flex flex-col space-y-3">
           <input
             className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
             type="text"
@@ -91,9 +91,9 @@ export default function EditProfile({ user, setUser }) {
       </div>
 
       {/* Website */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold">{t`website`}</div>
-        <div className="w-full max-w-xs">
+      <div className="edit-container">
+        <div className="edit-label">{t`website`}</div>
+        <div className="edit-input">
           <input
             className="rounded border-gray-border w-full"
             type="text"
@@ -106,24 +106,24 @@ export default function EditProfile({ user, setUser }) {
       </div>
 
       {/* Bio */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start">{t`bio`}</div>
-        <div className="w-full max-w-xs">
+      <div className="edit-container">
+        <div className="edit-label">{t`bio`}</div>
+        <div className="edit-input">
           <textarea
             className="rounded border-gray-border w-full"
             value={newUser?.bio || ''}
             onChange={handleChange}
             name="bio"
           />
+          <p className="mt-6 text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
+          <p className="text-xs text-gray-primary">{t`infoDescription`}</p>
         </div>
       </div>
 
       {/* Email */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-end mb-2">{t`email`}</div>
-        <div className="w-full max-w-xs">
-          <p className="text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
-          <p className="text-xs text-gray-primary mb-3">{t`infoDescription`}</p>
+      <div className="edit-container">
+        <div className="edit-label md:self-end mb-2">{t`email`}</div>
+        <div className="edit-input">
           <input
             className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
             type="text"
@@ -135,9 +135,9 @@ export default function EditProfile({ user, setUser }) {
       </div>
 
       {/* Phone Number */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`phoneNumber`}</div>
-        <div className="w-full max-w-xs">
+      <div className="edit-container">
+        <div className="edit-label">{t`phoneNumber`}</div>
+        <div className="edit-input">
           <input
             className="rounded border-gray-border w-full"
             type="text"

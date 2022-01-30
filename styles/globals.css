@@ -40,6 +40,15 @@
   .disabled-input {
     @apply cursor-not-allowed text-gray-primary bg-gray-100;
   }
+  .edit-container {
+    @apply flex flex-col md:flex-row mx-8 md:mx-0 md:items-center;
+  }
+  .edit-label {
+    @apply md:w-32 md:mx-8 md:text-right font-semibold self-start md:mt-2;
+  }
+  .edit-input {
+    @apply w-full md:max-w-xs;
+  }
 }
 
 body {
