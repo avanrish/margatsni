@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from 'react-responsive-modal';
 import { reAuthenticate } from '../../services/firebase';
 
-export default function Reauthenticate({ open, close, email, changePassword }) {
+export default function Reauthenticate({ open, close, email, handleChange }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { t } = useTranslation('settings');
@@ -12,7 +12,7 @@ export default function Reauthenticate({ open, close, email, changePassword }) {
   const handleSubmit = async () => {
     try {
       await reAuthenticate(email, password);
-      await changePassword();
+      await handleChange();
       close();
     } catch (err) {
       setError(err.code);

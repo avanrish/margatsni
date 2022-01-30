@@ -1,15 +1,13 @@
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { changePassword } from '../../services/firebase';
 import Link from '../Link';
 import Reauthenticate from '../Modals/Reauthenticate';
 import Spinner from '../Spinner';
-import Toast from './Toast';
 
-export default function ChangePassword({ user }) {
+export default function ChangePassword({ user, setActiveToast }) {
   const [password, setPassword] = useState({ newPasswd: '', confirmNewPasswd: '' });
-  const [activeToast, setActiveToast] = useState(null);
   const [openReauth, setOpenReauth] = useState(false);
   const [updateInProgress, setUpdateInProgress] = useState(false);
   const { t } = useTranslation('settings');
@@ -34,11 +32,6 @@ export default function ChangePassword({ user }) {
       setOpenReauth(true);
     }
   };
-
-  useEffect(() => {
-    if (activeToast && typeof window !== 'undefined')
-      window.setTimeout(() => setActiveToast(null), 2000);
-  }, [activeToast]);
 
   return (
     <div className="space-y-4">
@@ -91,9 +84,8 @@ export default function ChangePassword({ user }) {
         open={openReauth}
         close={() => setOpenReauth(false)}
         email={user.email}
-        changePassword={handleSubmit}
+        handleChange={handleSubmit}
       />
-      <Toast text={activeToast} />
     </div>
   );
 }

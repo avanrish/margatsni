@@ -1,24 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 
-import Toast from './Toast';
 import ChangePicture from './ChangePicture';
 import deepEqual from '../../util/deepEqual';
 import validData from '../../util/validData';
-import { updateUserData } from '../../services/firebase';
+import { changeEmail, updateUserData } from '../../services/firebase';
 import Spinner from '../Spinner';
+import Reauthenticate from '../Modals/Reauthenticate';
 
-export default function EditProfile({ user, setUser }) {
+export default function EditProfile({ user, setUser, setActiveToast }) {
   const [newUser, setNewUser] = useState(null);
-  const [activeToast, setActiveToast] = useState(null);
   const [updateInProgress, setUpdateInProgress] = useState(false);
+  const [openReauth, setOpenReauth] = useState(false);
   const [inactiveSubmit, setInactiveSubmit] = useState(true);
   const { t } = useTranslation('settings');
-
-  useEffect(() => {
-    if (activeToast && typeof window !== 'undefined')
-      window.setTimeout(() => setActiveToast(null), 2000);
-  }, [activeToast]);
 
   useEffect(() => {
     setNewUser(user);
@@ -41,10 +36,17 @@ export default function EditProfile({ user, setUser }) {
       setNewUser(user);
     } else {
       setUpdateInProgress(true);
-      await updateUserData(user.uid, newUser);
-      setUser({ user: newUser });
-      setUpdateInProgress(false);
-      setActiveToast('profileSaved');
+
+      try {
+        if (newUser.email !== user.email) await changeEmail(newUser.email);
+        await updateUserData(user.uid, newUser);
+        setUser({ user: newUser });
+        setUpdateInProgress(false);
+        setActiveToast('profileSaved');
+      } catch {
+        setUpdateInProgress(false);
+        setOpenReauth(true);
+      }
     }
   };
 
@@ -125,11 +127,12 @@ export default function EditProfile({ user, setUser }) {
         <div className="edit-label md:self-end mb-2">{t`email`}</div>
         <div className="edit-input">
           <input
-            className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
+            className={`rounded border-gray-border w-full`}
             type="text"
+            name="email"
             placeholder={t`email`}
-            defaultValue={newUser?.email || ''}
-            disabled
+            value={newUser?.email || ''}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -151,8 +154,12 @@ export default function EditProfile({ user, setUser }) {
           </button>
         </div>
       </div>
-
-      <Toast text={activeToast} />
+      <Reauthenticate
+        open={openReauth}
+        close={() => setOpenReauth(false)}
+        email={user.email}
+        handleChange={handleSubmit}
+      />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
+  updateEmail,
   updatePassword,
 } from 'firebase/auth';
 import {
@@ -139,3 +140,5 @@ export const reAuthenticate = async (email, password) => {
   const credential = EmailAuthProvider.credential(email, password);
   await reauthenticateWithCredential(auth.currentUser, credential);
 };
+
+export const changeEmail = async (email) => await updateEmail(auth.currentUser, email);

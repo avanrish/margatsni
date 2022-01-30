@@ -37,7 +37,7 @@ Live demo at [_margatsni-nine.vercel.app_](http://margatsni-nine.vercel.app/).
 - Explore people / posts
 - Follow / Unfollow
 - Edit Profile
-- Change Password
+- Change Password / Email
 - Multiple languages
   - EN
   - PL
