@@ -31,5 +31,9 @@
   "female": "Kobieta",
   "custom": "Niestandardowa",
   "unset": "Wolę nie ujawniać",
-  "done": "Gotowe"
+  "done": "Gotowe",
+  "newPasswd": "Nowe hasło",
+  "confirmNewPasswd": "Potwierdź nowe hasło",
+  "reAuthDesc": "Ta operacja wymaga ponownego zalogowania się, aby potwierdzić Twoją tożsamość!",
+  "passwdChanged": "Hasło zostało zmienione."
 }

@@ -10,6 +10,8 @@ import SettingsTab from '../../components/Settings/SettingsTab';
 import Header from '../../components/Header';
 import LanguageSelect from '../../components/LanguageSelect';
 import EditProfile from '../../components/Settings/EditProfile';
+import ChangePassword from '../../components/Settings/ChangePassword';
+import Loading from '../../components/Loading';
 
 export default function Settings() {
   const [{ user, loading }, setUser] = useRecoilState(userState);
@@ -20,6 +22,8 @@ export default function Settings() {
   useEffect(() => {
     if (!loading && !user) router.push('/accounts/login');
   }, [loading, user, router]);
+
+  if (loading) return <Loading />;
 
   return (
     <div>
@@ -40,9 +44,8 @@ export default function Settings() {
             ))}
           </div>
           <div className="w-full py-6 space-y-4">
-            {currentTab === 'editProfile' && (
-              <EditProfile user={user} loading={loading} setUser={setUser} />
-            )}
+            {currentTab === 'editProfile' && <EditProfile user={user} setUser={setUser} />}
+            {currentTab === 'changePassword' && <ChangePassword user={user} />}
           </div>
         </div>
         <LanguageSelect />

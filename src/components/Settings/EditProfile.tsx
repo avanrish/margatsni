@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
 
 import Toast from './Toast';
 import ChangePicture from './ChangePicture';
@@ -9,7 +8,7 @@ import validData from '../../util/validData';
 import { updateUserData } from '../../services/firebase';
 import Spinner from '../Spinner';
 
-export default function EditProfile({ user, loading, setUser }) {
+export default function EditProfile({ user, setUser }) {
   const [newUser, setNewUser] = useState(null);
   const [activeToast, setActiveToast] = useState(null);
   const [updateInProgress, setUpdateInProgress] = useState(false);
@@ -22,8 +21,8 @@ export default function EditProfile({ user, loading, setUser }) {
   }, [activeToast]);
 
   useEffect(() => {
-    if (!loading) setNewUser(user);
-  }, [loading, user]);
+    setNewUser(user);
+  }, [user]);
 
   useEffect(() => {
     if (newUser) {
@@ -48,13 +47,6 @@ export default function EditProfile({ user, loading, setUser }) {
       setActiveToast('profileSaved');
     }
   };
-
-  if (loading)
-    return (
-      <div className="mx-8">
-        <Skeleton height={300} />
-      </div>
-    );
 
   return (
     <div className="space-y-4">
@@ -144,7 +136,7 @@ export default function EditProfile({ user, loading, setUser }) {
 
       {/* Phone Number */}
       <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold">{t`phoneNumber`}</div>
+        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`phoneNumber`}</div>
         <div className="w-full max-w-xs">
           <input
             className="rounded border-gray-border w-full"
@@ -152,21 +144,6 @@ export default function EditProfile({ user, loading, setUser }) {
             placeholder={t`phoneNumber`}
             value={newUser?.phoneNumber || ''}
             name="phoneNumber"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-
-      {/* Gender */}
-      <div className="flex items-center">
-        <div className="w-32 mx-8 text-right font-semibold self-start mt-2">{t`gender`}</div>
-        <div className="w-full max-w-xs">
-          <input
-            className="rounded border-gray-border w-full"
-            type="text"
-            placeholder={t`gender`}
-            value={newUser?.gender || ''}
-            name="gender"
             onChange={handleChange}
           />
           <button className="login_btn mt-4" disabled={inactiveSubmit} onClick={handleSubmit}>

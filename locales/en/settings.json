@@ -31,5 +31,9 @@
   "female": "Female",
   "custom": "Custom",
   "unset": "Prefer Not To Say",
-  "done": "Done"
+  "done": "Done",
+  "newPasswd": "New Password",
+  "confirmNewPasswd": "Confirm New Password",
+  "reAuthDesc": "Looks like you have been logged in for a while, we need to make sure it's you!",
+  "passwdChanged": "Password changed."
 }

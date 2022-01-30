@@ -1,9 +1,12 @@
 import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
+  updatePassword,
 } from 'firebase/auth';
 import {
   arrayRemove,
@@ -128,4 +131,11 @@ export const updateUserImage = async (userId, profileImg) => {
 export const updateUserData = async (userId, newUser) => {
   const userRef = doc(db, 'users', userId);
   await updateDoc(userRef, newUser);
+};
+
+export const changePassword = async (password) => await updatePassword(auth.currentUser, password);
+
+export const reAuthenticate = async (email, password) => {
+  const credential = EmailAuthProvider.credential(email, password);
+  await reauthenticateWithCredential(auth.currentUser, credential);
 };
