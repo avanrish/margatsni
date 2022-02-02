@@ -1,5 +1,5 @@
 {
-  "likes": "{{count}} likes",
+  "likes": { "one": "{{count}} like", "other": "{{count}} likes" },
   "sendComment": "Post",
   "commentPlaceholder": "Add a comment...",
   "delete": "Delete",
