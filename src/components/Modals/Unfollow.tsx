@@ -1,6 +1,7 @@
-import Modal from 'react-responsive-modal';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
+
+import CustomModal from '../CustomModal';
 
 export default function Unfollow({ open, setOpen, profileImg, username, toggleFollow }) {
   const { t } = useTranslation('common');
@@ -11,16 +12,7 @@ export default function Unfollow({ open, setOpen, profileImg, username, toggleFo
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={() => setOpen(false)}
-      showCloseIcon={false}
-      center={true}
-      classNames={{
-        modal: 'flex flex-col w-full !max-w-xs rounded-lg !p-0 !text-center divide-y text-sm',
-        modalContainer: 'overflow-y-hidden flex items-center justify-center',
-      }}
-    >
+    <CustomModal open={open} onClose={() => setOpen(false)} showCloseIcon={false} center={true}>
       <div className="mt-6">
         <Image className="rounded-full" src={profileImg} alt={username} width={90} height={90} />
         <p className="py-6">{t('unfollowConsentMsg', { user: username })}</p>
@@ -32,6 +24,6 @@ export default function Unfollow({ open, setOpen, profileImg, username, toggleFo
         {t`unfollow`}
       </div>
       <div className="py-3 cursor-pointer" onClick={() => setOpen(false)}>{t`cancel`}</div>
-    </Modal>
+    </CustomModal>
   );
 }

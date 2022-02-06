@@ -1,8 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useState } from 'react';
-import Modal from 'react-responsive-modal';
 import { reAuthenticate } from '../../services/firebase';
+
+import CustomModal from '../CustomModal';
 
 export default function Reauthenticate({ open, close, email, handleChange }) {
   const [password, setPassword] = useState('');
@@ -20,15 +21,7 @@ export default function Reauthenticate({ open, close, email, handleChange }) {
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={close}
-      center={true}
-      classNames={{
-        modal: 'flex flex-col w-full !max-w-xs rounded-lg !p-0 !text-center divide-y text-sm',
-        modalContainer: 'overflow-y-hidden flex items-center justify-center',
-      }}
-    >
+    <CustomModal open={open} onClose={close} center={true}>
       <div className="p-4 !space-y-2">
         <Image
           src={'/images/margatsni.png'}
@@ -53,6 +46,6 @@ export default function Reauthenticate({ open, close, email, handleChange }) {
           onClick={handleSubmit}
         >{t`submit`}</button>
       </div>
-    </Modal>
+    </CustomModal>
   );
 }

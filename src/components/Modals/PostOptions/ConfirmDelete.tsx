@@ -1,13 +1,14 @@
-import Modal from 'react-responsive-modal';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+
+import CustomModal from '../../CustomModal';
 import Spinner from '../../Spinner';
 
 export default function ConfirmDelete({ open, close, handleDelete }) {
   const [deleting, setDeleting] = useState(false);
   const { t } = useTranslation('post');
   return (
-    <Modal
+    <CustomModal
       open={open}
       onClose={close}
       showCloseIcon={false}
@@ -38,6 +39,6 @@ export default function ConfirmDelete({ open, close, handleDelete }) {
           <Spinner blue width={48} height={48} />
         </div>
       )}
-    </Modal>
+    </CustomModal>
   );
 }

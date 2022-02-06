@@ -1,20 +1,13 @@
-import Modal from 'react-responsive-modal';
 import Image from 'next/image';
 import Link from '../Link';
 import useTranslation from 'next-translate/useTranslation';
 
+import CustomModal from '../CustomModal';
+
 export default function LogInDialog({ open, close }) {
   const { t } = useTranslation();
   return (
-    <Modal
-      open={open}
-      onClose={close}
-      center={true}
-      classNames={{
-        modal: 'flex flex-col w-full !max-w-xs rounded-lg !p-0 !text-center divide-y text-sm',
-        modalContainer: 'overflow-y-hidden flex items-center justify-center',
-      }}
-    >
+    <CustomModal open={open} onClose={close} center={true}>
       <div className="p-8 !space-y-6">
         <Image
           src="/images/margatsni.png"
@@ -38,6 +31,6 @@ export default function LogInDialog({ open, close }) {
           >{t`common:signup`}</Link>
         </p>
       </div>
-    </Modal>
+    </CustomModal>
   );
 }
