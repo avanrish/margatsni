@@ -2,7 +2,7 @@ import { PencilAltIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
@@ -12,10 +12,9 @@ import UserPlaceholder from '../../components/UserPlaceholder';
 import NoChatSelected from '../../components/Inbox/NoChatSelected';
 import NewMessage from '../../components/Modals/NewMessage';
 
-import LanguageSelect from '../../components/LanguageSelect';
 export default function Inbox() {
   const [chats, setChats] = useState([]);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const { user, loading } = useRecoilValue(userState);
   const router = useRouter();
   const { t } = useTranslation('inbox');
@@ -58,9 +57,7 @@ export default function Inbox() {
         </div>
       </main>
 
-      <NewMessage open={modalOpen} onClose={() => setModalOpen(false)} userId={user.uid} />
-      {/* TODO: Remove Language Select */}
-      <LanguageSelect />
+      <NewMessage open={modalOpen} close={() => setModalOpen(false)} user={user} />
     </div>
   );
 }

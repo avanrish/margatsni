@@ -107,7 +107,9 @@ export const getUsersByKeyword = async (keyword: string) => {
       limit(8)
     )
   );
-  return docs;
+  return docs.map((user) => ({
+    ...user.data(),
+  }));
 };
 
 export const getUserDataByUserId = async (userId: string) => {

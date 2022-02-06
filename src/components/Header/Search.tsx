@@ -48,24 +48,24 @@ export default function Search({ setDropdownOpen }) {
             {result.length > 0 ? (
               result.map((user) => (
                 <Link
-                  href={`/${user.data().username}`}
+                  href={`/${user.username}`}
                   onClick={() => setSearchTerm('')}
-                  key={user.data().uid}
+                  key={user.uid}
                   className="flex items-center pl-3 py-2 hover:bg-gray-100"
                 >
                   <div className="h-12 w-12 border-2 rounded-full border-red-500 p-[2px] cursor-pointer">
                     <Image
                       className="rounded-full"
-                      src={user.data().profileImg}
-                      alt={user.data().username}
+                      src={user.profileImg}
+                      alt={user.username}
                       width={54}
                       height={54}
                       objectFit="contain"
                     />
                   </div>
                   <div className="ml-3 flex flex-col text-sm">
-                    <span className="font-semibold">{user.data().username}</span>
-                    <span className="text-gray-primary">{user.data().fullName}</span>
+                    <span className="font-semibold">{user.username}</span>
+                    <span className="text-gray-primary">{user.fullName}</span>
                   </div>
                 </Link>
               ))
