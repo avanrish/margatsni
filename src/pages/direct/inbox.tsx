@@ -2,7 +2,7 @@ import { PencilAltIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
@@ -10,14 +10,19 @@ import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import UserPlaceholder from '../../components/UserPlaceholder';
 import NoChatSelected from '../../components/Inbox/NoChatSelected';
-import NewMessage from '../../components/Modals/NewMessage';
+import NewChat from '../../components/Modals/NewChat';
+import { getChats } from '../../services/firebase';
+import ChatRoom from '../../components/Inbox/ChatRoom';
 
 export default function Inbox() {
   const [chats, setChats] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedChat, setSelectedChat] = useState(null);
   const { user, loading } = useRecoilValue(userState);
   const router = useRouter();
   const { t } = useTranslation('inbox');
+
+  useEffect(() => getChats(user, setChats), [loading, user]);
 
   if (loading) return <Loading />;
   if (!loading && !user) {
@@ -29,9 +34,7 @@ export default function Inbox() {
     <div>
       <Head>
         <title>
-          {modalOpen
-            ? `${t`newMessage`}  • Direct`
-            : t(chats.length > 0 ? 'chatTitle' : 'inboxTitle')}
+          {modalOpen ? `${t`newMessage`}  • Direct` : t(selectedChat ? 'chatTitle' : 'inboxTitle')}
         </title>
       </Head>
       <Header />
@@ -49,15 +52,28 @@ export default function Inbox() {
                     <UserPlaceholder width={56} height={56} />
                   </div>
                 ))
-              : null}
+              : chats.map((chat) => (
+                  <ChatRoom
+                    key={chat.chatId}
+                    chat={chat}
+                    currUserId={user.uid}
+                    setSelectedChat={() => setSelectedChat(chat.chatId)}
+                    active={selectedChat === chat.chatId}
+                  />
+                ))}
           </div>
         </div>
         <div className="border-l col-span-2">
-          {chats.length === 0 ? <NoChatSelected openModal={() => setModalOpen(true)} /> : null}
+          {!selectedChat ? <NoChatSelected openModal={() => setModalOpen(true)} /> : null}
         </div>
       </main>
 
-      <NewMessage open={modalOpen} close={() => setModalOpen(false)} user={user} />
+      <NewChat
+        open={modalOpen}
+        close={() => setModalOpen(false)}
+        user={user}
+        setSelectedChat={setSelectedChat}
+      />
     </div>
   );
 }

@@ -7,7 +7,7 @@ import CustomModal from '../CustomModal';
 import SearchResults from '../Inbox/SearchResults';
 import Spinner from '../Spinner';
 
-export default function NewMessage({ open, close, user }) {
+export default function NewMessage({ open, close, user, setSelectedChat }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -26,11 +26,17 @@ export default function NewMessage({ open, close, user }) {
 
   const handleCreateChat = async () => {
     setInProgress(true);
-    await createChat([
+    const newChat = await createChat([
       ...selectedUsers,
-      { username: user.username, profileImg: user.profileImg, fullName: user.fullName },
+      {
+        username: user.username,
+        profileImg: user.profileImg,
+        fullName: user.fullName,
+        uid: user.uid,
+      },
     ]);
     setInProgress(false);
+    setSelectedChat(newChat.id);
     close();
   };
 

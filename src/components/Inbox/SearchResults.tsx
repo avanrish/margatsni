@@ -7,7 +7,12 @@ export default function SearchResults({ selected, setSelectedUsers, user }) {
     else
       setSelectedUsers((prev) => [
         ...prev,
-        { username: user.username, profileImg: user.profileImg, fullName: user.fullName },
+        {
+          username: user.username,
+          profileImg: user.profileImg,
+          fullName: user.fullName,
+          uid: user.uid,
+        },
       ]);
   };
 
