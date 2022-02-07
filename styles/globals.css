@@ -4,7 +4,7 @@
 
 @layer components {
   .navBtn {
-    @apply h-6 w-6 cursor-pointer hover:scale-125 transition-all duration-150 ease-out;
+    @apply h-6 w-6 cursor-pointer sm:hover:scale-125 transition-all duration-150 ease-out;
   }
   .btn {
     @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out;

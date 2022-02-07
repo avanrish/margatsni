@@ -18,7 +18,7 @@ export const createChat = async (participants) => {
   });
 };
 
-export const getChats = (user, setChats) => {
+export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
   if (!user) return;
   const { username, fullName, profileImg, uid } = user;
   return onSnapshot(
@@ -32,6 +32,10 @@ export const getChats = (user, setChats) => {
       }),
       orderBy('lastUpdated', 'desc')
     ),
-    ({ docs }) => setChats(docs.map((doc) => ({ ...doc.data(), chatId: doc.id })))
+    ({ docs }) => {
+      const newDocs = docs.map((doc) => ({ ...doc.data(), chatId: doc.id }));
+      if (newDocs.findIndex((doc) => doc.chatId === selectedChat) === -1) setSelectedChat(null);
+      setChats(newDocs);
+    }
   );
 };

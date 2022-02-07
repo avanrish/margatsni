@@ -18,10 +18,11 @@ export default function ChatRoom({ chat, currUserId, setSelectedChat, active }) 
     >
       <Image className="rounded-full" src={imgUrl} alt="" width={56} height={56} />
       <div className="ml-4">
-        <p>
+        <p className="max-w-[180px] truncate">
           {otherParticipants.length > 1
-            ? messages[messages.length - 1].username
-            : otherParticipants[0].username}
+            ? messages[messages.length - 1]?.fullName ||
+              otherParticipants.map((p) => p.fullName).join(', ')
+            : otherParticipants[0].fullName}
         </p>
         <p className="text-gray-primary truncate">{lastMessage}</p>
       </div>
