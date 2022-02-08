@@ -37,6 +37,8 @@ export default function NewMessage({ open, close, user, setSelectedChat }) {
     ]);
     setInProgress(false);
     setSelectedChat(newChat.id);
+    setSearchTerm('');
+    setSelectedUsers([]);
     close();
   };
 

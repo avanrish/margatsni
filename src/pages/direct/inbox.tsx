@@ -25,7 +25,10 @@ export default function Inbox() {
   const router = useRouter();
   const { t } = useTranslation('inbox');
 
-  useEffect(() => getChats(user, setChats, selectedChat, setSelectedChat), [loading, user]);
+  useEffect(
+    () => getChats(user, setChats, selectedChat, setSelectedChat),
+    [loading, user, selectedChat]
+  );
 
   if (loading) return <Loading />;
   if (!loading && !user) {
