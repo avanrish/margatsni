@@ -7,5 +7,7 @@
   "newMessage": "New Message",
   "noResults": "No account found.",
   "to": "To:",
-  "next": "Next"
+  "next": "Next",
+  "inputPlaceholder": "Message...",
+  "send": "Wyślij"
 }

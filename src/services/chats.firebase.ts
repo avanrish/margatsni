@@ -1,10 +1,13 @@
 import {
   addDoc,
+  arrayUnion,
   collection,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -38,4 +41,16 @@ export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
       setChats(newDocs);
     }
   );
+};
+
+export const sendMessage = async (chatId, message, userId) => {
+  const docRef = doc(db, 'chats', chatId);
+  const messageObj = {
+    message,
+    uid: userId,
+  };
+
+  await updateDoc(docRef, {
+    message: arrayUnion(messageObj),
+  });
 };

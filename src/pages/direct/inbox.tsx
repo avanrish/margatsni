@@ -37,14 +37,14 @@ export default function Inbox() {
   }
 
   return (
-    <div>
+    <div className=" pb-[57px] md:pb-0">
       <Head>
         <title>
           {modalOpen ? `${t`newMessage`}  • Direct` : t(selectedChat ? 'chatTitle' : 'inboxTitle')}
         </title>
       </Head>
       <Header />
-      <main className="max-w-4xl h-[calc(100vh-155px)] sm:h-[calc(100vh-98px)] mx-auto my-4 bg-white border rounded-sm grid grid-cols-3 overflow-hidden pb-[57px] md:pb-0">
+      <main className="max-w-4xl h-[calc(100vh-155px)] md:h-[calc(100vh-98px)] mx-auto my-4 bg-white border rounded-sm grid grid-cols-3 overflow-hidden">
         <div className={isMobile ? (selectedChat ? 'hidden' : 'col-span-3') : undefined}>
           <div className="py-4 px-5 flex justify-between font-semibold border-b">
             <span />

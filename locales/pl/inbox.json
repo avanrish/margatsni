@@ -7,5 +7,7 @@
   "newMessage": "Nowa wiadomość",
   "noResults": "Nie znaleziono konta.",
   "to": "Do:",
-  "next": "Dalej"
+  "next": "Dalej",
+  "inputPlaceholder": "Wyślij wiadomość...",
+  "send": "Wyślij"
 }
