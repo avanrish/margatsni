@@ -24,7 +24,7 @@ export default function ChatRoom({ chat, currUserId, setSelectedChat, active }) 
               otherParticipants.map((p) => p.fullName).join(', ')
             : otherParticipants[0].fullName}
         </p>
-        <p className="text-gray-primary truncate">{lastMessage}</p>
+        <p className="text-gray-primary truncate">{lastMessage?.message || ''}</p>
       </div>
     </div>
   );

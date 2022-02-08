@@ -73,9 +73,9 @@ export default function Username({ profile: initProfile }) {
           </div>
           <div className="ml-4 sm:ml-8 flex flex-col space-y-4">
             <Buttons
-              username={user?.username}
+              user={user}
               loading={loading}
-              profileUsername={profile.username}
+              profile={profile}
               following={following}
               handleFollow={handleFollow}
             />

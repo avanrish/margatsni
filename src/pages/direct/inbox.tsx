@@ -61,7 +61,7 @@ export default function Inbox() {
                 ))}
               </div>
             ) : (
-              chats.map((chat) => (
+              chats?.map((chat) => (
                 <ChatRoom
                   key={chat.chatId}
                   chat={chat}

@@ -49,6 +49,9 @@
   .edit-input {
     @apply w-full md:max-w-xs;
   }
+  .chat-message {
+    @apply text-sm break-all w-fit p-4 max-w-[40%] border border-[#EFEFEF] rounded-3xl;
+  }
 }
 
 body {

@@ -7,6 +7,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  Timestamp,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -48,6 +49,7 @@ export const sendMessage = async (chatId, message, userId) => {
   const messageObj = {
     message,
     uid: userId,
+    timestamp: Timestamp.fromDate(new Date()),
   };
 
   await updateDoc(docRef, {

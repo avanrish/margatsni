@@ -12,7 +12,8 @@ export default function SendMessage({ userId, chatId }) {
 
   const disabled = message.trim() === '';
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
     setInProgress(true);
     await sendMessage(chatId, message, userId);
     setInProgress(false);
@@ -20,7 +21,10 @@ export default function SendMessage({ userId, chatId }) {
   };
 
   return (
-    <div className="m-4 flex items-center px-2 py-1 border border-gray-border rounded-full">
+    <form
+      onSubmit={handleClick}
+      className="m-4 flex items-center px-2 py-1 border border-gray-border rounded-full"
+    >
       <EmojiHappyIcon className="h-7" />
       <input
         type="text"
@@ -31,13 +35,13 @@ export default function SendMessage({ userId, chatId }) {
       />
       <button
         disabled={disabled}
+        type="submit"
         className={`font-semibold text-blue-primary mr-2 ${
           disabled && 'opacity-50 cursor-default'
         }`}
-        onClick={handleClick}
       >
         {inProgress ? <Spinner blue /> : t`send`}
       </button>
-    </div>
+    </form>
   );
 }
