@@ -51,6 +51,7 @@ export const sendMessage = async (chatId, message, userId) => {
   };
 
   await updateDoc(docRef, {
-    message: arrayUnion(messageObj),
+    messages: arrayUnion(messageObj),
+    lastUpdated: serverTimestamp(),
   });
 };
