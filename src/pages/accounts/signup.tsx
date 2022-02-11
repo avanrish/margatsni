@@ -43,8 +43,7 @@ export default function SignUp() {
     try {
       if (credentials.fullName.trim() === '') throw { code: 'auth/invalid-fullname' };
       await doesUsernameExist(credentials.username);
-      await createUser(credentials);
-      router.push('/');
+      createUser(credentials).then(() => router.push('/'));
     } catch (err) {
       setError(err.code);
       setLoading(false);

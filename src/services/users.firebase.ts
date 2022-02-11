@@ -27,7 +27,9 @@ import {
 } from 'firebase/firestore';
 
 import { auth, db } from '../lib/firebase';
+import toDataURL from '../util/toDataURL';
 import validateUsername from '../util/validateUsername';
+import { getImageRef, uploadImage } from './firebase';
 
 export const doesUsernameExist = async (username: string) => {
   validateUsername(username);
@@ -39,18 +41,22 @@ export const doesUsernameExist = async (username: string) => {
 
 export const createUser = async ({ username, fullName, email, password }) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  const imageRef = getImageRef('avatars', user.uid);
+  const defaultImage = await toDataURL('/images/default.png');
+  const imgUrl = await uploadImage(imageRef, defaultImage);
   await setDoc(doc(db, 'users', user.uid), {
     uid: user.uid,
     username,
     fullName,
     email,
     timestamp: serverTimestamp(),
-    profileImg: '/images/default.png',
+    profileImg: imgUrl,
     following: [],
     followers: [],
     posts: [],
   });
-  await setPersistence(auth, browserLocalPersistence);
+  await auth.signOut();
+  await loginUser({ email, password });
 };
 
 export const loginUser = async ({ email, password }) => {
@@ -114,7 +120,7 @@ export const getUsersByKeyword = async (keyword: string) => {
 
 export const getUserDataByUserId = async (userId: string) => {
   const { docs } = await getDocs(query(collection(db, 'users'), where('uid', '==', userId)));
-  return docs[0].data();
+  return docs[0]?.data();
 };
 
 export const updateUserPostsArray = async (action, userId, docId) => {

@@ -8,5 +8,6 @@
   "deletePost": "Usunąć post?",
   "deletePostConsent": "Czy na pewno chcesz usunąć ten post?",
   "on": "na",
-  "seeAllComments": "Zobacz wszystkie {{count}} komentarzy"
+  "seeAllComments": "Zobacz wszystkie {{count}} komentarzy",
+  "noPosts": "Nie znaleziono postów, zaobserwuj kogoś!"
 }

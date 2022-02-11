@@ -78,7 +78,7 @@ export const toggleLike = async (hasLiked, currUserId, postId, setLikes) => {
 };
 
 export const getSavedPosts = async (savedPosts: string[]) => {
-  if (savedPosts.length > 0) {
+  if (savedPosts?.length > 0) {
     const { docs } = await getDocs(
       query(collection(db, 'posts'), where(documentId(), 'in', savedPosts))
     );
