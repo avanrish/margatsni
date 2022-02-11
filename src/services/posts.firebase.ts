@@ -33,7 +33,7 @@ export const addComment = async (id, commentToSend, user, setComments, homePage)
   const commentObj = {
     comment: commentToSend,
     username: user.username,
-    profileImg: user.profileImg,
+    profileImg: user.profileImg.match(/.*media/)[0],
   };
 
   await updateDoc(docRef, {
@@ -46,7 +46,7 @@ export const createPost = async (user, caption: string | null) => {
   return await addDoc(collection(db, 'posts'), {
     username: user?.username,
     caption,
-    profileImg: user?.profileImg,
+    profileImg: user?.profileImg.match(/.*media/)[0],
     likes: [],
     comments: [],
     timestamp: serverTimestamp(),
