@@ -3,6 +3,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -42,6 +43,21 @@ export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
       setChats(newDocs);
     }
   );
+};
+
+export const getChatsOnce = async ({ username, fullName, profileImg, uid }) => {
+  const { docs } = await getDocs(
+    query(
+      collection(db, 'chats'),
+      where('participants', 'array-contains', {
+        username,
+        fullName,
+        profileImg: profileImg.match(/.*media/)[0],
+        uid,
+      })
+    )
+  );
+  return docs.map((doc) => ({ ...doc.data(), chatId: doc.id }));
 };
 
 export const sendMessage = async (chatId, message, userId) => {

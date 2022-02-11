@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ChangePicture from './ChangePicture';
 import deepEqual from '../../util/deepEqual';
 import validData from '../../util/validData';
-import { changeEmail, updateUserData } from '../../services/firebase';
+import { changeEmail, updateUserData, updateChatParticipants } from '../../services/firebase';
 import Spinner from '../Spinner';
 import Reauthenticate from '../Modals/Reauthenticate';
 
@@ -39,6 +39,7 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
 
       try {
         if (newUser.email !== user.email) await changeEmail(newUser.email);
+        if (newUser.fullName !== user.fullName) updateChatParticipants(user, newUser.fullName);
         await updateUserData(user.uid, newUser);
         setUser({ user: newUser });
         setUpdateInProgress(false);

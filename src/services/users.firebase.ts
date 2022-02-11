@@ -29,6 +29,7 @@ import {
 import { auth, db } from '../lib/firebase';
 import toDataURL from '../util/toDataURL';
 import validateUsername from '../util/validateUsername';
+import { getChatsOnce } from './chats.firebase';
 import { getImageRef, uploadImage } from './firebase';
 
 export const doesUsernameExist = async (username: string) => {
@@ -150,3 +151,17 @@ export const reAuthenticate = async (email, password) => {
 };
 
 export const changeEmail = async (email) => await updateEmail(auth.currentUser, email);
+
+export const updateChatParticipants = async (oldUser, fullName) => {
+  const chats = await getChatsOnce(oldUser);
+  chats.forEach((chat: any) => {
+    const chatRef = doc(db, 'chats', chat.chatId);
+    const participants = chat.participants.map((p) => {
+      if (p.uid === oldUser.uid) return { ...p, fullName };
+      return { ...p };
+    });
+    updateDoc(chatRef, {
+      participants,
+    });
+  });
+};
