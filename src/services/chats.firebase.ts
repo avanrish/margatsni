@@ -31,7 +31,7 @@ export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
       where('participants', 'array-contains', {
         username,
         fullName,
-        profileImg,
+        profileImg: profileImg.match(/.*media/)[0],
         uid,
       }),
       orderBy('lastUpdated', 'desc')

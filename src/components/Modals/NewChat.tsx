@@ -30,7 +30,7 @@ export default function NewMessage({ open, close, user, setSelectedChat }) {
       ...selectedUsers,
       {
         username: user.username,
-        profileImg: user.profileImg,
+        profileImg: user.profileImg.match(/.*media/)[0],
         fullName: user.fullName,
         uid: user.uid,
       },

@@ -20,13 +20,13 @@ export default function Buttons({ user, profile, following, handleFollow, loadin
     await createChat([
       {
         username: profile.username,
-        profileImg: profile.profileImg,
+        profileImg: profile.profileImg.match(/.*media/)[0],
         fullName: profile.fullName,
         uid: profile.uid,
       },
       {
         username: user.username,
-        profileImg: user.profileImg,
+        profileImg: user.profileImg.match(/.*media/)[0],
         fullName: user.fullName,
         uid: user.uid,
       },
