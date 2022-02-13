@@ -1,5 +1,5 @@
-import { PaperAirplaneIcon as Inactive } from '@heroicons/react/outline';
 import { PaperAirplaneIcon as Active } from '@heroicons/react/solid';
+import { PaperAirplaneIcon as Inactive } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 
 import Link from '../Link';

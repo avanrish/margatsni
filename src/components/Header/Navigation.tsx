@@ -1,4 +1,3 @@
-import { HeartIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
@@ -9,6 +8,7 @@ import { userState } from '../../atoms/UserAtom';
 import { CreateIcon, ExploreIcon, HomeIcon, MailIcon } from '../Icons';
 import Link from '../Link';
 import Dropdown from '../Dropdown';
+import Notifications from '../Notifications';
 
 export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpen }) {
   const mobile = useRecoilValue(mobileDeviceState);
@@ -35,7 +35,7 @@ export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpe
               {!mobile && <MailIcon />}
               <CreateIcon open={open} setOpen={setOpen} mobile={mobile} />
               <ExploreIcon active={router.pathname === '/explore'} mobile={mobile} />
-              <HeartIcon className="navBtn order-4" />
+              <Notifications />
 
               <div
                 className={`relative h-10 w-10 order-5 z-10 rounded-full p-2 ${
