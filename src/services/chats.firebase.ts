@@ -23,7 +23,7 @@ export const createChat = async (participants) => {
   });
 };
 
-export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
+export const getChatsSubscribe = (user, setChats, selectedChat, setSelectedChat) => {
   if (!user) return;
   const { username, fullName, profileImg, uid } = user;
   return onSnapshot(
@@ -45,7 +45,7 @@ export const getChats = (user, setChats, selectedChat, setSelectedChat) => {
   );
 };
 
-export const getChatsOnce = async ({ username, fullName, profileImg, uid }) => {
+export const getChats = async ({ username, fullName, profileImg, uid }) => {
   const { docs } = await getDocs(
     query(
       collection(db, 'chats'),

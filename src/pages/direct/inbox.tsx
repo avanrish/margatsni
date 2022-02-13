@@ -11,7 +11,7 @@ import Loading from '../../components/Loading';
 import UserPlaceholder from '../../components/UserPlaceholder';
 import NoChatSelected from '../../components/Inbox/NoChatSelected';
 import NewChat from '../../components/Modals/NewChat';
-import { getChats } from '../../services/firebase';
+import { getChatsSubscribe } from '../../services/firebase';
 import ChatRoom from '../../components/Inbox/ChatRoom';
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import Chat from '../../components/Inbox/Chat';
@@ -26,7 +26,7 @@ export default function Inbox() {
   const { t } = useTranslation('inbox');
 
   useEffect(
-    () => getChats(user, setChats, selectedChat, setSelectedChat),
+    () => getChatsSubscribe(user, setChats, selectedChat, setSelectedChat),
     [loading, user, selectedChat]
   );
 
