@@ -2,7 +2,6 @@ import { CameraIcon } from '@heroicons/react/outline';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-import Modal from 'react-responsive-modal';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../../atoms/UserAtom';
@@ -13,6 +12,7 @@ import {
   updateUserPostsArray,
   addImageLinkToPost,
 } from '../../../services/firebase';
+import CustomModal from '../../CustomModal';
 
 export default function Create({ open, close, setSuccess }) {
   const { user } = useRecoilValue(userState);
@@ -48,14 +48,7 @@ export default function Create({ open, close, setSuccess }) {
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={close}
-      classNames={{
-        modal: 'rounded-lg drop-shadow-md',
-        modalContainer: 'overflow-y-hidden flex items-center justify-center',
-      }}
-    >
+    <CustomModal open={open} onClose={close}>
       {selectedFile ? (
         <div className="relative w-full h-[200px] cursor-pointer">
           <Image
@@ -103,6 +96,6 @@ export default function Create({ open, close, setSuccess }) {
           {loading ? t('common:uploading') : t('common:uploadPost')}
         </button>
       </div>
-    </Modal>
+    </CustomModal>
   );
 }

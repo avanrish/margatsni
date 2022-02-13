@@ -1,5 +1,5 @@
-import { BookmarkIcon as BookmarkIconInactive } from '@heroicons/react/outline';
-import { BookmarkIcon as BookmarkIconActive } from '@heroicons/react/solid';
+import { BookmarkIcon as Inactive } from '@heroicons/react/outline';
+import { BookmarkIcon as Active } from '@heroicons/react/solid';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
@@ -22,11 +22,8 @@ export default function SavePostIcon({ postId }) {
   }
 
   return saved ? (
-    <BookmarkIconActive className="btn" onClick={user ? handleClick : () => setLoginDialog(true)} />
+    <Active className="btn" onClick={user ? handleClick : () => setLoginDialog(true)} />
   ) : (
-    <BookmarkIconInactive
-      className="btn"
-      onClick={user ? handleClick : () => setLoginDialog(true)}
-    />
+    <Inactive className="btn" onClick={user ? handleClick : () => setLoginDialog(true)} />
   );
 }

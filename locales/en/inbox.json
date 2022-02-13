@@ -1,0 +1,20 @@
+{
+  "inbox": "Inbox",
+  "yourMessages": "Your Messages",
+  "description": "Send private photos and messages to a friend or group.",
+  "sendMessage": "Send Message",
+  "newMessage": "New Message",
+  "noResults": "No account found.",
+  "to": "To:",
+  "next": "Next",
+  "inputPlaceholder": "Message...",
+  "send": "Send",
+  "details": "Details",
+  "members": "Members",
+  "deleteChat": "Delete Chat",
+  "deleteTitle": "Delete Chat?",
+  "deleteDescription": "Deleting removes the chat from your inbox, but no one else's inbox.",
+  "delete": "Delete",
+  "userLeft": "{{user}} left the chat",
+  "noParticipants": "There are no members."
+}

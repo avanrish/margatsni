@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
-import { HomeIcon as HomeIconActive } from '@heroicons/react/solid';
-import { HomeIcon as HomeIconInactive } from '@heroicons/react/outline';
+import { HomeIcon as Active } from '@heroicons/react/solid';
+import { HomeIcon as Inactive } from '@heroicons/react/outline';
 
 export default function HomeIcon({ open }) {
   const { pathname } = useRouter();
 
   return pathname === '/' && !open ? (
-    <HomeIconActive className="navBtn order-1" />
+    <Active className="navBtn order-1" />
   ) : (
-    <HomeIconInactive className="navBtn order-1" />
+    <Inactive className="navBtn order-1" />
   );
 }

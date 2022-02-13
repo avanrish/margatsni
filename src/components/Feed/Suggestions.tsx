@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import Skeleton from 'react-loading-skeleton';
 
 import { getSuggestions } from '../../services/firebase';
 import Suggestion from './Suggestion';
 import Link from '../Link';
+import UserPlaceholder from '../UserPlaceholder';
 
 export default function Suggestions({ user }) {
   const [suggestions, setSuggestions] = useState<any>();
@@ -38,15 +38,7 @@ export default function Suggestions({ user }) {
                 profileImg={profile.data().profileImg}
               />
             ))
-          : [...Array(5)].map((_, i) => (
-              <div key={i} className="flex items-center h-[40px]">
-                <Skeleton width={40} height={40} borderRadius={999} />
-                <div className="ml-4">
-                  <Skeleton width={120} height={14} />
-                  <Skeleton width={60} height={12} />
-                </div>
-              </div>
-            ))}
+          : [...Array(5)].map((_, i) => <UserPlaceholder key={i} />)}
       </div>
     </div>
   );

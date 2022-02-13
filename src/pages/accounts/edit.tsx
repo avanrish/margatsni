@@ -22,15 +22,15 @@ export default function Settings() {
   const { t } = useTranslation('settings');
 
   useEffect(() => {
-    if (!loading && !user) router.push('/accounts/login');
-  }, [loading, user, router]);
-
-  useEffect(() => {
     if (activeToast && typeof window !== 'undefined')
       window.setTimeout(() => setActiveToast(null), 2000);
   }, [activeToast]);
 
   if (loading) return <Loading />;
+  if (!loading && !user) {
+    router.push('/accounts/login');
+    return <Loading />;
+  }
 
   return (
     <div>

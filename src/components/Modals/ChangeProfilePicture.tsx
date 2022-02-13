@@ -1,20 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
-import Modal from 'react-responsive-modal';
+
+import CustomModal from '../CustomModal';
 
 export default function ChangeProfilePicture({ open, close, filePicker, deletePhoto }) {
   const { t } = useTranslation('settings');
 
   return (
-    <Modal
-      open={open}
-      onClose={close}
-      center={true}
-      showCloseIcon={false}
-      classNames={{
-        modal: 'flex flex-col w-full !max-w-xs rounded-lg !p-0 !text-center divide-y text-sm',
-        modalContainer: 'overflow-y-hidden flex items-center justify-center',
-      }}
-    >
+    <CustomModal open={open} onClose={close} center={true} showCloseIcon={false}>
       <div className="divide-y divide-gray-border">
         <p className="text-lg py-6 font-semibold">{t`changeProfilePhoto`}</p>
         <p
@@ -30,6 +22,6 @@ export default function ChangeProfilePicture({ open, close, filePicker, deletePh
           onClick={close}
         >{t`common:cancel`}</p>
       </div>
-    </Modal>
+    </CustomModal>
   );
 }

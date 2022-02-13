@@ -1,5 +1,5 @@
 {
-  "likes": "{{count}} likes",
+  "likes": { "one": "{{count}} like", "other": "{{count}} likes" },
   "sendComment": "Post",
   "commentPlaceholder": "Add a comment...",
   "delete": "Delete",
@@ -8,5 +8,6 @@
   "deletePost": "Delete Post?",
   "deletePostConsent": "Are you sure you want to delete this post?",
   "on": "on",
-  "seeAllComments": "See all {{count}} comments"
+  "seeAllComments": "See all {{count}} comments",
+  "noPosts": "Looks like there are no posts, follow someone!"
 }

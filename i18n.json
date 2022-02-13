@@ -11,6 +11,7 @@
     "/404": ["not-found"],
     "/p/[postId]": ["post"],
     "/[username]": ["profile"],
-    "/explore/people": ["suggestions"]
+    "/explore/people": ["suggestions"],
+    "/direct/inbox": ["inbox"]
   }
 }

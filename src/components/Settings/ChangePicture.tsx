@@ -1,21 +1,35 @@
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
 
 import { userState } from '../../atoms/UserAtom';
-import { getImageRef, uploadImage, updateUserImage, deleteImage } from '../../services/firebase';
+import {
+  getImageRef,
+  uploadImage,
+  updateUserImage,
+  getCustomMetadata,
+} from '../../services/firebase';
 import useTranslation from 'next-translate/useTranslation';
 import ChangeProfilePicture from '../Modals/ChangeProfilePicture';
-
-const defaultImg = '/images/default.png';
+import toDataURL from '../../util/toDataURL';
 
 export default function ChangePicture({ profileImg, username, userId, setActiveToast }) {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isDefault, setIsDefault] = useState(true);
   const setUser = useSetRecoilState(userState);
   const filePickerRef = useRef(null);
   const { t } = useTranslation('settings');
+
+  useEffect(() => {
+    const isUsersPictureDefault = async () => {
+      const ref = getImageRef('avatars', userId);
+      const metadata = await getCustomMetadata(ref);
+      setIsDefault(metadata.customMetadata?.isDefault === 'true');
+    };
+    isUsersPictureDefault();
+  }, [userId]);
 
   const handleUpload = (e) => {
     if (loading) return;
@@ -32,7 +46,9 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
       await updateUserImage(userId, profilePicture);
       setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: profilePicture } }));
       setLoading(false);
+      setIsDefault(false);
       setActiveToast('photoAdded');
+      filePickerRef.current.value = null;
     };
   };
 
@@ -40,10 +56,13 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
     if (loading) return;
     setLoading(true);
     if (openModal) setOpenModal(false);
-    await deleteImage('avatars', userId);
-    await updateUserImage(userId, defaultImg);
-    setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: defaultImg } }));
+    const imageRef = getImageRef('avatars', userId);
+    const defaultImage = await toDataURL('/images/default.png');
+    const imgUrl = await uploadImage(imageRef, defaultImage, true);
+    await updateUserImage(userId, imgUrl);
+    setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: imgUrl } }));
     setLoading(false);
+    setIsDefault(true);
     setActiveToast('photoRemoved');
   };
 
@@ -62,11 +81,7 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
               alt=""
               width={38}
               height={38}
-              onClick={
-                profileImg === defaultImg
-                  ? () => filePickerRef.current.click()
-                  : () => setOpenModal(true)
-              }
+              onClick={isDefault ? () => filePickerRef.current.click() : () => setOpenModal(true)}
             />
           )}
         </div>
@@ -74,11 +89,7 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
           <span className="text-lg">{username}</span>
           <span
             className="text-sm font-semibold text-blue-primary cursor-pointer"
-            onClick={
-              profileImg === defaultImg
-                ? () => filePickerRef.current.click()
-                : () => setOpenModal(true)
-            }
+            onClick={isDefault ? () => filePickerRef.current.click() : () => setOpenModal(true)}
           >
             {t`changeProfilePhoto`}
           </span>

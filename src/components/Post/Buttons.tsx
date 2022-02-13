@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { clipboardState } from '../../atoms/ClipboardAtom';
 import { toggleLike } from '../../services/firebase';
-import SavePostIcon from '../Icons/SavePostIcon';
+import { SavePostIcon } from '../Icons';
 
 export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
   const [hasLiked, setHasLiked] = useState(false);

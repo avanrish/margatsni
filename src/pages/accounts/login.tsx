@@ -51,7 +51,7 @@ export default function LogIn() {
       <main className="flex justify-center items-center">
         <span className="hidden md:inline-flex">
           <Image
-            src="/images/iphone-with-profile.jpg"
+            src="/images/iphone-with-profile.png"
             alt="Iphone with profile"
             width={454}
             height={618}

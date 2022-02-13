@@ -3,7 +3,7 @@
 The purpose of this app was to learn some technologies I have not used before, e.g. Recoil and to get better at technologies I already was familiar with, e.g. firebase.
 \
 \
-Live demo at [_margatsni-nine.vercel.app_](http://margatsni-nine.vercel.app/).
+Live demo at [_margatsni.blipinski.com_](https://margatsni.blipinski.com/).
 
 ## Table of Contents
 
@@ -41,6 +41,9 @@ Live demo at [_margatsni-nine.vercel.app_](http://margatsni-nine.vercel.app/).
 - Multiple languages
   - EN
   - PL
+- Chats
+  - Create chats with multiple people
+  - Leave chats
 
 ## Setup
 

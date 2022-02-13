@@ -18,6 +18,7 @@ module.exports = {
       },
       screens: {
         xs: '480px',
+        'md+': '800px',
       },
     },
   },
