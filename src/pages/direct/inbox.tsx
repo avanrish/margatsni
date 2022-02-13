@@ -15,11 +15,13 @@ import { getChatsSubscribe } from '../../services/firebase';
 import ChatRoom from '../../components/Inbox/ChatRoom';
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import Chat from '../../components/Inbox/Chat';
+import inboxTitle from '../../util/inboxTitle';
 
 export default function Inbox() {
   const [chats, setChats] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(0);
   const { user, loading } = useRecoilValue(userState);
   const isMobile = useRecoilValue(mobileDeviceState);
   const router = useRouter();
@@ -39,9 +41,7 @@ export default function Inbox() {
   return (
     <div className=" pb-[57px] md:pb-0">
       <Head>
-        <title>
-          {modalOpen ? `${t`newMessage`}  • Direct` : t(selectedChat ? 'chatTitle' : 'inboxTitle')}
-        </title>
+        <title>{inboxTitle(modalOpen, selectedChat, selectedTab, t)}</title>
       </Head>
       <Header />
       <main className="max-w-4xl h-[calc(100vh-155px)] md:h-[calc(100vh-98px)] mx-auto my-4 bg-white border rounded-sm grid grid-cols-3 overflow-hidden">
@@ -82,6 +82,8 @@ export default function Inbox() {
                 user={user}
                 chat={chats.filter((c) => c.chatId === selectedChat)[0]}
                 closeChat={() => setSelectedChat(null)}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
               />
             )}
           </div>

@@ -1,6 +1,5 @@
 {
-  "inboxTitle": "Skrzynka odbiorcza • Direct",
-  "chatTitle": "Margatsni • Direct",
+  "inbox": "Skrzynka odbiorcza",
   "yourMessages": "Twoje wiadomości",
   "description": "Wysyłaj prywatne zdjęcia i wiadomości do znajomego lub grupy.",
   "sendMessage": "Wyślij wiadomość",
@@ -9,5 +8,11 @@
   "to": "Do:",
   "next": "Dalej",
   "inputPlaceholder": "Wyślij wiadomość...",
-  "send": "Wyślij"
+  "send": "Wyślij",
+  "details": "Szczegóły",
+  "members": "Członkowie",
+  "deleteChat": "Usuń czat",
+  "deleteTitle": "Usunąć czat?",
+  "deleteDescription": "Usunięcie spowoduje usunięcie czatu z Twojej skrzynki odbiorczej, ale nie ze skrzynek odbiorczych innych użytkowników.",
+  "delete": "Usuń"
 }
