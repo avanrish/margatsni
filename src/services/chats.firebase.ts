@@ -73,3 +73,15 @@ export const sendMessage = async (chatId, message, userId) => {
     lastUpdated: serverTimestamp(),
   });
 };
+
+export const deleteUserFromChat = async (chatId, participants, userId, fullName) => {
+  const docRef = doc(db, 'chats', chatId);
+  const newParticipants = participants.map((p) => {
+    if (p.uid === userId) return { ...p, left: true };
+    return { ...p };
+  });
+  await updateDoc(docRef, {
+    participants: newParticipants,
+  });
+  sendMessage(chatId, fullName, 'SYSTEM');
+};

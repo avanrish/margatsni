@@ -32,6 +32,10 @@ export default function Inbox() {
     [loading, user, selectedChat]
   );
 
+  useEffect(() => {
+    setSelectedTab(0);
+  }, [selectedChat]);
+
   if (loading) return <Loading />;
   if (!loading && !user) {
     router.push('/accounts/login');

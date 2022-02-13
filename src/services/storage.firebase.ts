@@ -1,4 +1,11 @@
-import { getDownloadURL, getMetadata, ref, updateMetadata, uploadString } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  getMetadata,
+  ref,
+  updateMetadata,
+  uploadString,
+} from 'firebase/storage';
 
 import { storage } from '../lib/firebase';
 
@@ -14,3 +21,6 @@ export const uploadImage = async (imageRef, selectedFile, isDefault = false) => 
 };
 
 export const getCustomMetadata = async (imageRef) => await getMetadata(imageRef);
+
+export const deleteImage = async (dir: string, name: string) =>
+  deleteObject(ref(storage, `${dir}/${name}/image`));

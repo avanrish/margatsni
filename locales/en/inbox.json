@@ -14,5 +14,7 @@
   "deleteChat": "Delete Chat",
   "deleteTitle": "Delete Chat?",
   "deleteDescription": "Deleting removes the chat from your inbox, but no one else's inbox.",
-  "delete": "Delete"
+  "delete": "Delete",
+  "userLeft": "{{user}} left the chat",
+  "noParticipants": "There are no members."
 }
