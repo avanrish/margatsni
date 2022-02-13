@@ -16,8 +16,7 @@ export default function Explore() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && user) getPosts().then((docs) => setPosts(docs));
-    if (!loading && !user) router.push('/accounts/login');
+    getPosts().then((docs) => setPosts(docs));
   }, [loading, user, router]);
 
   return (
