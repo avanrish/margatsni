@@ -66,13 +66,13 @@ export default function Navigation({ open, setOpen, dropdownOpen, setDropdownOpe
         ) : (
           <div className="flex items-center space-x-4">
             <Link
-              href="/accounts/login"
+              href={{ pathname: '/accounts/login', query: { next: router.asPath } }}
               className="text-white font-semibold bg-blue-primary text-sm h-[30px] px-3 flex items-center rounded-md"
             >
               {t('common:login')}
             </Link>
             <Link
-              href="/accounts/signup"
+              href={{ pathname: '/accounts/signup', query: { next: router.asPath } }}
               className="text-blue-primary font-semibold text-sm h-[30px] flex items-center rounded-md "
             >
               {t('common:signup')}

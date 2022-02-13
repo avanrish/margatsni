@@ -26,7 +26,7 @@ export default function People() {
 
   if (loading) return <Loading />;
   if (!loading && !user) {
-    router.push('/accounts/login');
+    router.push({ pathname: '/accounts/login', query: { next: router.asPath } });
     return <Loading />;
   }
 
