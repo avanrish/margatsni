@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 
 import useDebounce from '../../hooks/useDebounce';
-import { createChat, getUsersByKeyword } from '../../services/firebase';
+import { createChat, createNotification, getUsersByKeyword } from '../../services/firebase';
 import CustomModal from '../CustomModal';
 import SearchResults from '../Inbox/SearchResults';
 import Spinner from '../Spinner';
@@ -35,6 +35,9 @@ export default function NewMessage({ open, close, user, setSelectedChat }) {
         uid: user.uid,
       },
     ]);
+    selectedUsers.forEach((u) =>
+      createNotification('newChat', user.username, user.profileImg, u.uid)
+    );
     setInProgress(false);
     setSelectedChat(newChat.id);
     setSearchTerm('');

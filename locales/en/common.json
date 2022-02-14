@@ -25,5 +25,10 @@
   "readMoreLink": "https://www.aboutcookies.org/",
   "noPosts": "Looks like there are no posts, follow someone!",
   "noAccount": "Don't have an account?",
-  "noNotifications": "No Notifications"
+  "noNotifications": "No Notifications",
+  "likeNotification": "liked your photo.",
+  "commentNotification": "commented your photo.",
+  "followNotification": "started following you.",
+  "newChatNotification": "added you to a chat.",
+  "leftChatNotification": "left a chat."
 }

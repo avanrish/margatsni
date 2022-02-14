@@ -15,6 +15,6 @@
   "deleteTitle": "Usunąć czat?",
   "deleteDescription": "Usunięcie spowoduje usunięcie czatu z Twojej skrzynki odbiorczej, ale nie ze skrzynek odbiorczych innych użytkowników.",
   "delete": "Usuń",
-  "userLeft": "Czat został opuszczony przez {{user}}",
+  "userLeft": "{{user}} opuścił(a) czat.",
   "noParticipants": "Czat nie ma członków."
 }

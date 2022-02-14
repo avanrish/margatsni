@@ -25,6 +25,10 @@ export default function Suggestion({
     setFollowed((prev) => !prev);
   }
 
+  const handleFollow = () => {
+    toggleFollow(user, targetUserId, followed, followCallback);
+  };
+
   const followClass = cn('font-semibold', {
     'text-xs': !explore,
     'text-blue-secondary': !explore && followed,
@@ -47,14 +51,7 @@ export default function Suggestion({
           <h3 className="text-xs text-gray-primary">{fullName || t('recommended')}</h3>
         </div>
 
-        <button
-          className={followClass}
-          onClick={() =>
-            followed
-              ? setOpen(true)
-              : toggleFollow(user.uid, targetUserId, followed, followCallback)
-          }
-        >
+        <button className={followClass} onClick={followed ? () => setOpen(true) : handleFollow}>
           {t(`common:${followed ? 'following' : 'follow'}`)}
         </button>
       </div>
@@ -63,7 +60,7 @@ export default function Suggestion({
         setOpen={setOpen}
         profileImg={profileImg}
         username={username}
-        toggleFollow={() => toggleFollow(user.uid, targetUserId, followed, followCallback)}
+        toggleFollow={handleFollow}
       />
     </>
   );

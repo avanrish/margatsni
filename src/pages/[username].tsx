@@ -49,7 +49,7 @@ export default function Username({ profile: initProfile }) {
 
   const handleFollow = () => {
     if (following) setOpen(true);
-    else toggleFollow(user.uid, profile.uid, following, followCallback);
+    else toggleFollow(user, profile.uid, following, followCallback);
   };
 
   function followCallback() {
@@ -140,7 +140,7 @@ export default function Username({ profile: initProfile }) {
         setOpen={setOpen}
         profileImg={profile.profileImg}
         username={profile.username}
-        toggleFollow={() => toggleFollow(user.uid, profile.uid, following, followCallback)}
+        toggleFollow={() => toggleFollow(user, profile.uid, following, followCallback)}
       />
     </div>
   );

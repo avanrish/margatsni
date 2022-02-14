@@ -14,6 +14,7 @@ import {
 } from 'firebase/firestore';
 
 import { db } from '../lib/firebase';
+import { createNotification } from './notifications.firebase';
 
 export const createChat = async (participants) => {
   return await addDoc(collection(db, 'chats'), {
@@ -84,4 +85,8 @@ export const deleteUserFromChat = async (chatId, participants, userId, fullName)
     participants: newParticipants,
   });
   sendMessage(chatId, fullName, 'SYSTEM');
+  const { profileImg, username } = participants.filter((p) => p.uid === userId)[0];
+  participants.forEach((p) => {
+    if (p.uid !== userId) createNotification('leftChat', username, profileImg, p.uid);
+  });
 };
