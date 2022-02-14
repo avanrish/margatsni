@@ -4,18 +4,26 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 
 import { getNotifications } from '../services/firebase';
 import { userState } from '../atoms/UserAtom';
+import { mobileDeviceState } from '../atoms/MobileDeviceAtom';
 import Notification from './Notification';
 
 export default function Notifications() {
   const [active, setActive] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const { user } = useRecoilValue(userState);
+  const isMobile = useRecoilValue(mobileDeviceState);
+  const router = useRouter();
   const { t } = useTranslation('common');
 
   useEffect(() => getNotifications(user?.uid, setNotifications), [user?.uid]);
+
+  useEffect(() => {
+    if (active && isMobile) setActive(false);
+  }, [active, isMobile]);
 
   return (
     <>
@@ -48,9 +56,13 @@ export default function Notifications() {
               )}
             </div>
           </>
+        ) : isMobile && router.pathname === '/accounts/activity' ? (
+          <Active className="navBtn" />
         ) : (
-          // TODO: GO TO /accounts/activity
-          <Inactive className="navBtn" onClick={() => setActive(true)} />
+          <Inactive
+            className="navBtn"
+            onClick={isMobile ? () => router.push('/accounts/activity') : () => setActive(true)}
+          />
         )}
       </div>
       {active && (

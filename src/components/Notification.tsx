@@ -22,14 +22,11 @@ export default function Notification({ username, profileImg, type, docId, postId
   };
 
   return (
-    <Link
-      href={href}
-      className="flex pl-2 pr-4 py-2 items-center hover:bg-[#FAFAFA] cursor-pointer"
-    >
+    <Link href={href} className="flex py-2 px-4 items-center hover:bg-[#FAFAFA] cursor-pointer">
       <div className="relative w-[44px] h-[44px] aspect-square">
         <Image className="rounded-full" alt={username} src={profileImg} layout="fill" />
       </div>
-      <div className="flex mx-4 w-full text-sm">
+      <div className="flex ml-4 w-full text-sm">
         <div>
           <span className="font-semibold mr-1">{username}</span>
           {notificationText(type, t)}

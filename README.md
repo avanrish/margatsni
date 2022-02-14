@@ -46,6 +46,8 @@ Live demo at [_margatsni.blipinski.com_](https://margatsni.blipinski.com/).
 - Chats
   - Create chats with multiple people
   - Leave chats
+- Notifications
+  - User can create and delete notifications
 
 ## Setup
 
