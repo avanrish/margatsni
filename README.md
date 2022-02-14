@@ -34,7 +34,9 @@ Live demo at [_margatsni.blipinski.com_](https://margatsni.blipinski.com/).
 - Post page (public for everyone with restrictions for not logged in users)
 - Suggestions
 - Search
-- Explore people / posts
+- Explore
+  - Posts (public for everyone)
+  - People (only for logged in users)
 - Follow / Unfollow
 - Edit Profile
 - Change Password / Email
@@ -44,6 +46,8 @@ Live demo at [_margatsni.blipinski.com_](https://margatsni.blipinski.com/).
 - Chats
   - Create chats with multiple people
   - Leave chats
+- Notifications
+  - User can create and delete notifications
 
 ## Setup
 

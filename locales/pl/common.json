@@ -24,5 +24,11 @@
   "readMore": "O cookies",
   "readMoreLink": "https://skrypt-cookies.pl/czym-sa-ciasteczka",
   "noPosts": "Wygląda na to, że nie ma żadnych postów, zaobserwuj kogoś!",
-  "noAccount": "Nie masz konta?"
+  "noAccount": "Nie masz konta?",
+  "noNotifications": "Brak powiadomień",
+  "likeNotification": "lubi Twoje zdjęcie.",
+  "commentNotification": "skomentował(a) Twoje zdjęcie.",
+  "followNotification": "zaczął/zaczęła Cię obserwować.",
+  "newChatNotification": "dodał(a) Cię do czatu.",
+  "leftChatNotification": "opuścił(a) czat."
 }

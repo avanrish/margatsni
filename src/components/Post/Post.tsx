@@ -14,6 +14,7 @@ import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import PostImage from './Image';
+import { createNotification, deleteNotification } from '../../services/notifications.firebase';
 
 const locales = { en: enUS, pl };
 
@@ -39,6 +40,13 @@ export default function Post({
   const { user } = useRecoilValue(userState);
   const setLoginDialog = useSetRecoilState(logInDialogState);
   const inputRef = useRef(null);
+
+  const handleNotification = (type, hasLiked = null) => {
+    if (user.uid === userId) return;
+    if (hasLiked) deleteNotification('like', user.username, postId);
+    else
+      createNotification(type, user.username, user.profileImg.match(/.*media/)[0], userId, postId);
+  };
 
   return (
     <div
@@ -77,6 +85,7 @@ export default function Post({
           inputRef={homePage ? null : inputRef}
           currUserId={user?.uid}
           setLoginDialog={setLoginDialog}
+          handleNotification={(hasLiked) => handleNotification('like', hasLiked)}
         />
         <Caption
           homePage={homePage}
@@ -103,6 +112,7 @@ export default function Post({
             inputRef={inputRef}
             user={user}
             setLoginDialog={setLoginDialog}
+            handleNotification={() => handleNotification('comment')}
           />
 
           <PostOptionsModal

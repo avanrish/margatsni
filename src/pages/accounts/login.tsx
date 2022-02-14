@@ -22,8 +22,9 @@ export default function LogIn() {
 
   if (authLoading) return <Loading />;
   if (user) {
-    router.push('/');
-    return null;
+    const { next } = router.query;
+    router.replace((next as string) || '/');
+    return <Loading />;
   }
 
   const isInvalid = credentials.email.trim() === '' || credentials.password.trim() === '';
@@ -36,7 +37,6 @@ export default function LogIn() {
     setLoading(true);
     try {
       await loginUser(credentials);
-      router.push('/');
     } catch (err) {
       setError(err.code);
       setLoading(false);

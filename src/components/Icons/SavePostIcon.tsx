@@ -1,5 +1,5 @@
-import { BookmarkIcon as Inactive } from '@heroicons/react/outline';
 import { BookmarkIcon as Active } from '@heroicons/react/solid';
+import { BookmarkIcon as Inactive } from '@heroicons/react/outline';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';

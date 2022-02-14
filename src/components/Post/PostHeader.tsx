@@ -32,6 +32,10 @@ export default function PostHeader({
     setFollowing((prev) => !prev);
   }
 
+  const handleFollow = () => {
+    toggleFollow(currUser, userId, following, followCallback);
+  };
+
   return (
     <div className="flex items-center px-5 py-3 border-b">
       <Link className="block rounded-full border h-12 w-12 p-1 mr-3" href={`/${username}`}>
@@ -56,7 +60,7 @@ export default function PostHeader({
             onClick={() => {
               if (!currUser) setLoginDialog(true);
               else if (following) setOpen(true);
-              else toggleFollow(currUser.uid, userId, following, followCallback);
+              else handleFollow();
             }}
           >
             {following ? t`following` : t`follow`}
@@ -66,7 +70,7 @@ export default function PostHeader({
             setOpen={setOpen}
             profileImg={userImg}
             username={username}
-            toggleFollow={() => toggleFollow(currUser.uid, userId, following, followCallback)}
+            toggleFollow={handleFollow}
           />
         </>
       )}

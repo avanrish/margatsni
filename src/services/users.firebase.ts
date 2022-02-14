@@ -29,8 +29,13 @@ import {
 import { auth, db } from '../lib/firebase';
 import toDataURL from '../util/toDataURL';
 import validateUsername from '../util/validateUsername';
-import { getChats } from './chats.firebase';
-import { getImageRef, uploadImage } from './firebase';
+import {
+  getImageRef,
+  uploadImage,
+  createNotification,
+  deleteNotification,
+  getChats,
+} from './firebase';
 
 export const doesUsernameExist = async (username: string) => {
   validateUsername(username);
@@ -77,21 +82,23 @@ export const getSuggestions = async (following: string[], _limit: number) => {
 };
 
 export const toggleFollow = async (
-  currentUserId: string,
+  currentUser,
   targetUserId: string,
   followed: boolean,
   callback
 ) => {
-  const currentUserRef = doc(db, 'users', currentUserId);
+  const currentUserRef = doc(db, 'users', currentUser.uid);
   const targetUserRef = doc(db, 'users', targetUserId);
 
   updateDoc(currentUserRef, {
     following: followed ? arrayRemove(targetUserId) : arrayUnion(targetUserId),
   });
   updateDoc(targetUserRef, {
-    followers: followed ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
+    followers: followed ? arrayRemove(currentUser.uid) : arrayUnion(currentUser.uid),
   });
   if (callback) callback();
+  if (followed) deleteNotification('follow', currentUser.username, null, targetUserId);
+  else createNotification('follow', currentUser.username, currentUser.profileImg, targetUserId);
 };
 
 export const toggleSave = async (userId, postId, saved, callback) => {

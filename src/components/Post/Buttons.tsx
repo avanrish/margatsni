@@ -9,7 +9,15 @@ import { clipboardState } from '../../atoms/ClipboardAtom';
 import { toggleLike } from '../../services/firebase';
 import { SavePostIcon } from '../Icons';
 
-export default function Buttons({ postId, setLikes, likes, inputRef, currUserId, setLoginDialog }) {
+export default function Buttons({
+  postId,
+  setLikes,
+  likes,
+  inputRef,
+  currUserId,
+  setLoginDialog,
+  handleNotification,
+}) {
   const [hasLiked, setHasLiked] = useState(false);
   const setClipboard = useSetRecoilState(clipboardState);
   const router = useRouter();
@@ -20,6 +28,7 @@ export default function Buttons({ postId, setLikes, likes, inputRef, currUserId,
   }, [likes, currUserId]);
 
   const likePost = async () => {
+    handleNotification(hasLiked);
     toggleLike(hasLiked, currUserId, postId, setLikes);
   };
 

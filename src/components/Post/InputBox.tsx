@@ -11,6 +11,7 @@ export default function InputBox({
   inputRef,
   user,
   setLoginDialog,
+  handleNotification,
 }) {
   const [comment, setComment] = useState('');
   const { t } = useTranslation('post');
@@ -23,6 +24,7 @@ export default function InputBox({
       setComment('');
 
       await addComment(postId, commentToSend, user, setComments, homePage);
+      handleNotification();
     }
   };
 

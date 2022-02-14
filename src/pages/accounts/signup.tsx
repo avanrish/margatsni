@@ -27,8 +27,9 @@ export default function SignUp() {
 
   if (authLoading) return <Loading />;
   if (user) {
-    router.push('/');
-    return null;
+    const { next } = router.query;
+    router.replace((next as string) || '/');
+    return <Loading />;
   }
 
   const isInvalid =
@@ -43,7 +44,7 @@ export default function SignUp() {
     try {
       if (credentials.fullName.trim() === '') throw { code: 'auth/invalid-fullname' };
       await doesUsernameExist(credentials.username);
-      createUser(credentials).then(() => router.push('/'));
+      await createUser(credentials);
     } catch (err) {
       setError(err.code);
       setLoading(false);
