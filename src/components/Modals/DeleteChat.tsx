@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRecoilValue } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
-import { deleteUserFromChat } from '../../services/chats.firebase';
+import { deleteUserFromChat } from '../../services/firebase';
 import CustomModal from '../CustomModal';
 
 export default function DeleteChat({ open, close, chatId, participants }) {

@@ -13,7 +13,7 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { db } from '../lib/firebase';
+import { db } from '../../lib/firebase';
 import { createNotification } from './notifications.firebase';
 
 export const createChat = async (participants) => {

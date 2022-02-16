@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
 import { logInDialogState } from '../../atoms/LogInDialogAtom';
-import { toggleSave } from '../../services/users.firebase';
+import { toggleSave } from '../../services/firebase';
 
 export default function SavePostIcon({ postId }) {
   const [{ user, loading }, setUser] = useRecoilState(userState);
