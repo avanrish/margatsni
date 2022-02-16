@@ -26,16 +26,10 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { auth, db } from '../lib/firebase';
-import toDataURL from '../util/toDataURL';
-import validateUsername from '../util/validateUsername';
-import {
-  getImageRef,
-  uploadImage,
-  createNotification,
-  deleteNotification,
-  getChats,
-} from './firebase';
+import { auth, db } from '../../lib/firebase';
+import toDataURL from '../../util/toDataURL';
+import validateUsername from '../../util/validateUsername';
+import { getImageRef, uploadImage, createNotification, deleteNotification, getChats } from '.';
 
 export const doesUsernameExist = async (username: string) => {
   validateUsername(username);

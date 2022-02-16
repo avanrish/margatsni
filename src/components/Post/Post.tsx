@@ -14,7 +14,7 @@ import Comments from './Comments';
 import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import PostImage from './Image';
-import { createNotification, deleteNotification } from '../../services/notifications.firebase';
+import { createNotification, deleteNotification } from '../../services/firebase';
 
 const locales = { en: enUS, pl };
 

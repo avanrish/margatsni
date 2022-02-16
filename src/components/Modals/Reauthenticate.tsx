@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useState } from 'react';
-import { reAuthenticate } from '../../services/firebase';
 
+import { reAuthenticate } from '../../services/firebase';
 import CustomModal from '../CustomModal';
 
 export default function Reauthenticate({ open, close, email, handleChange }) {

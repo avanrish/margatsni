@@ -64,7 +64,7 @@ export default function People() {
           ) : (
             <p className="text-center text-lg">
               <EmojiSadIcon className="w-32 mx-auto" />
-              Looks like there is nobody to follow!
+              {t`noSuggestions`}
             </p>
           )}
         </div>

@@ -1,5 +1,6 @@
 {
   "suggestions": "Suggestions for you",
   "seeAll": "See all",
-  "recommended": "Recommended"
+  "recommended": "Recommended",
+  "noSuggestions": "Looks like there is nobody to follow!"
 }
