@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { userState } from '../../atoms/UserAtom';
@@ -12,19 +12,13 @@ import LanguageSelect from '../../components/LanguageSelect';
 import EditProfile from '../../components/Settings/EditProfile';
 import ChangePassword from '../../components/Settings/ChangePassword';
 import Loading from '../../components/Loading';
-import Toast from '../../components/Settings/Toast';
+import ClipboardToast from '../../components/ClipboardToast';
 
 export default function Settings() {
   const [{ user, loading }, setUser] = useRecoilState(userState);
   const [currentTab, setCurrentTab] = useState('editProfile');
-  const [activeToast, setActiveToast] = useState(false);
   const router = useRouter();
   const { t } = useTranslation('settings');
-
-  useEffect(() => {
-    if (activeToast && typeof window !== 'undefined')
-      window.setTimeout(() => setActiveToast(null), 2000);
-  }, [activeToast]);
 
   if (loading) return <Loading />;
   if (!loading && !user) {
@@ -51,15 +45,11 @@ export default function Settings() {
             ))}
           </div>
           <div className="w-full py-6 space-y-4">
-            {currentTab === 'editProfile' && (
-              <EditProfile user={user} setUser={setUser} setActiveToast={setActiveToast} />
-            )}
-            {currentTab === 'changePassword' && (
-              <ChangePassword user={user} setActiveToast={setActiveToast} />
-            )}
+            {currentTab === 'editProfile' && <EditProfile user={user} setUser={setUser} />}
+            {currentTab === 'changePassword' && <ChangePassword user={user} />}
           </div>
         </div>
-        <Toast text={activeToast} />
+        <ClipboardToast />
         <LanguageSelect />
       </main>
     </div>

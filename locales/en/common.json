@@ -14,7 +14,7 @@
   "following": "Following",
   "unfollowConsentMsg": "Unfollow @{{user}}?",
   "unfollow": "Unfollow",
-  "copiedToClipboard": "Link copied to clipboard.",
+  "clipboard": "Link copied to clipboard.",
   "noResults": "No results found.",
   "profile": "Profile",
   "saved": "Saved",

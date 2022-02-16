@@ -14,7 +14,7 @@ import useTranslation from 'next-translate/useTranslation';
 import ChangeProfilePicture from '../Modals/ChangeProfilePicture';
 import toDataURL from '../../util/toDataURL';
 
-export default function ChangePicture({ profileImg, username, userId, setActiveToast }) {
+export default function ChangePicture({ profileImg, username, userId, setToast }) {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [isDefault, setIsDefault] = useState(true);
@@ -47,7 +47,7 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
       setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: profilePicture } }));
       setLoading(false);
       setIsDefault(false);
-      setActiveToast('photoAdded');
+      setToast((prev) => ({ ...prev, active: true, action: 'photoAdded' }));
       filePickerRef.current.value = null;
     };
   };
@@ -63,7 +63,7 @@ export default function ChangePicture({ profileImg, username, userId, setActiveT
     setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: imgUrl } }));
     setLoading(false);
     setIsDefault(true);
-    setActiveToast('photoRemoved');
+    setToast((prev) => ({ ...prev, active: true, action: 'photoRemoved' }));
   };
 
   return (

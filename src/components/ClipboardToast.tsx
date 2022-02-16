@@ -2,18 +2,23 @@ import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { clipboardState } from '../atoms/ClipboardAtom';
+import { toastState } from '../atoms/ToastAtom';
 
-export default function ClipboardMonit() {
-  const [{ monit, post }, setClipboard] = useRecoilState(clipboardState);
+export default function Toast() {
+  const [{ active, action, post }, setToast] = useRecoilState(toastState);
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    if (monit && typeof window !== 'undefined') {
-      navigator.clipboard.writeText(`${window.location.origin}/p/${post}`);
-      window.setTimeout(() => setClipboard({ monit: false, post }), 2000);
+    if (active && typeof window !== 'undefined') {
+      if (action === 'clipboard')
+        navigator.clipboard.writeText(`${window.location.origin}/p/${post}`);
+      window.setTimeout(() => setToast({ active: false, post, action }), 2000);
     }
-  }, [monit, post, setClipboard]);
+  }, [active, post, action, setToast]);
 
-  return <div className={`toast ${monit && '!bottom-0'}`}>{t`copiedToClipboard`}</div>;
+  return (
+    <div className={`toast ${active && '!bottom-0'}`}>
+      {action === 'clipboard' ? t`clipboard` : t(`settings:${action}`)}
+    </div>
+  );
 }

@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSetRecoilState } from 'recoil';
 
-import { clipboardState } from '../../../atoms/ClipboardAtom';
+import { toastState } from '../../../atoms/ToastAtom';
 import CustomModal from '../../CustomModal';
 import Link from '../../Link';
 
@@ -13,7 +13,7 @@ export default function Options({
   setConsentDialog,
   docId,
 }) {
-  const setClipboard = useSetRecoilState(clipboardState);
+  const setClipboard = useSetRecoilState(toastState);
   const { t } = useTranslation('post');
 
   return (
@@ -31,7 +31,7 @@ export default function Options({
       </Link>
       <div
         className="py-3 hover:bg-gray-100 cursor-pointer"
-        onClick={() => setClipboard({ monit: true, post: docId })}
+        onClick={() => setClipboard({ active: true, post: docId, action: 'clipboard' })}
       >
         {t('copyLink')}
       </div>

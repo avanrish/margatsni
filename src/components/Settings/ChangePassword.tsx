@@ -1,15 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+
+import { toastState } from '../../atoms/ToastAtom';
 import { changePassword } from '../../services/firebase';
 import Link from '../Link';
 import Reauthenticate from '../Modals/Reauthenticate';
 import Spinner from '../Spinner';
 
-export default function ChangePassword({ user, setActiveToast }) {
+export default function ChangePassword({ user }) {
   const [password, setPassword] = useState({ newPasswd: '', confirmNewPasswd: '' });
   const [openReauth, setOpenReauth] = useState(false);
   const [updateInProgress, setUpdateInProgress] = useState(false);
+  const setToast = useSetRecoilState(toastState);
   const { t } = useTranslation('settings');
 
   const isInvalid =
@@ -24,7 +28,7 @@ export default function ChangePassword({ user, setActiveToast }) {
     try {
       setUpdateInProgress(true);
       await changePassword(password.newPasswd);
-      setActiveToast('passwdChanged');
+      setToast((prev) => ({ ...prev, active: true, action: 'passwdChanged' }));
       setPassword({ newPasswd: '', confirmNewPasswd: '' });
       setUpdateInProgress(false);
     } catch {
