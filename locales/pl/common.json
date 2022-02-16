@@ -14,7 +14,7 @@
   "following": "Obserwowanie",
   "unfollowConsentMsg": "Przestać obserwować użytkownika @{{user}}?",
   "unfollow": "Przestań obserwować",
-  "copiedToClipboard": "Link skopiowano do schowka.",
+  "clipboard": "Link skopiowano do schowka.",
   "noResults": "Brak wyników.",
   "profile": "Profil",
   "saved": "Zapisane",

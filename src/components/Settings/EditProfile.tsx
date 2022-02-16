@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 import ChangePicture from './ChangePicture';
 import deepEqual from '../../util/deepEqual';
@@ -7,12 +8,14 @@ import validData from '../../util/validData';
 import { changeEmail, updateUserData, updateChatParticipants } from '../../services/firebase';
 import Spinner from '../Spinner';
 import Reauthenticate from '../Modals/Reauthenticate';
+import { toastState } from '../../atoms/ToastAtom';
 
-export default function EditProfile({ user, setUser, setActiveToast }) {
+export default function EditProfile({ user, setUser }) {
   const [newUser, setNewUser] = useState(null);
   const [updateInProgress, setUpdateInProgress] = useState(false);
   const [openReauth, setOpenReauth] = useState(false);
   const [inactiveSubmit, setInactiveSubmit] = useState(true);
+  const setToast = useSetRecoilState(toastState);
   const { t } = useTranslation('settings');
 
   useEffect(() => {
@@ -29,10 +32,11 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
   const handleChange = ({ target }) =>
     setNewUser((prev) => ({ ...prev, [target.name]: target.value }));
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { valid, error } = validData(newUser);
     if (!valid) {
-      setActiveToast(error);
+      setToast((prev) => ({ ...prev, active: true, action: error }));
       setNewUser(user);
     } else {
       setUpdateInProgress(true);
@@ -43,7 +47,7 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
         await updateUserData(user.uid, newUser);
         setUser({ user: newUser });
         setUpdateInProgress(false);
-        setActiveToast('profileSaved');
+        setToast((prev) => ({ ...prev, active: true, action: 'profileSaved' }));
       } catch {
         setUpdateInProgress(false);
         setOpenReauth(true);
@@ -52,12 +56,12 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
   };
 
   return (
-    <div className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <ChangePicture
         profileImg={newUser?.profileImg || user?.profileImg}
         username={user?.username}
         userId={user?.uid}
-        setActiveToast={setActiveToast}
+        setToast={setToast}
       />
 
       {/* Full Name */}
@@ -150,7 +154,7 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
             name="phoneNumber"
             onChange={handleChange}
           />
-          <button className="login_btn mt-4" disabled={inactiveSubmit} onClick={handleSubmit}>
+          <button className="login_btn mt-4" disabled={inactiveSubmit}>
             {updateInProgress ? <Spinner /> : t`submit`}
           </button>
         </div>
@@ -161,6 +165,6 @@ export default function EditProfile({ user, setUser, setActiveToast }) {
         email={user.email}
         handleChange={handleSubmit}
       />
-    </div>
+    </form>
   );
 }

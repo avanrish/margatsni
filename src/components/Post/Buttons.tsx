@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import useTranslation from 'next-translate/useTranslation';
 
-import { clipboardState } from '../../atoms/ClipboardAtom';
+import { toastState } from '../../atoms/ToastAtom';
 import { toggleLike } from '../../services/firebase';
 import { SavePostIcon } from '../Icons';
 
@@ -19,7 +19,7 @@ export default function Buttons({
   handleNotification,
 }) {
   const [hasLiked, setHasLiked] = useState(false);
-  const setClipboard = useSetRecoilState(clipboardState);
+  const setClipboard = useSetRecoilState(toastState);
   const router = useRouter();
   const { t } = useTranslation('post');
 
@@ -54,7 +54,7 @@ export default function Buttons({
           />
           <PaperAirplaneIcon
             className="btn"
-            onClick={() => setClipboard({ monit: true, post: postId })}
+            onClick={() => setClipboard({ active: true, post: postId, action: 'clipboard' })}
           />
         </div>
         <SavePostIcon postId={postId} />
