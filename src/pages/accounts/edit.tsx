@@ -12,7 +12,7 @@ import LanguageSelect from '../../components/LanguageSelect';
 import EditProfile from '../../components/Settings/EditProfile';
 import ChangePassword from '../../components/Settings/ChangePassword';
 import Loading from '../../components/Loading';
-import ClipboardToast from '../../components/ClipboardToast';
+import Toast from '../../components/Toast';
 
 export default function Settings() {
   const [{ user, loading }, setUser] = useRecoilState(userState);
@@ -49,7 +49,7 @@ export default function Settings() {
             {currentTab === 'changePassword' && <ChangePassword user={user} />}
           </div>
         </div>
-        <ClipboardToast />
+        <Toast />
         <LanguageSelect />
       </main>
     </div>
