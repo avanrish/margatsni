@@ -24,8 +24,9 @@ export default function Chat({
         <p className="max-w-[180px] truncate">
           {selectedTab === 0
             ? Object.keys(otherParticipants)
-                .map((p) => otherParticipants[p].fullName)
-                .join(', ') || user.fullName
+                .filter((k) => !otherParticipants[k].left)
+                .map((k) => otherParticipants[k].fullName)
+                .join(',') || user.fullName
             : t`details`}
         </p>
         <DetailsIcon selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
