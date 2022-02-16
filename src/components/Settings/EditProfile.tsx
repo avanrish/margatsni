@@ -56,115 +56,117 @@ export default function EditProfile({ user, setUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <ChangePicture
-        profileImg={newUser?.profileImg || user?.profileImg}
-        username={user?.username}
-        userId={user?.uid}
-        setToast={setToast}
-      />
+    <>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <ChangePicture
+          profileImg={newUser?.profileImg || user?.profileImg}
+          username={user?.username}
+          userId={user?.uid}
+          setToast={setToast}
+        />
 
-      {/* Full Name */}
-      <div className="edit-container">
-        <div className="edit-label ">{t`name`}</div>
-        <div className="edit-input flex flex-col space-y-3">
-          <input
-            className="rounded border-gray-border w-full"
-            type="text"
-            placeholder={t`name`}
-            name="fullName"
-            value={newUser?.fullName || ''}
-            onChange={handleChange}
-          />
-          <p className="text-xs text-gray-primary">{t`nameDescription`}</p>
+        {/* Full Name */}
+        <div className="edit-container">
+          <div className="edit-label ">{t`name`}</div>
+          <div className="edit-input flex flex-col space-y-3">
+            <input
+              className="rounded border-gray-border w-full"
+              type="text"
+              placeholder={t`name`}
+              name="fullName"
+              value={newUser?.fullName || ''}
+              onChange={handleChange}
+            />
+            <p className="text-xs text-gray-primary">{t`nameDescription`}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Username */}
-      <div className="edit-container">
-        <div className="edit-label ">{t`username`}</div>
-        <div className="edit-input flex flex-col space-y-3">
-          <input
-            className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
-            type="text"
-            placeholder={t`username`}
-            disabled
-            defaultValue={user?.username}
-          />
-          <p className="text-xs text-gray-primary">
-            {t('usernameDescription', { username: user?.username })}
-          </p>
+        {/* Username */}
+        <div className="edit-container">
+          <div className="edit-label ">{t`username`}</div>
+          <div className="edit-input flex flex-col space-y-3">
+            <input
+              className={`rounded border-gray-border w-full ${true && 'disabled-input'}`}
+              type="text"
+              placeholder={t`username`}
+              disabled
+              defaultValue={user?.username}
+            />
+            <p className="text-xs text-gray-primary">
+              {t('usernameDescription', { username: user?.username })}
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Website */}
-      <div className="edit-container">
-        <div className="edit-label">{t`website`}</div>
-        <div className="edit-input">
-          <input
-            className="rounded border-gray-border w-full"
-            type="text"
-            placeholder={t`website`}
-            value={newUser?.website || ''}
-            name="website"
-            onChange={handleChange}
-          />
+        {/* Website */}
+        <div className="edit-container">
+          <div className="edit-label">{t`website`}</div>
+          <div className="edit-input">
+            <input
+              className="rounded border-gray-border w-full"
+              type="text"
+              placeholder={t`website`}
+              value={newUser?.website || ''}
+              name="website"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Bio */}
-      <div className="edit-container">
-        <div className="edit-label">{t`bio`}</div>
-        <div className="edit-input">
-          <textarea
-            className="rounded border-gray-border w-full"
-            value={newUser?.bio || ''}
-            onChange={handleChange}
-            name="bio"
-          />
-          <p className="mt-6 text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
-          <p className="text-xs text-gray-primary">{t`infoDescription`}</p>
+        {/* Bio */}
+        <div className="edit-container">
+          <div className="edit-label">{t`bio`}</div>
+          <div className="edit-input">
+            <textarea
+              className="rounded border-gray-border w-full"
+              value={newUser?.bio || ''}
+              onChange={handleChange}
+              name="bio"
+            />
+            <p className="mt-6 text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
+            <p className="text-xs text-gray-primary">{t`infoDescription`}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Email */}
-      <div className="edit-container">
-        <div className="edit-label md:self-end mb-2">{t`email`}</div>
-        <div className="edit-input">
-          <input
-            className={`rounded border-gray-border w-full`}
-            type="text"
-            name="email"
-            placeholder={t`email`}
-            value={newUser?.email || ''}
-            onChange={handleChange}
-          />
+        {/* Email */}
+        <div className="edit-container">
+          <div className="edit-label md:self-end mb-2">{t`email`}</div>
+          <div className="edit-input">
+            <input
+              className={`rounded border-gray-border w-full`}
+              type="text"
+              name="email"
+              placeholder={t`email`}
+              value={newUser?.email || ''}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Phone Number */}
-      <div className="edit-container">
-        <div className="edit-label">{t`phoneNumber`}</div>
-        <div className="edit-input">
-          <input
-            className="rounded border-gray-border w-full"
-            type="text"
-            placeholder={t`phoneNumber`}
-            value={newUser?.phoneNumber || ''}
-            name="phoneNumber"
-            onChange={handleChange}
-          />
-          <button className="login_btn mt-4" disabled={inactiveSubmit}>
-            {updateInProgress ? <Spinner /> : t`submit`}
-          </button>
+        {/* Phone Number */}
+        <div className="edit-container">
+          <div className="edit-label">{t`phoneNumber`}</div>
+          <div className="edit-input">
+            <input
+              className="rounded border-gray-border w-full"
+              type="text"
+              placeholder={t`phoneNumber`}
+              value={newUser?.phoneNumber || ''}
+              name="phoneNumber"
+              onChange={handleChange}
+            />
+            <button className="login_btn mt-4" disabled={inactiveSubmit}>
+              {updateInProgress ? <Spinner /> : t`submit`}
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
       <Reauthenticate
         open={openReauth}
         close={() => setOpenReauth(false)}
         email={user.email}
         handleChange={handleSubmit}
       />
-    </form>
+    </>
   );
 }

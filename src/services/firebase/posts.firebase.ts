@@ -14,7 +14,7 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { db } from '../lib/firebase';
+import { db } from '../../lib/firebase';
 
 export const getPostsByUserId = async (id: string) => {
   return await getDocs(

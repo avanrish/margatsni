@@ -7,7 +7,7 @@ import {
   uploadString,
 } from 'firebase/storage';
 
-import { storage } from '../lib/firebase';
+import { storage } from '../../lib/firebase';
 
 export const getImageRef = (dir: string, name: string) => ref(storage, `${dir}/${name}/image`);
 

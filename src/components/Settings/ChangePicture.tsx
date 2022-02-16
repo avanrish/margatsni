@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Skeleton from 'react-loading-skeleton';
+import useTranslation from 'next-translate/useTranslation';
 
 import { userState } from '../../atoms/UserAtom';
 import {
@@ -10,7 +11,6 @@ import {
   updateUserImage,
   getCustomMetadata,
 } from '../../services/firebase';
-import useTranslation from 'next-translate/useTranslation';
 import ChangeProfilePicture from '../Modals/ChangeProfilePicture';
 import toDataURL from '../../util/toDataURL';
 
