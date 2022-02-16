@@ -10,7 +10,8 @@ export default function Reauthenticate({ open, close, email, handleChange }) {
   const [error, setError] = useState('');
   const { t } = useTranslation('settings');
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       await reAuthenticate(email, password);
       await handleChange();
@@ -22,7 +23,7 @@ export default function Reauthenticate({ open, close, email, handleChange }) {
 
   return (
     <CustomModal open={open} onClose={close} center={true}>
-      <div className="p-4 !space-y-2">
+      <form className="p-4 !space-y-2" onSubmit={handleSubmit}>
         <Image
           src={'/images/margatsni.png'}
           alt="Margatsni"
@@ -43,9 +44,8 @@ export default function Reauthenticate({ open, close, email, handleChange }) {
         <button
           disabled={password.length < 6 || password.trim() === ''}
           className="login_btn w-full"
-          onClick={handleSubmit}
         >{t`submit`}</button>
-      </div>
+      </form>
     </CustomModal>
   );
 }

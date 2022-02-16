@@ -32,7 +32,8 @@ export default function EditProfile({ user, setUser }) {
   const handleChange = ({ target }) =>
     setNewUser((prev) => ({ ...prev, [target.name]: target.value }));
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { valid, error } = validData(newUser);
     if (!valid) {
       setToast((prev) => ({ ...prev, active: true, action: error }));
@@ -55,7 +56,7 @@ export default function EditProfile({ user, setUser }) {
   };
 
   return (
-    <div className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <ChangePicture
         profileImg={newUser?.profileImg || user?.profileImg}
         username={user?.username}
@@ -153,17 +154,18 @@ export default function EditProfile({ user, setUser }) {
             name="phoneNumber"
             onChange={handleChange}
           />
-          <button className="login_btn mt-4" disabled={inactiveSubmit} onClick={handleSubmit}>
+          <button className="login_btn mt-4" disabled={inactiveSubmit}>
             {updateInProgress ? <Spinner /> : t`submit`}
           </button>
         </div>
       </div>
+
       <Reauthenticate
         open={openReauth}
         close={() => setOpenReauth(false)}
         email={user.email}
         handleChange={handleSubmit}
       />
-    </div>
+    </form>
   );
 }
