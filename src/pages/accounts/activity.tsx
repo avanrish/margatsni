@@ -10,9 +10,10 @@ import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Notification from '../../components/Notification';
 import { getNotifications } from '../../services/firebase';
+import { Notification as TNotification } from '../../types';
 
 export default function Activity() {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<TNotification[]>([]);
   const { user, loading } = useRecoilValue(userState);
   const { t } = useTranslation('common');
   const router = useRouter();

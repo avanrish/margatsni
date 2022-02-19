@@ -10,10 +10,11 @@ import { getNotifications } from '../services/firebase';
 import { userState } from '../atoms/UserAtom';
 import { mobileDeviceState } from '../atoms/MobileDeviceAtom';
 import Notification from './Notification';
+import { Notification as TNotification } from '../types';
 
 export default function Notifications() {
   const [active, setActive] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<TNotification[]>([]);
   const { user } = useRecoilValue(userState);
   const isMobile = useRecoilValue(mobileDeviceState);
   const router = useRouter();
