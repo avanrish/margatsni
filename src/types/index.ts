@@ -7,6 +7,12 @@ export type Chat = {
   chatId: string;
 };
 
+export type Comment = {
+  comment: string;
+  profileImg: string;
+  username: string;
+};
+
 export type Message = {
   message: string;
   timestamp: Timestamp;
@@ -32,6 +38,18 @@ export type Participant = {
   uid: string;
 };
 
+export type Post = {
+  caption: string;
+  comments: Comment[];
+  image: string;
+  likes: string[];
+  profileImg: string[];
+  timestamp: Timestamp;
+  uid: string;
+  username: string;
+  docId: string;
+};
+
 export type User = {
   email: string;
   followers: string[];
@@ -43,4 +61,7 @@ export type User = {
   uid: string;
   username: string;
   saved: string[];
+  bio?: string;
+  phoneNumber?: string;
+  website?: string;
 };

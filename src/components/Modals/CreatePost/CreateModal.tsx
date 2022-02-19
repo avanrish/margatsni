@@ -34,11 +34,11 @@ export default function Create({ open, close, setSuccess }) {
   const uploadPost = async () => {
     if (loading) return;
     setLoading(true);
-    const docRef = await createPost(user, captionRef.current.value);
-    const imageRef = getImageRef('posts', docRef.id);
+    const docId = await createPost(user, captionRef.current.value);
+    const imageRef = getImageRef('posts', docId);
     const imageLink = await uploadImage(imageRef, selectedFile);
-    await addImageLinkToPost(docRef.id, imageLink);
-    await updateUserPostsArray('add', user.uid, docRef.id);
+    await addImageLinkToPost(docId, imageLink);
+    await updateUserPostsArray('add', user.uid, docId);
 
     close();
 
