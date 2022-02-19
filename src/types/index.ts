@@ -13,10 +13,22 @@ export type Comment = {
   username: string;
 };
 
+export type LoginCredentials = {
+  email: string;
+  password: string;
+};
+
 export type Message = {
   message: string;
   timestamp: Timestamp;
   uid: string;
+};
+
+export type NewUser = {
+  username: string;
+  fullName: string;
+  email: string;
+  password: string;
 };
 
 export type Notification = {
@@ -50,18 +62,23 @@ export type Post = {
   docId: string;
 };
 
+export type PostAction = 'add' | 'remove';
+
 export type StorageDirectory = 'avatars' | 'posts';
 
-export type User = {
+export type SuggestedUser = {
+  profileImg: string;
+  uid: string;
+  username: string;
+  fullName: string;
+};
+
+export type User = SuggestedUser & {
   email: string;
   followers: string[];
   following: string[];
-  fullName: string;
   posts: string[];
-  profileImg: string;
   timestamp: Timestamp;
-  uid: string;
-  username: string;
   saved: string[];
   bio?: string;
   phoneNumber?: string;

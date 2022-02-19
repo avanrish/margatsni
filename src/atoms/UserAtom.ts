@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
+import { User } from '../types';
 
-export const userState = atom<{ user: any | null; loading: boolean }>({
+export const userState = atom<{ user: User | null; loading: boolean }>({
   key: 'userState',
   default: {
     user: null,

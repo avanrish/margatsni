@@ -5,9 +5,10 @@ import { getSuggestions } from '../../services/firebase';
 import Suggestion from './Suggestion';
 import Link from '../Link';
 import UserPlaceholder from '../UserPlaceholder';
+import { SuggestedUser } from '../../types';
 
 export default function Suggestions({ user }) {
-  const [suggestions, setSuggestions] = useState<any>();
+  const [suggestions, setSuggestions] = useState<SuggestedUser[]>();
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation('suggestions');
 
@@ -32,10 +33,10 @@ export default function Suggestions({ user }) {
         {!loading
           ? suggestions.map((profile) => (
               <Suggestion
-                key={profile.data().uid}
-                uid={profile.data().uid}
-                username={profile.data().username}
-                profileImg={profile.data().profileImg}
+                key={profile.uid}
+                uid={profile.uid}
+                username={profile.username}
+                profileImg={profile.profileImg}
               />
             ))
           : [...Array(5)].map((_, i) => <UserPlaceholder key={i} />)}
