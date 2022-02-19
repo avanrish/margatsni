@@ -50,6 +50,8 @@ export type Post = {
   docId: string;
 };
 
+export type StorageDirectory = 'avatars' | 'posts';
+
 export type User = {
   email: string;
   followers: string[];

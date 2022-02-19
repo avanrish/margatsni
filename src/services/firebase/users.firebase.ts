@@ -44,7 +44,7 @@ export const createUser = async ({ username, fullName, email, password }) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const imageRef = getImageRef('avatars', user.uid);
   const defaultImage = await toDataURL('/images/default.png');
-  const imgUrl = await uploadImage(imageRef, defaultImage, true);
+  const imgUrl = await uploadImage(imageRef, defaultImage as string, true);
   await setDoc(doc(db, 'users', user.uid), {
     uid: user.uid,
     username,
