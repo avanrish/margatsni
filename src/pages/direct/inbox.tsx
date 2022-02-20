@@ -16,11 +16,12 @@ import ChatRoom from '../../components/Inbox/ChatRoom';
 import { mobileDeviceState } from '../../atoms/MobileDeviceAtom';
 import Chat from '../../components/Inbox/Chat';
 import inboxTitle from '../../util/inboxTitle';
+import { Chat as TChat } from '../../types';
 
 export default function Inbox() {
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState<TChat[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedChat, setSelectedChat] = useState<string>(null);
   const [selectedTab, setSelectedTab] = useState(0);
   const { user, loading } = useRecoilValue(userState);
   const isMobile = useRecoilValue(mobileDeviceState);

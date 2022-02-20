@@ -13,7 +13,7 @@ import Loading from '../../components/Loading';
 import LanguageSelect from '../../components/LanguageSelect';
 
 export default function LogIn() {
-  const [credentials, setCredentials] = useState<ILogin>({ email: '', password: '' });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -115,9 +115,4 @@ export default function LogIn() {
       <LanguageSelect />
     </div>
   );
-}
-
-export interface ILogin {
-  email: string;
-  password: string;
 }

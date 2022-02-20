@@ -16,7 +16,7 @@ import CustomModal from '../../CustomModal';
 
 export default function Create({ open, close, setSuccess }) {
   const { user } = useRecoilValue(userState);
-  const [selectedFile, setSelectedFile] = useState<any>();
+  const [selectedFile, setSelectedFile] = useState<string>(null);
   const [loading, setLoading] = useState(false);
   const filePickerRef = useRef(null);
   const captionRef = useRef(null);
@@ -27,18 +27,18 @@ export default function Create({ open, close, setSuccess }) {
     if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
 
     reader.onload = (readerEvent) => {
-      setSelectedFile(readerEvent.target.result);
+      setSelectedFile(readerEvent.target.result as string);
     };
   };
 
   const uploadPost = async () => {
     if (loading) return;
     setLoading(true);
-    const docRef = await createPost(user, captionRef.current.value);
-    const imageRef = getImageRef('posts', docRef.id);
+    const docId = await createPost(user, captionRef.current.value);
+    const imageRef = getImageRef('posts', docId);
     const imageLink = await uploadImage(imageRef, selectedFile);
-    await addImageLinkToPost(docRef.id, imageLink);
-    await updateUserPostsArray('add', user.uid, docRef.id);
+    await addImageLinkToPost(docId, imageLink);
+    await updateUserPostsArray('add', user.uid, docId);
 
     close();
 
@@ -48,7 +48,7 @@ export default function Create({ open, close, setSuccess }) {
   };
 
   return (
-    <CustomModal open={open} onClose={close}>
+    <CustomModal open={open} onClose={() => (close(), setSelectedFile(null))}>
       {selectedFile ? (
         <div className="relative w-full h-[200px] cursor-pointer">
           <Image

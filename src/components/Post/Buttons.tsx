@@ -24,7 +24,7 @@ export default function Buttons({
   const { t } = useTranslation('post');
 
   useEffect(() => {
-    setHasLiked(!!likes.find((like) => like === currUserId));
+    setHasLiked(!!likes.find((like: string) => like === currUserId));
   }, [likes, currUserId]);
 
   const likePost = async () => {

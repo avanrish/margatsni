@@ -16,11 +16,12 @@ import Stats from '../components/Profile/Stats';
 import Posts from '../components/Profile/Posts';
 import Saved from '../components/Profile/Saved';
 import removePrivateData from '../util/removePrivateData';
+import { Post } from '../types';
 
 export default function Username({ profile: initProfile }) {
   const [profile, setProfile] = useState(initProfile);
-  const [posts, setPosts] = useState(null);
-  const [savedPosts, setSavedPosts] = useState(null);
+  const [posts, setPosts] = useState<Post[]>(null);
+  const [savedPosts, setSavedPosts] = useState<Post[]>(null);
   const [showPosts, setShowPosts] = useState(true);
   const [open, setOpen] = useState(false);
   const [following, setFollowing] = useState(false);
@@ -34,7 +35,7 @@ export default function Username({ profile: initProfile }) {
   useEffect(() => {
     const getPosts = async () => {
       const posts = await getPostsByUserId(profile.uid);
-      setPosts(posts.docs);
+      setPosts(posts);
     };
     if (profile) getPosts();
   }, [profile]);

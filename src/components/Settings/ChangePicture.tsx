@@ -42,7 +42,7 @@ export default function ChangePicture({ profileImg, username, userId, setToast }
 
     reader.onload = async (readerEvent) => {
       const imageRef = getImageRef('avatars', userId);
-      const profilePicture = await uploadImage(imageRef, readerEvent.target.result);
+      const profilePicture = await uploadImage(imageRef, readerEvent.target.result as string);
       await updateUserImage(userId, profilePicture);
       setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: profilePicture } }));
       setLoading(false);
@@ -58,7 +58,7 @@ export default function ChangePicture({ profileImg, username, userId, setToast }
     if (openModal) setOpenModal(false);
     const imageRef = getImageRef('avatars', userId);
     const defaultImage = await toDataURL('/images/default.png');
-    const imgUrl = await uploadImage(imageRef, defaultImage, true);
+    const imgUrl = await uploadImage(imageRef, defaultImage as string, true);
     await updateUserImage(userId, imgUrl);
     setUser((prev) => ({ ...prev, user: { ...prev.user, profileImg: imgUrl } }));
     setLoading(false);

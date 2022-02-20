@@ -12,9 +12,10 @@ import Header from '../../components/Header';
 import LanguageSelect from '../../components/LanguageSelect';
 import Loading from '../../components/Loading';
 import { getSuggestions } from '../../services/firebase';
+import { SuggestedUser } from '../../types';
 
 export default function People() {
-  const [suggestions, setSuggestions] = useState(null);
+  const [suggestions, setSuggestions] = useState<SuggestedUser[]>(null);
   const { user, loading } = useRecoilValue(userState);
   const router = useRouter();
   const { t } = useTranslation('suggestions');
@@ -53,11 +54,11 @@ export default function People() {
           ) : suggestions.length !== 0 ? (
             suggestions.map((profile) => (
               <Suggestion
-                key={profile.data().uid}
-                uid={profile.data().uid}
-                username={profile.data().username}
-                fullName={profile.data().fullName}
-                profileImg={profile.data().profileImg}
+                key={profile.uid}
+                uid={profile.uid}
+                username={profile.username}
+                fullName={profile.fullName}
+                profileImg={profile.profileImg}
                 explore
               />
             ))

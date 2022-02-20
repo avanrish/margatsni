@@ -7,15 +7,16 @@ import Skeleton from 'react-loading-skeleton';
 import { userState } from '../../atoms/UserAtom';
 import { getPostsOfFollowedUsers } from '../../services/firebase';
 import Post from '../Post';
+import { Post as TPost } from '../../types';
 
 export default function Posts() {
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState<TPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useRecoilValue(userState);
   const { t } = useTranslation('post');
 
   const getPosts = useCallback(async () => {
-    const { docs } = await getPostsOfFollowedUsers([...user.following, user.uid]);
+    const docs = await getPostsOfFollowedUsers([...user.following, user.uid]);
     setPosts(docs);
     setLoading(false);
   }, [user]);
@@ -52,16 +53,16 @@ export default function Posts() {
       ) : posts.length > 0 ? (
         posts.map((post) => (
           <Post
-            key={post.id}
-            userId={post.data().uid}
-            postId={post.id}
-            username={post.data().username}
-            userImg={post.data().profileImg}
-            img={post.data().image}
-            caption={post.data().caption}
-            likes={post.data().likes}
-            comments={post.data().comments.reverse()}
-            timestamp={post.data().timestamp.seconds}
+            key={post.docId}
+            userId={post.uid}
+            postId={post.docId}
+            username={post.username}
+            userImg={post.profileImg}
+            img={post.image}
+            caption={post.caption}
+            likes={post.likes}
+            comments={post.comments.reverse()}
+            timestamp={post.timestamp.seconds}
             getPosts={getPosts}
           />
         ))

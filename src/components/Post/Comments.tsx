@@ -32,7 +32,7 @@ export default function Comments({ comments, homePage, mobile }) {
               {comment.username}
             </Link>
           </p>
-          <span className="text-gray-600 inline break-all">{comment.comment}</span>
+          <span className="text-gray-600 inline break-all pr-2">{comment.comment}</span>
         </div>
       ))}
     </div>

@@ -15,6 +15,7 @@ import InputBox from './InputBox';
 import PostHeader from './PostHeader';
 import PostImage from './Image';
 import { createNotification, deleteNotification } from '../../services/firebase';
+import { Comment } from '../../types';
 
 const locales = { en: enUS, pl };
 
@@ -33,8 +34,10 @@ export default function Post({
   const { locale, pathname } = useRouter();
   const homePage = pathname === '/';
 
-  const [comments, setComments] = useState(homePage ? initComments.slice(0, 5) : initComments); // Displays only 5 latest messages
-  const [likes, setLikes] = useState(initLikes);
+  const [comments, setComments] = useState<Comment[]>(
+    homePage ? initComments.slice(0, 5) : initComments
+  ); // Displays only 5 latest messages
+  const [likes, setLikes] = useState<string[]>(initLikes);
   const [openOptions, setOpenOptions] = useState(false);
   const mobile = useRecoilValue(mobileDeviceState);
   const { user } = useRecoilValue(userState);
