@@ -30,5 +30,6 @@
   "commentNotification": "commented your photo.",
   "followNotification": "started following you.",
   "newChatNotification": "added you to a chat.",
-  "leftChatNotification": "left a chat."
+  "leftChatNotification": "left a chat.",
+  "createPost": "Create new post"
 }

@@ -4,7 +4,7 @@
   "signout": "Wyloguj się",
   "search": "Szukaj",
   "follow": "Obserwuj",
-  "uploadPhoto": "Utwórz nowy post",
+  "uploadPhoto": "Prześlij zdjęcie",
   "captionMsg": "Wpisz opis...",
   "uploadPost": "Opublikuj post",
   "uploading": "Publikowanie...",
@@ -30,5 +30,6 @@
   "commentNotification": "skomentował(a) Twoje zdjęcie.",
   "followNotification": "zaczął/zaczęła Cię obserwować.",
   "newChatNotification": "dodał(a) Cię do czatu.",
-  "leftChatNotification": "opuścił(a) czat."
+  "leftChatNotification": "opuścił(a) czat.",
+  "createPost": "Utwórz nowy post"
 }
