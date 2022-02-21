@@ -51,7 +51,7 @@ export default function Posts() {
           </div>
         </div>
       ) : posts.length > 0 ? (
-        posts.map((post) => (
+        posts.map((post, i) => (
           <Post
             key={post.docId}
             userId={post.uid}
@@ -64,6 +64,7 @@ export default function Posts() {
             comments={post.comments.reverse()}
             timestamp={post.timestamp.seconds}
             getPosts={getPosts}
+            loading={i === 0 ? 'eager' : 'lazy'}
           />
         ))
       ) : (

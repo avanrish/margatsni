@@ -32,6 +32,7 @@ export default function PostId({ post, postId, timestamp }) {
             img={post.image}
             likes={post.likes}
             timestamp={timestamp}
+            loading="eager"
           />
         </div>
         <LanguageSelect />
