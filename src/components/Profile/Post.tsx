@@ -20,7 +20,14 @@ export default function Post({ post }) {
           {post.comments.length}
         </span>
       </div>
-      <Image draggable={false} src={post.image} alt="" layout="fill" objectFit="cover" />
+      <Image
+        draggable={false}
+        src={post.image}
+        alt=""
+        layout="fill"
+        objectFit="cover"
+        sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
+      />
     </Link>
   );
 }
