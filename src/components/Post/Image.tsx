@@ -17,11 +17,11 @@ export default function Image({ postId, img, homePage, loading }) {
   };
 
   return homePage ? (
-    <Link href={`/p/${postId}`} className="block relative w-full">
+    <Link href={`/p/${postId}`} className="block relative w-full max-w-[790px]">
       <NextImage {...props} />
     </Link>
   ) : (
-    <div className={`block relative w-full my-auto`}>
+    <div className={`block relative w-full my-auto max-w-[790px]`}>
       <NextImage {...props} />
     </div>
   );
