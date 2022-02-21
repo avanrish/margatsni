@@ -1,7 +1,7 @@
 import NextImage from 'next/image';
 import Link from '../Link';
 
-export default function Image({ postId, img, homePage }) {
+export default function Image({ postId, img, homePage, loading }) {
   const props: NextImageProps = {
     src: img || '/',
     alt: '',
@@ -12,14 +12,16 @@ export default function Image({ postId, img, homePage }) {
     placeholder: 'blur',
     blurDataURL: img,
     draggable: false,
+    sizes: '(min-width: 800px) 50vw, 100vw',
+    loading,
   };
 
   return homePage ? (
-    <Link href={`/p/${postId}`} className="block relative">
+    <Link href={`/p/${postId}`} className="block relative w-full max-w-[790px]">
       <NextImage {...props} />
     </Link>
   ) : (
-    <div className={`block relative w-full my-auto`}>
+    <div className={`block relative w-full my-auto max-w-[790px]`}>
       <NextImage {...props} />
     </div>
   );
@@ -35,4 +37,6 @@ interface NextImageProps {
   placeholder: 'blur' | 'empty';
   blurDataURL: string;
   draggable: boolean;
+  sizes: string;
+  loading: 'lazy' | 'eager';
 }

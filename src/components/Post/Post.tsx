@@ -30,6 +30,7 @@ export default function Post({
   comments: initComments,
   timestamp,
   getPosts = null,
+  loading,
 }) {
   const { locale, pathname } = useRouter();
   const homePage = pathname === '/';
@@ -67,7 +68,7 @@ export default function Post({
         />
       )}
 
-      <PostImage postId={postId} img={img} homePage={homePage} />
+      <PostImage postId={postId} img={img} homePage={homePage} loading={loading} />
 
       <div className="flex flex-col sm:min-w-[360px]">
         {!homePage && !mobile && (
