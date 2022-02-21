@@ -12,6 +12,7 @@ export default function Image({ postId, img, homePage }) {
     placeholder: 'blur',
     blurDataURL: img,
     draggable: false,
+    sizes: '(min-width: 800px) 50vw, 100vw',
   };
 
   return homePage ? (
@@ -35,4 +36,5 @@ interface NextImageProps {
   placeholder: 'blur' | 'empty';
   blurDataURL: string;
   draggable: boolean;
+  sizes: string;
 }
