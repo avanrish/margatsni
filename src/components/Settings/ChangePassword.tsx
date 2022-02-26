@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -16,6 +17,8 @@ export default function ChangePassword({ user }) {
   const setToast = useSetRecoilState(toastState);
   const { t } = useTranslation('settings');
 
+  const isJohnDoe = user.username === 'johndoe33';
+
   const isInvalid =
     password.newPasswd !== password.confirmNewPasswd ||
     password.newPasswd.trim() === '' ||
@@ -26,6 +29,7 @@ export default function ChangePassword({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isJohnDoe) return;
     try {
       setUpdateInProgress(true);
       await changePassword(password.newPasswd);
@@ -54,15 +58,28 @@ export default function ChangePassword({ user }) {
           <span className="text-2xl">{user.username}</span>
         </div>
 
+        {isJohnDoe && (
+          <div className="edit-container">
+            <div className="edit-label" />
+            <div className="edit-input text-xs -mt-3 -mb-3 text-gray-primary">
+              <Trans
+                i18nKey="settings:john"
+                components={[<span key="john" className="font-semibold text-red-primary" />]}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="edit-container">
           <div className="edit-label">{t`newPasswd`}</div>
           <div className="edit-input">
             <input
-              className="rounded border-gray-border w-full"
+              className={`rounded border-gray-border w-full ${isJohnDoe && 'disabled-input'}`}
               type="password"
               name="newPasswd"
               value={password.newPasswd}
               onChange={handleChange}
+              disabled={isJohnDoe}
             />
           </div>
         </div>
@@ -71,13 +88,14 @@ export default function ChangePassword({ user }) {
           <div className="edit-label">{t`confirmNewPasswd`}</div>
           <div className="edit-input flex flex-col space-y-3">
             <input
-              className="rounded border-gray-border w-full"
+              className={`rounded border-gray-border w-full ${isJohnDoe && 'disabled-input'}`}
               type="password"
               name="confirmNewPasswd"
               value={password.confirmNewPasswd}
               onChange={handleChange}
+              disabled={isJohnDoe}
             />
-            <button className="login_btn max-w-max" disabled={isInvalid}>
+            <button className="login_btn max-w-max" disabled={isInvalid || isJohnDoe}>
               {updateInProgress ? <Spinner /> : t`changePassword`}
             </button>
             <Link

@@ -35,5 +35,6 @@
   "newPasswd": "Nowe hasło",
   "confirmNewPasswd": "Potwierdź nowe hasło",
   "reAuthDesc": "Ta operacja wymaga ponownego zalogowania się, aby potwierdzić Twoją tożsamość!",
-  "passwdChanged": "Hasło zostało zmienione."
+  "passwdChanged": "Hasło zostało zmienione.",
+  "john": "Nie można tego zmienić jako johndoe33, aby konto było dostępne dla wszystkich."
 }
