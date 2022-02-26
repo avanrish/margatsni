@@ -43,6 +43,13 @@ export default function LogIn() {
     }
   };
 
+  const logInAsJohn = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    await loginUser({ email: 'johndoe@email.com', password: 'zaq1@WSX' });
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <Head>
@@ -88,6 +95,11 @@ export default function LogIn() {
               <button disabled={isInvalid || loading} className="login_btn" onClick={handleSubmit}>
                 {loading ? <Spinner /> : t('common:login')}
               </button>
+              <button
+                disabled={loading}
+                className="login_btn"
+                onClick={logInAsJohn}
+              >{t`auth:john`}</button>
             </form>
             {error && (
               <div className="text-center text-red-500 text-sm mt-3">{t(`auth:${error}`)}</div>

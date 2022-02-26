@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import Trans from 'next-translate/Trans';
 
 import ChangePicture from './ChangePicture';
 import deepEqual from '../../util/deepEqual';
@@ -17,6 +18,8 @@ export default function EditProfile({ user, setUser }) {
   const [inactiveSubmit, setInactiveSubmit] = useState(true);
   const setToast = useSetRecoilState(toastState);
   const { t } = useTranslation('settings');
+
+  const isJohnDoe = user.username === 'johndoe33';
 
   useEffect(() => {
     setNewUser(user);
@@ -125,6 +128,15 @@ export default function EditProfile({ user, setUser }) {
             />
             <p className="mt-6 text-sm font-semibold text-gray-primary">{t`personalInfo`}</p>
             <p className="text-xs text-gray-primary">{t`infoDescription`}</p>
+
+            {isJohnDoe && (
+              <div className="text-xs mt-3 -mb-3 text-gray-primary">
+                <Trans
+                  i18nKey="settings:john"
+                  components={[<span key="john" className="font-semibold text-red-primary" />]}
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -133,12 +145,13 @@ export default function EditProfile({ user, setUser }) {
           <div className="edit-label md:self-end mb-2">{t`email`}</div>
           <div className="edit-input">
             <input
-              className={`rounded border-gray-border w-full`}
+              className={`rounded border-gray-border w-full ${isJohnDoe && 'disabled-input'}`}
               type="text"
               name="email"
               placeholder={t`email`}
               value={newUser?.email || ''}
-              onChange={handleChange}
+              disabled={isJohnDoe}
+              onChange={isJohnDoe ? null : handleChange}
             />
           </div>
         </div>

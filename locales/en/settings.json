@@ -35,5 +35,6 @@
   "newPasswd": "New Password",
   "confirmNewPasswd": "Confirm New Password",
   "reAuthDesc": "Looks like you have been logged in for a while, we need to make sure it's you!",
-  "passwdChanged": "Password changed."
+  "passwdChanged": "Password changed.",
+  "john": "You cannot change it as <0>johndoe33</0> so that this account remains accessible for everyone."
 }
