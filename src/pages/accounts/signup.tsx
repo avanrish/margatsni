@@ -74,7 +74,7 @@ export default function SignUp() {
           </p>
           <form className="flex flex-col space-y-2" method="POST">
             <input
-              type="text"
+              type="email"
               name="email"
               value={credentials.email}
               onChange={handleChange}

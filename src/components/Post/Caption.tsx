@@ -15,16 +15,19 @@ export default function Caption({
   return (
     <div className="px-5 py-3 truncate">
       {caption && (
-        <div className="flex items-center space-x-2">
+        <div className="space-x-2 max-w-full overflow-hidden flex-wrap">
           {!homePage && (
-            <Link className="block relative h-7 w-7" href={`/${username}`}>
+            <Link className="inline-block align-middle relative h-7 w-7" href={`/${username}`}>
               <Image src={profileImg} alt={username} layout="fill" className="rounded-full" />
             </Link>
           )}
-          <Link className="font-semibold hover:underline" href={`/${username}`}>
+          <Link
+            className="inline-block align-middle font-semibold hover:underline"
+            href={`/${username}`}
+          >
             {username}
           </Link>
-          <span>{caption}</span>
+          <span className="align-middle whitespace-pre-wrap pr-2">{caption}</span>
         </div>
       )}
       {homePage && initComments.length > 5 && (

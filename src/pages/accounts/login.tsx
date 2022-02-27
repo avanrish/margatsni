@@ -78,7 +78,7 @@ export default function LogIn() {
             <form className="flex flex-col space-y-2 mt-8" method="POST">
               <input
                 className="input"
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Email"
                 value={credentials.email}
@@ -105,7 +105,7 @@ export default function LogIn() {
               <div className="text-center text-red-500 text-sm mt-3">{t(`auth:${error}`)}</div>
             )}
             <div className="mt-3 flex border-b border-gray-border justify-center">
-              <p className="translate-y-2 text-xs bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
+              <p className="translate-y-2 text-xs bg-[#FAFAFA] xs:bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
                 {t('auth:or')}
               </p>
             </div>
