@@ -10,14 +10,12 @@ export default function Comments({ comments, homePage, mobile }) {
       }`}
     >
       {comments.map((comment, i) => (
-        <div
-          key={i}
-          className={`flex items-center mb-3 flex-wrap space-x-2 ${
-            !homePage && 'max-w-full md+:max-w-[360px]'
-          }`}
-        >
+        <div key={i} className={` mb-3 space-x-2 ${!homePage && 'max-w-full md+:max-w-[360px]'}`}>
           {!homePage && (
-            <Link className="block relative h-7 w-7" href={`/${comment.username}`}>
+            <Link
+              className="inline-block align-middle relative h-7 w-7"
+              href={`/${comment.username}`}
+            >
               <Image
                 src={comment.profileImg}
                 alt={comment.username}
@@ -27,12 +25,14 @@ export default function Comments({ comments, homePage, mobile }) {
             </Link>
           )}
 
-          <p>
+          <p className="inline-block align-middle">
             <Link className="font-semibold hover:underline" href={`/${comment.username}`}>
               {comment.username}
             </Link>
           </p>
-          <span className="text-gray-600 inline break-all pr-2">{comment.comment}</span>
+          <span className="text-gray-600 align-middle whitespace-pre-wrap pr-2">
+            {comment.comment}
+          </span>
         </div>
       ))}
     </div>

@@ -64,7 +64,7 @@ export default function ResetPassword() {
           <form method="POST">
             <input
               className="input mt-3 mb-1 w-full"
-              type="text"
+              type="email"
               placeholder="Email"
               value={email}
               onChange={({ target }) => setEmail(target.value)}
@@ -78,7 +78,7 @@ export default function ResetPassword() {
           )}
           {sent && <div className="text-sm mt-2 text-center text-blue-light">{t('emailSent')}</div>}
           <div className="mt-3 flex border-b border-gray-300 justify-center">
-            <p className="translate-y-2 text-xs bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
+            <p className="translate-y-2 text-xs bg-[#FAFAFA] xs:bg-white z-10 px-5 uppercase text-gray-primary select-none font-semibold">
               {t('auth:or')}
             </p>
           </div>

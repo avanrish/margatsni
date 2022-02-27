@@ -22,6 +22,8 @@ export const getUserDataByUsername = async (username: string): Promise<User> => 
     following: user.data().following,
     posts: user.data().posts,
     saved: user.data().saved,
+    bio: user.data().bio || null,
+    website: user.data().website || null,
     timestamp: user.data().timestamp,
   };
 };
