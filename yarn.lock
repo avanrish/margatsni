@@ -175,11 +175,6 @@
     "@firebase/util" "1.4.2"
     tslib "^2.1.0"
 
-"@firebase/app-types@0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.6.3.tgz#3f10514786aad846d74cd63cb693556309918f4b"
-  integrity sha512-/M13DPPati7FQHEQ9Minjk1HGLm/4K4gs9bR4rzLCWJg64yGtVC0zNg9gDpkw9yc2cvol/mNFxqTtd4geGrwdw==
-
 "@firebase/app-types@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.7.0.tgz#c9e16d1b8bed1a991840b8d2a725fb58d0b5899f"
@@ -4290,10 +4285,10 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-cookienotice@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/react-cookienotice/-/react-cookienotice-4.3.0.tgz#81b4ada226b788050411ffce94adc4b2f13553d7"
-  integrity sha512-xZg+Io+XrvMDIZFhDvm1t3P5qyRJNoMnLwm3O/YiPLOghg+hJMnLewujQZ+yA56GHCDsWE4uJOFgATDbUPhWEg==
+react-cookienotice@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-cookienotice/-/react-cookienotice-5.4.0.tgz#2c083faf74ab1006718bac19963cd9cca935166b"
+  integrity sha512-KSBhwrMaaWaElPIXOCaD6k6q/pj7qFtY/1qzRSklGXRvSN4AKFMVa4Y9vypUkZI9QLwoEp5mrLea+BT2yEk/rw==
 
 react-dom@17.0.2:
   version "17.0.2"
